@@ -4,8 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="resource/js/bootstrap.js"></script>
+<link rel="stylesheet" href="resource/css/bootstrap.css">
 </head>
 <body>
 	<header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
@@ -15,10 +18,47 @@
 	    	<a class="p-2 text-dark" href="ranking?cmd=ranking_list">Ranking</a>
   		</nav>
   		<nav class="my-2 my-md-0 me-md-3">
-	  		<a class="btn btn-outline-primary" href="users?cmd=login">Sign in</a>
+	  		<a class="btn btn-outline-primary" href="" data-toggle="modal" data-target="#elegantModalForm">Sign in</a>
 	  		<a class="btn btn-outline-primary" href="users?cmd=sign_up">Sign up</a>
   		</nav>
 	</header>
+		<!-- Modal -->
+		<div class="modal fade" id="elegantModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+		aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<!--Content-->
+				<div class="modal-content form-elegant">
+					<!--Header-->
+					<div class="modal-header text-center">
+					<h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel"><strong>Sign in</strong></h3>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<!--Body-->
+					<div class="modal-body mx-4">
+						<!--Body-->
+						<div class="md-form mb-5">
+							<input type="email" id="Form-email1" class="form-control validate">
+							<label data-error="wrong" data-success="right" for="Form-email1">Your email</label>
+						</div>
+		
+						<div class="md-form pb-3">
+							<input type="password" id="Form-pass1" class="form-control validate">
+							<label data-error="wrong" data-success="right" for="Form-pass1">Your password</label>
+							<p class="font-small blue-text d-flex justify-content-end">Forgot <a href="#" class="blue-text ml-1">
+								Password?</a></p>
+						</div>
+		
+						<div class="text-center mb-3">
+							<button type="button" class="btn blue-gradient btn-block btn-rounded z-depth-1a">Sign in</button>
+						</div>
+					</div>
+				</div>
+			<!--/.Content-->
+			</div>
+		</div>
+		<!-- Modal -->
 	<main class="container">
 		<div style="min-height: 400px;"
 		class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
