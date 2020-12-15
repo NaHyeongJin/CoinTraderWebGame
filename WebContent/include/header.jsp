@@ -9,14 +9,15 @@
 </head>
 <body>
 	<header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-  		<p class="h5 my-0 me-md-auto fw-normal">Company name</p>
+  		<p class="h5 my-0 me-md-auto fw-normal">Team Method</p>
   		<nav class="my-2 my-md-0 me-md-3">
-	    	<a class="p-2 text-dark" href="#">Features</a>
-	    	<a class="p-2 text-dark" href="#">Enterprise</a>
-	    	<a class="p-2 text-dark" href="#">Support</a>
-	    	<a class="p-2 text-dark" href="#">Pricing</a>
+	    	<a class="p-2 text-dark" href="coin?cmd=coin_list">Coin</a>
+	    	<a class="p-2 text-dark" href="ranking?cmd=ranking_list">Ranking</a>
   		</nav>
-  		<a class="btn btn-outline-primary" href="#">Sign up</a>
+  		<nav class="my-2 my-md-0 me-md-3">
+	  		<a class="btn btn-outline-primary" href="users?cmd=login">Sign in</a>
+	  		<a class="btn btn-outline-primary" href="users?cmd=sign_up">Sign up</a>
+  		</nav>
 	</header>
 	<main class="container">
 		<div style="min-height: 400px;"
