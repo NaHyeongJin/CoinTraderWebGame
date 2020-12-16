@@ -45,6 +45,6 @@
 		</div>
 	</footer>
 	</main>
-	<script type="text/javascript" src="resource/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../resource/js/bootstrap.js"></script>
 </body>
 </html>
