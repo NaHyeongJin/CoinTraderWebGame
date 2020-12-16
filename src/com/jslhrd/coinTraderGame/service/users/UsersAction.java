@@ -1,5 +1,7 @@
 package com.jslhrd.coinTraderGame.service.users;
 
-public class UsersAction {
+import com.jslhrd.coinTraderGame.model.users.UserDAO;
 
+public class UsersAction {
+	UserDAO dao = UserDAO.getInstance();
 }
