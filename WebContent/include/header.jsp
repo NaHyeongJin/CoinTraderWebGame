@@ -11,9 +11,9 @@
 <link rel="stylesheet" href="resource/css/bootstrap.css">
 </head>
 <body>
-	<header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+	<header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm sticky-top">
 		<p class="h5 my-0 mr-auto fw-normal">Team Method</p>
-		<nav class="my-2 my-md-0 me-md-3 align-tiems-right">
+		<nav class="my-2 my-md-0 me-md-3">
 	    	<a class="p-2 text-dark" href="coin?cmd=coin_list">Coin</a>
 	    	<a class="p-2 text-dark" href="ranking?cmd=ranking_list">Ranking</a>
 	  		<a class="btn btn-outline-primary" href="" data-toggle="modal" data-target="#loginModalForm">Sign in</a>
