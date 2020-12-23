@@ -9,19 +9,21 @@ import javax.servlet.http.HttpServletResponse;
 import com.jslhrd.coinTraderGame.model.users.UserDAO;
 import com.jslhrd.coinTraderGame.model.users.UserVO;
 import com.jslhrd.coinTraderGame.service.Action;
-
+//import com.jslhrd.coinTraderGame.model.users.UserVO;
 public class UsersModifyProAction implements Action {
 	UserDAO dao = UserDAO.getInstance();
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+				
+		//회원정보 가져오는 메소드 추가 요망
+		
 		
 		request.setCharacterEncoding("utf-8");
 		
 		UserVO vo = new UserVO();
 		vo.setPw(request.getParameter("pw1"));
 		vo.setId(request.getParameter("user_id"));
-		vo.setMoney(Integer.parseInt(request.getParameter("money")));
 		vo.setEmail1(request.getParameter("email1"));
 		vo.setEmail2(request.getParameter("email2"));
 		
