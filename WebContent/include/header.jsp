@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,16 +10,25 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="../resource/js/bootstrap.js"></script>
 <link rel="stylesheet" href="../resource/css/bootstrap.css">
+<style>
+nav{
+text-align: right;
+}
+</style>
 </head>
+
 <body>
 	<header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm sticky-top">
 		<p class="h5 my-0 mr-auto fw-normal">Team Method</p>
+		
 		<nav class="my-2 my-md-0 me-md-3">
+			
 	    	<a class="p-2 text-dark" href="coin?cmd=coin_list">Coin</a>
 	    	<a class="p-2 text-dark" href="ranking?cmd=ranking_list">Ranking</a>
 	  		<a class="btn btn-outline-primary" href="" data-toggle="modal" data-target="#loginModalForm">Sign in</a>
 			<a class="btn btn-outline-primary" href="users?cmd=sign_up">Sign up</a>
 		</nav>
+		
 	</header>
 		<!-- Modal -->
 		<div class="modal fade" id="loginModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"

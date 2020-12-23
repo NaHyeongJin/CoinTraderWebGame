@@ -1,6 +1,8 @@
 package com.jslhrd.coinTraderGame.controller;
 
 import com.jslhrd.coinTraderGame.service.Action;
+import com.jslhrd.coinTraderGame.service.users.UsersModifyAction;
+import com.jslhrd.coinTraderGame.service.users.UsersModifyProAction;
 
 public class UserActionFactory {
 	private static UserActionFactory instance = new UserActionFactory();
@@ -9,11 +11,10 @@ public class UserActionFactory {
 	}
 	public Action getAction(String cmd) {
 		Action action = null;
-		if(cmd.equals("user")) {
+		if(cmd.equals("user_edit")) {
 			action = new UsersModifyAction();
-			System.out.println("정보수정 성공");
-		}else if(cmd != null) {
-			
+		}else if(cmd.equals("user_edit_pro")) {
+			action = new UsersModifyProAction();
 		}
 		return action;
 	}
