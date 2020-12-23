@@ -17,7 +17,7 @@ public class UserDAO {
 
 	//개인정보 수정
 	public int UserModify(UserVO vo) {
-		String query=" update COIN_USER set pw=? where id=?";
+		String query="update COIN_USER set pw=? where id=?";
 		int row=0;
 		try {
 			conn = DBUtil.getConnection();
@@ -43,7 +43,10 @@ public class UserDAO {
 		}
 		return row;
 	}
-	// 현금 충전 메소드
-	public int 
+	//로그인 메소드
+	
+	//충전 메소드
+	
+	
 	
 }

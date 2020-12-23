@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.jslhrd.coinTraderGame.service.Action;
 
 
-@WebServlet("/UserController")
+@WebServlet("/user")	// /UserController에서 User로 수정
 public class UserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

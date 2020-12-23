@@ -10,7 +10,6 @@
 <script>
 //정규화 구분(제이쿼리에서 value에서는 val)
 var pw = /^[A-Za-z0-9~!@#$%^&*()_+|<>?:{}]{4,20}$/;
-//var pwJ = doucument.getElementById("pw");
 
 $(function(){
 	$("#pw").blur(function(){

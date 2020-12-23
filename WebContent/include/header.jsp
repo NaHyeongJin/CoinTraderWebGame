@@ -10,11 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="../resource/js/bootstrap.js"></script>
 <link rel="stylesheet" href="../resource/css/bootstrap.css">
-<style>
-nav{
-text-align: right;
-}
-</style>
+
 </head>
 
 <body>
@@ -25,7 +21,19 @@ text-align: right;
 			
 	    	<a class="p-2 text-dark" href="coin?cmd=coin_list">Coin</a>
 	    	<a class="p-2 text-dark" href="ranking?cmd=ranking_list">Ranking</a>
+	    	
+	    	<c:if test="${admin}">
 	  		<a class="btn btn-outline-primary" href="" data-toggle="modal" data-target="#loginModalForm">Sign in</a>
+	  		</c:if>
+	  		
+	  		<c:if test="${user}">
+	  		<a class="btn btn-outline-primary" href="" data-toggle="modal" data-target="#loginModalForm">Sign in</a>
+	  		</c:if>
+	  		
+	  		<c:if test="${empty user}">
+	  		<a class="btn btn-outline-primary" href="" data-toggle="modal" data-target="#loginModalForm">Sign in</a>
+	  		</c:if>
+	  		
 			<a class="btn btn-outline-primary" href="users?cmd=sign_up">Sign up</a>
 		</nav>
 		

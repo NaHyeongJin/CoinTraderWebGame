@@ -15,12 +15,16 @@ public class UsersModifyProAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		request.setCharacterEncoding("utf-8");
 		
 		UserVO vo = new UserVO();
 		vo.setPw(request.getParameter("pw1"));
 		vo.setId(request.getParameter("user_id"));
+		vo.setMoney(Integer.parseInt(request.getParameter("money")));
+		vo.setEmail1(request.getParameter("email1"));
+		vo.setEmail2(request.getParameter("email2"));
+		
 		UserDAO dao = UserDAO.getInstance();
 		int row = dao.UserModify(vo);
 		request.setAttribute("row", row);
