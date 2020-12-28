@@ -2,6 +2,7 @@ package com.jslhrd.coinTraderGame.model.users;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import com.jslhrd.coinTraderGame.util.DBUtil;
 
@@ -13,6 +14,7 @@ public class UserDAO {
 	}
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
+	private ResultSet rs = null;
 	
 
 	//개인정보 수정
@@ -43,6 +45,30 @@ public class UserDAO {
 		}
 		return row;
 	}
+	
+	public String getTitle(String id) {
+
+
+		String sql = "select COIN_USER from email where id=?";
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				conn.close();
+				pstmt.close();
+			} catch (Exception e) {
+			}
+		}
+		return id;
+	}
+	
 	//로그인 메소드
 	
 	//충전 메소드

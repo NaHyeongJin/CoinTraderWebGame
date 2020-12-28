@@ -5,6 +5,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.jslhrd.coinTraderGame.model.users.UserDAO;
 import com.jslhrd.coinTraderGame.model.users.UserVO;
@@ -17,9 +18,9 @@ public class UsersModifyProAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				
 		//회원정보 가져오는 메소드 추가 요망
-		
-		
 		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
+		
 		
 		UserVO vo = new UserVO();
 		vo.setPw(request.getParameter("pw1"));
