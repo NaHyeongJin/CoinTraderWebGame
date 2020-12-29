@@ -6,6 +6,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.jslhrd.coinTraderGame.model.users.UserDAO;
 import com.jslhrd.coinTraderGame.service.Action;
@@ -18,7 +19,7 @@ public class UsersModifyAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserDAO manager = UserDAO.getInstance();
-		
+		HttpSession session = request.getSession();
 		String id = request.getParameter("id");
 		
 		RequestDispatcher rd = request.getRequestDispatcher("users/user_edit.jsp");

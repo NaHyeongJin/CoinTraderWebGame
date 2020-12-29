@@ -47,8 +47,6 @@ public class UserDAO {
 	}
 	
 	public String getTitle(String id) {
-
-
 		String sql = "select COIN_USER from email where id=?";
 		try {
 			conn = DBUtil.getConnection();
@@ -69,8 +67,48 @@ public class UserDAO {
 		return id;
 	}
 	
-	//로그인 메소드
-	
+	//로그인 메소드(세션 유지)
+	public LoginVO login (String id, String pw) {
+		String query = "";
+		LoginVO lvo =null;
+
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			boolean b = rs.next();
+			if(b) {
+				lvo = new LoginVO();
+				lvo.setId(rs.getString("id"));
+				lvo.setPw( rs.getString("pw"));
+				lvo.setGrade( rs.getString("grade"));
+				if(lvo.getPw().equals(pw)) {
+					lvo.setRow(1);
+				}else {
+					lvo.setRow(0);
+				}
+			}else {
+				lvo = new LoginVO();
+				lvo.setRow(-1);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+		}try {
+			
+			rs.close();
+			pstmt.close();
+			conn.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return lvo;
+		
+	}
 	//충전 메소드
 	
 	

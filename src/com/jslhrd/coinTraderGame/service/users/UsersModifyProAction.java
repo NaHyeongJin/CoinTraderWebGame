@@ -1,5 +1,6 @@
 package com.jslhrd.coinTraderGame.service.users;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,11 +18,20 @@ public class UsersModifyProAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				
-		//회원정보 가져오는 메소드 추가 요망
-		request.setCharacterEncoding("utf-8");
-		HttpSession session = request.getSession();
-		
-		
+//		회원정보 가져오는 메소드 추가 요망
+//		로그아웃
+//		request.setCharacterEncoding("utf-8");
+//		HttpSession session = request.getSession();
+//		session.removeAttribute("");
+//		session.removeAttribute("");
+//		session.invalidate();
+//		response.setContentType("text/html; charset=utf-8");
+//		PrintWriter out = response.getWriter();
+//		out.println("<script>");
+//		out.println("alert('로그아웃 성공');");
+//		out.println("location.href='/index.jsp';");
+//		out.println("</script>");
+//		
 		UserVO vo = new UserVO();
 		vo.setPw(request.getParameter("pw1"));
 		vo.setId(request.getParameter("user_id"));

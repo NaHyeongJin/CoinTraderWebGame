@@ -22,19 +22,22 @@
 	    	<a class="p-2 text-dark" href="coin?cmd=coin_list">Coin</a>
 	    	<a class="p-2 text-dark" href="ranking?cmd=ranking_list">Ranking</a>
 	    	
-	    	<c:if test="${admin}">
-	  		<a class="btn btn-outline-primary" href="" data-toggle="modal" data-target="#loginModalForm">Sign in</a>
+	    	<!-- admin로그인 -->
+	  		<c:if test="${Grade == 'A'}">
+	  		<a class="btn btn-outline-primary" href="" data-toggle="modal" data-target="#loginModalForm">Logout</a>
 	  		</c:if>
 	  		
-	  		<c:if test="${user}">
-	  		<a class="btn btn-outline-primary" href="" data-toggle="modal" data-target="#loginModalForm">Sign in</a>
+	  		<!-- 유저 로그인 -->
+	  		<c:if test="${Grade == 'B'}"> 
+	  		<a class="btn btn-outline-primary" href="" data-toggle="modal" data-target="#loginModalForm">Logout</a>
 	  		</c:if>
 	  		
+	  		<!-- 일반인 보기 및 회원가입 -->
 	  		<c:if test="${empty user}">
-	  		<a class="btn btn-outline-primary" href="" data-toggle="modal" data-target="#loginModalForm">Sign in</a>
+	  		<a class="btn btn-outline-primary" href="" data-toggle="modal" data-target="#loginModalForm">Login</a>
 	  		</c:if>
-	  		
 			<a class="btn btn-outline-primary" href="users?cmd=sign_up">Sign up</a>
+	  		
 		</nav>
 		
 	</header>

@@ -66,17 +66,18 @@ $(function(){
 	<form method="post" class="needs-validation" novalidate name="coin" action="UserController?cmd=user_edit_pro">
 		<div class="row g-3">
 		
+		<c:forEach var="vo" items="${list}">
 			<div class="col-12">
 				<label for="user_id" class="form-label">아이디</label>
 				<div class="input-group">
-					<input type="text" class="form-control" id="user_id" name="user_id" value="${id}" readonly>
+					<input type="text" class="form-control" id="user_id" name="user_id" value="${vo.id}" readonly>
 				</div>
 			</div>
 			
 			<div class="col-12">
 				<label for="user_id" class="form-label">보유자산</label>
 				<div class="input-group">
-					<input type="text" class="form-control" id="money" name="money" value="${money} " readonly>
+					<input type="text" class="form-control" id="money" name="money" value="${vo.money} " readonly>
 					
 				
 					
@@ -121,6 +122,7 @@ $(function(){
 					<input type="text" name="email2" class="form-control" id="email2" value="${email2}" readonly>
 				</div>
 			</div>
+			</c:forEach>
 			
 			<div class="col-12 mt-5">
 				<button class="btn btn-outline-primary" onclick="return modify()" type="submit">완료</button>
