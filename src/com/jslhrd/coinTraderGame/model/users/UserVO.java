@@ -1,7 +1,13 @@
 package com.jslhrd.coinTraderGame.model.users;
 
 public class UserVO {
-	private int money;
+	private int money, row;
+	public int getRow() {
+		return row;
+	}
+	public void setRow(int row) {
+		this.row = row;
+	}
 	private String id,pw,email1,email2;
 	
 	public int getMoney() {

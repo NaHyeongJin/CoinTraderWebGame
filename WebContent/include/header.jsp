@@ -23,12 +23,12 @@
 	    	<a class="p-2 text-dark" href="ranking?cmd=ranking_list">Ranking</a>
 	    	
 	    	<!-- admin로그인 -->
-	  		<c:if test="${Grade == 'A'}">
+	  		<c:if test="${id == 'admin'}">
 	  		<a class="btn btn-outline-primary" href="" data-toggle="modal" data-target="#loginModalForm">Logout</a>
 	  		</c:if>
 	  		
 	  		<!-- 유저 로그인 -->
-	  		<c:if test="${Grade == 'B'}"> 
+	  		<c:if test="${id == 'user'}"> 
 	  		<a class="btn btn-outline-primary" href="" data-toggle="modal" data-target="#loginModalForm">Logout</a>
 	  		</c:if>
 	  		
@@ -74,6 +74,7 @@
 							<div class="text-center mb-3">
 								<a href="로그인주소" style="text-decoration: none;">
 								<button type="submit" class="btn btn-primary btn-block btn-rounded z-depth-1a">Sign in</button>
+								
 								</a>
 							</div>
 						</div>
