@@ -8,36 +8,33 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="../resource/js/bootstrap.js"></script>
-<link rel="stylesheet" href="../resource/css/bootstrap.css">
+<script type="text/javascript" src="resource/js/bootstrap.js"></script>
+<link rel="stylesheet" href="resource/css/bootstrap.css">
 
 </head>
 
 <body>
 	<header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm sticky-top">
 		<p class="h5 my-0 mr-auto fw-normal">Team Method</p>
-		
+		<c:if test="${!empty id}">
+			<p class="h7 my-0 mr-3 fw-normal">${id}님 환영합니다.</p>
+			<p class="h7 my-0 mr-auto fw-normal">현재 남은 자금은 10000원입니다.</p>
+		</c:if>
 		<nav class="my-2 my-md-0 me-md-3">
 			
 	    	<a class="p-2 text-dark" href="coin?cmd=coin_list">Coin</a>
 	    	<a class="p-2 text-dark" href="ranking?cmd=ranking_list">Ranking</a>
-	    	
-	    	<!-- admin로그인 -->
-	  		<c:if test="${Grade == 'A'}">
-	  		<a class="btn btn-outline-primary" href="" data-toggle="modal" data-target="#loginModalForm">Logout</a>
+
+
+	  		<c:if test="${empty id}">
+	  			<a class="btn btn-outline-primary" href="" data-toggle="modal" data-target="#loginModalForm">Sign in</a>
+				<a class="btn btn-outline-primary" href="user?cmd=sign_up">Sign up</a>
 	  		</c:if>
-	  		
-	  		<!-- 유저 로그인 -->
-	  		<c:if test="${Grade == 'B'}"> 
-	  		<a class="btn btn-outline-primary" href="" data-toggle="modal" data-target="#loginModalForm">Logout</a>
+	  		<c:if test="${!(empty id)}">
+	  			<a class="btn btn-outline-primary" href="user?cmd=logout">Sign out</a>
+	  			<a class="btn btn-outline-primary" href="user?cmd=user_edit">Your profile</a>
+	  			<a class="btn btn-outline-primary" href="">Help</a>
 	  		</c:if>
-	  		
-	  		<!-- 일반인 보기 및 회원가입 -->
-	  		<c:if test="${empty user}">
-	  		<a class="btn btn-outline-primary" href="" data-toggle="modal" data-target="#loginModalForm">Login</a>
-	  		</c:if>
-			<a class="btn btn-outline-primary" href="users?cmd=sign_up">Sign up</a>
-	  		
 		</nav>
 		
 	</header>
@@ -55,16 +52,16 @@
 						</button>
 					</div>
 					<!--Body-->
-					<form type="post" action="#">
+					<form method="post" action="user?cmd=login">
 						<div class="modal-body mx-4">
 							<!--Body-->
 							<div class="md-form mb-5">
-								<input type="text" id="Form-id" class="form-control validate" required>
+								<input type="text" id="Form-id" name="id" class="form-control validate" required>
 								<label data-error="wrong" data-success="right" for="Form-id">Your id</label>
 							</div>
 			
 							<div class="md-form pb-3">
-								<input type="password" id="Form-pass" class="form-control validate" required>
+								<input type="password" id="Form-pass" name="pw" class="form-control validate" required>
 								<label data-error="wrong" data-success="right" for="Form-pass">Your password</label>
 								<p class="font-small blue-text d-flex justify-content-end">Forgot <a href="#" class="blue-text ml-1">
 									Id?</a><a href="#" class="blue-text ml-1">

@@ -18,42 +18,42 @@ public class UserDAO {
 	
 
 	//개인정보 수정
-	public int UserModify(UserVO vo) {
+	public int userModify(String id, String pw) {
 		String query="update COIN_USER set pw=? where id=?";
-		int row=0;
+		int row = 0;
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, vo.getPw());
-			pstmt.setString(2, vo.getId());
-			pstmt.setInt(3, vo.getMoney());
-			pstmt.setString(4, vo.getEmail1());
-			pstmt.setString(5, vo.getEmail2());
+			pstmt.setString(1, pw);
+			pstmt.setString(2, id);
 			
 			row = pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
-			System.out.println("정보 수정중 오류");
 		}finally {
 			try {
 				pstmt.close();
 				conn.close();
-				
 			}catch (Exception e) {
-				
 			}
 		}
 		return row;
 	}
-	
-	public String getTitle(String id) {
-		String sql = "select COIN_USER from email where id=?";
+
+	public UserVO getUser(String id) {
+		String query = "SELECT * FROM COIN_USER WHERE ID = ?";
+		UserVO vo = new UserVO();
 		try {
 			conn = DBUtil.getConnection();
-			pstmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-			
+			if (rs.next()) {
+				vo.setId(rs.getString("id"));
+				vo.setMoney(rs.getInt("money"));
+				vo.setEmail1(rs.getString("email1"));
+				vo.setEmail2(rs.getString("email2"));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -64,53 +64,31 @@ public class UserDAO {
 			} catch (Exception e) {
 			}
 		}
-		return id;
+		return vo;
 	}
 	
-	//로그인 메소드(세션 유지)
-	public LoginVO login (String id, String pw) {
-		String query = "";
-		LoginVO lvo =null;
-
+	public int userLogin(String id, String pw) {
+		String query = "SELECT PW FROM COIN_USER WHERE ID = ?";
+		int row = 0;
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id);
-			rs=pstmt.executeQuery();
-			boolean b = rs.next();
-			if(b) {
-				lvo = new LoginVO();
-				lvo.setId(rs.getString("id"));
-				lvo.setPw( rs.getString("pw"));
-				lvo.setGrade( rs.getString("grade"));
-				if(lvo.getPw().equals(pw)) {
-					lvo.setRow(1);
-				}else {
-					lvo.setRow(0);
-				}
-			}else {
-				lvo = new LoginVO();
-				lvo.setRow(-1);
-			}
+			rs = pstmt.executeQuery();
 			
-		} catch (Exception e) {
+			row = (rs.next() && rs.getString("pw").equals(pw)) ? 1 : 0;
+		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-		}try {
-			
-			rs.close();
-			pstmt.close();
-			conn.close();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			}catch (Exception e) {
+			}
 		}
-
-		return lvo;
-		
+		return row;
 	}
-	//충전 메소드
-	
 	
 	
 }

@@ -1,6 +1,8 @@
 package com.jslhrd.coinTraderGame.controller;
 
 import com.jslhrd.coinTraderGame.service.Action;
+import com.jslhrd.coinTraderGame.service.users.UsersLoginAction;
+import com.jslhrd.coinTraderGame.service.users.UsersLogoutAction;
 import com.jslhrd.coinTraderGame.service.users.UsersModifyAction;
 import com.jslhrd.coinTraderGame.service.users.UsersModifyProAction;
 
@@ -11,10 +13,14 @@ public class UserActionFactory {
 	}
 	public Action getAction(String cmd) {
 		Action action = null;
-		if(cmd.equals("user_edit")) {
+		if (cmd.equals("user_edit")) {
 			action = new UsersModifyAction();
-		}else if(cmd.equals("user_edit_pro")) {
+		} else if (cmd.equals("user_edit_pro")) {
 			action = new UsersModifyProAction();
+		} else if (cmd.equals("login")) {
+			action = new UsersLoginAction();
+		} else if (cmd.equals("logout")) {
+			action = new UsersLogoutAction();
 		}
 		return action;
 	}
