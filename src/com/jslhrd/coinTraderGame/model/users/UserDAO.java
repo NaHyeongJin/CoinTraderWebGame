@@ -69,7 +69,7 @@ public class UserDAO {
 	
 	//로그인 메소드(세션 유지)
 	public LoginVO login (String id, String pw) {
-		String query = "";
+		String query = "select id,pw,grade from COIN_USER where id=?";
 		LoginVO lvo =null;
 
 		try {
