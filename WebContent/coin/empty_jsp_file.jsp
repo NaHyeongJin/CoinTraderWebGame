@@ -1,18 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/include/header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
-
-
 <title>Coin 현황</title>
-
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-
-
+<script src="jquery.js"></script>
 <link rel="stylesheet" href="resource/css/bootstrap.css">
 <link rel="stylesheet" href="resource/css/bootstrap.min.css">
 <link rel="stylesheet" href="graph.css">
@@ -25,10 +23,16 @@
   font-size: 16px;
   background-color: white;
   background-image: url('img/Won-512.png');
-  background-size: 16px;
-  background-position: 10px 10px; 
+  background-size: 23px;
+  background-position: 100px 6px; 
   background-repeat: no-repeat;
+  
   padding: 12px 20px 12px 40px;
+}
+.modal-footer {
+
+  display: inherit;
+
 }
 </style>
 </head>
@@ -69,15 +73,14 @@
     <label for="inputPassword6" class="col-form-label">구매수량</label>
   </div>
   <div class="col-auto" align="center">
-    <input  type="text" id="coincnt" class="form-control" aria-describedby="passwordHelpInline">
+    <input style="text-align: center;" type="text" id="coincnt" class="form-control" aria-describedby="passwordHelpInline">
   </div>
 </div>
-<div class="col-auto" style="padding-bottom: 15px;">
-    <span id="passwordHelpInline" class="form-text">
+ <div class="col-auto" style="padding-bottom: 15px;" align="center">
+    <span id="passwordHelpInline" class="form-text" style="color: red;">
     	
     </span>
   </div>
-       
   </form>
 
       <div class="modal-footer">
@@ -90,7 +93,8 @@
       </div>
     </div>
   </div>
-<div class="modal fade" id="myModal2" tabindex="-1" >
+  
+<div class="modal fade" data-backdrop="static" data-keyboard="false" id="myModal2" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -100,19 +104,24 @@
         
         <a id ="closemodalbutton3"><img alt="" src="img/x.svg" width="30" height="30"></a>
       </div>
-      
-      
-     
+
       <div class="modal-body">
         <form action="">
-   <label for="floatingInputValue">구입한 코인</label>     
+   <label for="floatingInputValue"><b>구입한 코인</b></label>     
   <input type="text" style="text-align: center;" class="form-control" id="floatingInputValue" placeholder="name@example.com" value="" readonly="readonly">
   
   
-<label for="floatingInputValue" style="padding-top: 10px;">판매할 코인</label>
+<label for="floatingInputValue" style="padding-top: 10px;"><b>판매할 코인</b></label>
  <div class="input-group mb-3">
-  <div class="btn-group">
-    <button class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" href="#" >시간<span class="caret"></span></button>
+  <div class="row g-3 align-items-center">
+  <div class="col-auto">
+    <label for="inputPassword6" class="col-form-label">판매수량</label>
+  </div>
+  <div class="col-auto" style="padding-left: 0px;">
+    <input style="text-align: center;" type="text" id="coincnt2" class="form-control" aria-describedby="passwordHelpInline">
+  </div>
+   <div class="btn-group">
+    <button class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" href="#" >시간선택<span class="caret"></span></button>
     <ul class="dropdown-menu">
       <li><a class="dropdown-item" href="#"><B>5초후</B></a></li>
       <li><a class="dropdown-item" href="#"><B>10초후</B></a></li>
@@ -121,13 +130,6 @@
       <li><a class="dropdown-item" href="#"><B>25초후</B></a></li>
       <li><a class="dropdown-item" href="#"><B>30초후</B></a></li>
     </ul>
-  </div>
-  <div class="row g-3 align-items-center">
-  <div class="col-auto">
-    <label for="inputPassword6" class="col-form-label">판매수량</label>
-  </div>
-  <div class="col-auto" style="padding-left: 0px;">
-    <input type="text" id="coincnt2" class="form-control" aria-describedby="passwordHelpInline">
   </div>
 </div>
 </div>
@@ -141,10 +143,11 @@
   </form>
 
       <div class="modal-footer">
+      
         <button type="button" class="btn btn-secondary" id ="closemodalbutton4">닫기</button>
         <button data-bs-toggle="modal" data-bs-target="#myModal2" type="button" class="btn btn-primary">바로팔기<img alt="" src="img/cart-check.svg" width="20" height="25" ></button>
-       </div> 
-       
+        
+       </div>
       </div>
       
       </div>
@@ -152,16 +155,14 @@
   </div>
 
 
-<div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+<div id="myCarousel" class="carousel slide carousel-fade" data-ride='carousel' data-interval='3000' data-pause="hover">
     <ol class="carousel-indicators" >
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
       <li data-target="#myCarousel" data-slide-to="1"></li>
       <li data-target="#myCarousel" data-slide-to="2"></li>
       <li data-target="#myCarousel" data-slide-to="3"></li>
     </ol>
-   
     <div class="carousel-inner">
-   
       <div class="carousel-item active">
 	 	<div class="container">
 	 	<div class="carousel-caption">
@@ -170,10 +171,10 @@
 		<img alt="" src="img/question-square.svg">
   		</a>
   		<div id="Acontainer"></div>
-  		<br></figure><br>
-  		<button type="button" class="btn btn-outline-primary">10초</button>
-		<button type="button" class="btn btn-outline-primary">Primary</button>
-		<button type="button" class="btn btn-outline-primary">Primary</button>
+  		<br><div class="alert alert-light" role="alert">
+  		
+		가격을쓰시오
+		</div></figure>
 		 </div>
         </div>
       </div>
@@ -186,10 +187,9 @@
 		<img alt="" src="img/question-square.svg">
   		</a>
   		<div id="Bcontainer"></div>
-  		<br></figure><br>
-  		<button type="button" class="btn btn-outline-primary">10초</button>
-		<button type="button" class="btn btn-outline-primary">Primary</button>
-		<button type="button" class="btn btn-outline-primary">Primary</button>
+  		<br><div class="alert alert-light" role="alert">
+		가격을쓰시오
+		</div></figure>
 		 </div>
         </div>
       </div>
@@ -202,10 +202,9 @@
 		<img alt="" src="img/question-square.svg">
   		</a>
   		<div id="Ccontainer"></div>
-  		<br></figure><br>
-  		<button type="button" class="btn btn-outline-primary">10초</button>
-		<button type="button" class="btn btn-outline-primary">Primary</button>
-		<button type="button" class="btn btn-outline-primary">Primary</button>
+  		<br><div class="alert alert-light" role="alert">
+		가격을쓰시오
+		</div></figure>
 		 </div>
         </div>
       </div>
@@ -218,10 +217,9 @@
 			<img alt="" src="img/question-square.svg">
   			</a>
   			<div id="Dcontainer"></div>
-  			<br></figure><br>
-  			<button type="button" class="btn btn-outline-primary">Primary</button>
-			<button type="button" class="btn btn-outline-primary">Primary</button>
-			<button type="button" class="btn btn-outline-primary">Primary</button>
+  			<br><div class="alert alert-light" role="alert">
+		가격을쓰시오
+		</div></figure>
           </div>
         </div>
       </div>
