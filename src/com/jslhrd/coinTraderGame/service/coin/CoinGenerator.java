@@ -7,10 +7,10 @@ import java.util.TimerTask;
 
 import com.jslhrd.coinTraderGame.model.coin.CoinDAO;
 
-public class CoinGenerator extends TimerTask {
+public class CoinGenerator {
 	static private final int COIN_NUMBER = 4;
-	static private final int LOW_VALUE = 20;
-	static private final int HIGH_VALUE = 100;
+	static private final int LOW_VALUE = 25;
+	static private final int HIGH_VALUE = 200;
 
 	static private CoinGenerator instance;
 
@@ -32,8 +32,8 @@ public class CoinGenerator extends TimerTask {
 	private CoinGenerator() {
 		upPer[0] = 40;
 		upPer[1] = 40;
-		upPer[2] = 70;
-		upPer[3] = 20;
+		upPer[2] = 80;
+		upPer[3] = 10;
 
 		keepPer[0] = 20;
 		keepPer[1] = 20;
@@ -42,8 +42,8 @@ public class CoinGenerator extends TimerTask {
 
 		downPer[0] = 40;
 		downPer[1] = 40;
-		downPer[2] = 20;
-		downPer[3] = 70;
+		downPer[2] = 10;
+		downPer[3] = 80;
 		
 		maxUp[0] = LOW_VALUE;
 		maxUp[1] = HIGH_VALUE;
@@ -97,8 +97,12 @@ public class CoinGenerator extends TimerTask {
 		if (dif == 0) {
 			return prices;
 		}
-		for (int i = 0; i < prices.length - (int) dif + 1; i++) {
-			prices[i] = prices[(int) dif - 1 + i];
+		for (int i = 0; i < prices.length - (int) dif; i++) {
+			prices[i] = prices[(int) dif + i];
+			cnt++;
+		}
+		if (cnt == 0) {
+			prices[0] = prices[69];
 			cnt++;
 		}
 		for (int i = cnt; i < prices.length; i++) {
