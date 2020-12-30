@@ -69,7 +69,10 @@
 							</div>
 			
 							<div class="text-center mb-3">
+								<a href="로그인주소" style="text-decoration: none;">
 								<button type="submit" class="btn btn-primary btn-block btn-rounded z-depth-1a">Sign in</button>
+								
+								</a>
 							</div>
 						</div>
 					</form>

@@ -7,34 +7,37 @@ import java.sql.ResultSet;
 import com.jslhrd.coinTraderGame.util.DBUtil;
 
 public class UserDAO {
-	private UserDAO() {}
+	private UserDAO() {
+	}
+
 	private static UserDAO instance = new UserDAO();
+
 	public static UserDAO getInstance() {
 		return instance;
 	}
+
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
-	
 
-	//개인정보 수정
+	// 개인정보 수정
 	public int userModify(String id, String pw) {
-		String query="update COIN_USER set pw=? where id=?";
+		String query = "update COIN_USER set pw=? where id=?";
 		int row = 0;
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, pw);
 			pstmt.setString(2, id);
-			
+
 			row = pstmt.executeUpdate();
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				pstmt.close();
 				conn.close();
-			}catch (Exception e) {
+			} catch (Exception e) {
 			}
 		}
 		return row;
@@ -66,7 +69,7 @@ public class UserDAO {
 		}
 		return vo;
 	}
-	
+
 	public int userLogin(String id, String pw) {
 		String query = "SELECT PW FROM COIN_USER WHERE ID = ?";
 		int row = 0;
@@ -75,20 +78,19 @@ public class UserDAO {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-			
+
 			row = (rs.next() && rs.getString("pw").equals(pw)) ? 1 : 0;
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				rs.close();
 				pstmt.close();
 				conn.close();
-			}catch (Exception e) {
+			} catch (Exception e) {
 			}
 		}
 		return row;
 	}
-	
-	
+
 }
