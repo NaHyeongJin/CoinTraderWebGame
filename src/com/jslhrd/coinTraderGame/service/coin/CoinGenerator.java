@@ -92,8 +92,8 @@ public class CoinGenerator {
 	static private int[] CoinPriceGenerator(Date lastUpdateDate, int[] prices, int maxUp, int minUp, int maxDown, int minDown,
 			int upPer, int keepPer, int downPer) {
 		int cnt = 0;
-		long dif = (new Date().getTime() - lastUpdateDate.getTime()) / 1000; // ÇöÀç½Ã°£ - ¸¶Áö¸· ¾÷µ¥ÀÌÆ® ½Ã°£
-		dif = (dif > 70) ? 70 : dif;
+		long dif = (new Date().getTime() - lastUpdateDate.getTime()) / 1000; // í˜„ìž¬ì‹œê°„ - ë§ˆì§€ë§‰ ì—…ë°ì´íŠ¸ ì‹œê°„
+		dif = (dif > 69) ? 69 : dif;
 		if (dif == 0) {
 			return prices;
 		}
@@ -101,23 +101,19 @@ public class CoinGenerator {
 			prices[i] = prices[(int) dif + i];
 			cnt++;
 		}
-		if (cnt == 0) {
-			prices[0] = prices[69];
-			cnt++;
-		}
 		for (int i = cnt; i < prices.length; i++) {
-			int rand = (int) Math.round(Math.random() * 100); // 0~100 »çÀÌ ·£´ý ¼ö ¼³Á¤
+			int rand = (int) Math.round(Math.random() * 100); // 0~100 ì‚¬ì´ ëžœë¤ ìˆ˜ ì„¤ì •
 			if (rand < downPer) {
 				prices[i] = prices[i - 1] - (int) Math.round(Math.random() * (maxDown - minDown)) - minDown;
-				prices[i] = (prices[i] < 0) ? 0 : prices[i]; // 0¿ø ¹Ì¸¸ÀÌ¸é 0¿øÀ¸·Î ¼³Á¤
-			} // °¨¼Ò
+				prices[i] = (prices[i] < 0) ? 0 : prices[i]; // 0ì› ë¯¸ë§Œì´ë©´ 0ì›ìœ¼ë¡œ ì„¤ì •
+			} // ê°ì†Œ
 			else if (rand < downPer + keepPer) {
 				prices[i] = prices[i - 1];
-			} // À¯Áö
+			} // ìœ ì§€
 			else {
 				prices[i] = prices[i - 1] + (int) Math.round(Math.random() * (maxUp - minUp)) + minUp;
-			} // »ó½Â
-		} // È®·ü¿¡ µû¶ó prices °¡°Ý ¹Ù²ã¼­ ¹è¿­¿¡ ÀúÀå
+			} // ìƒìŠ¹
+		} // í™•ë¥ ì— ë”°ë¼ prices ê°€ê²© ë°”ê¿”ì„œ ë°°ì—´ì— ì €ìž¥
 		return prices;
 	}
 }
