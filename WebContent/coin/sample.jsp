@@ -24,10 +24,14 @@ function requestGetPrice() {
 	    dataType: "JSON",
 	    success: function(data) {
 	    	// data.coin1
-	    	console.log(data);
+	    	console.log(data.coin1);
+	    	Acoin(data);
 	    	// data.coin2
+	    	console.log(data.coin2);
 	    	// data.coin3
+	    	console.log(data.coin3);
 	    	// data.coin4
+	    	console.log(data.coin4);
 	    	// 각각 70개 배열이고
 	    	// data.lastUpdateDate - "2020-12-28 15:10:46" String임
 	    	// 이 데이터로 그래프 출력시켜주시면 됩니다
