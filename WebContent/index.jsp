@@ -5,6 +5,7 @@
 <html>
 <head>
 <title>메인 화면입니다.</title>
+
 <script type="text/javascript" src="resource/js/bootstrap.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
@@ -28,6 +29,12 @@
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="coin/graph.js"></script>	
+
+</head>
+<body>
+	<h1 class="display-4">메인 화면입니다</h1>
+	<p class="lead">사이트에 대한 설명을 여기에 적으면 될 듯</p>
+
 </body>
 <%@ include file="/include/footer.jsp" %>
 </html>
