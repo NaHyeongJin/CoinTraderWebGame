@@ -16,12 +16,12 @@
 		<nav class="my-2 my-md-0 me-md-3">
 			<a class="p-2 text-dark" href="qna?cmd=qna_list">1:1문의</a>
 	    	<a class="p-2 text-dark" href="coin?cmd=coin_list">Coin</a>
-	    	<a class="p-2 text-dark" href="ranking?cmd=ranking_list">Ranking</a>
+	    	<a class="btn btn-outline-primary" href="" data-toggle="modal" data-target="#rankingModalForm">Ranking</a>
 	  		<a class="btn btn-outline-primary" href="" data-toggle="modal" data-target="#loginModalForm">Sign in</a>
 			<a class="btn btn-outline-primary" href="users?cmd=sign_up">Sign up</a>
 		</nav>
 	</header>
-		<!-- Modal -->
+		<!-- LoginModal -->
 		<div class="modal fade" id="loginModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 		aria-hidden="true">
 			<div class="modal-dialog" role="document">
@@ -56,6 +56,62 @@
 							</div>
 						</div>
 					</form>
+				</div>
+			<!--/.Content-->
+			</div>
+		</div>
+		<!-- Modal -->
+		
+		<!-- RankingModal -->
+		<div class="modal fade" id="rankingModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+		aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<!--Content-->
+				<div class="modal-content form-elegant">
+					<!--Header-->
+					<div class="modal-header text-center">
+					<h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel"><strong>Ranking</strong></h3>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<!--Body-->
+					<div class="row">
+				        <div class="col-lg-12">
+				            <div class="card">
+				                <div class="card-body">
+				                    <div class="table-responsive project-list">
+				                        <table class="table project-table table-centered table-nowrap">
+				                            <thead>
+				                                <tr>
+				                                    <th scope="col">순위</th>
+				                                    <th scope="col">아이디</th>
+				                                    <th scope="col">보유 자산</th>
+				                                </tr>
+				                            </thead>
+				                            <tbody>
+				                                <tr>
+				                                    <th scope="row">1위</th>
+				                                    <td>김용휘</td>
+				                                    <td>546585462851원</td>
+				                                </tr>
+				                                <tr>
+				                                    <th scope="row">2위</th>
+				                                    <td>조종혁</td>
+				                                    <td>10원</td>
+				                                </tr>
+				                                <tr>
+				                                    <th scope="row">3위</th>
+				                                    <td>나형진</td>
+				                                    <td>1원</td>
+				                                </tr>
+				                            </tbody>
+				                        </table>
+				                    </div>
+				                </div>
+				            </div>
+				        </div>
+				    </div>
 				</div>
 			<!--/.Content-->
 			</div>

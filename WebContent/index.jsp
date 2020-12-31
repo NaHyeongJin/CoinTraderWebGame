@@ -15,3 +15,4 @@
 </body>
 <%@ include file="/include/footer.jsp" %>
 </html>
+<a class="p-2 text-dark" href="qna?cmd=qna_list">1:1문의</a>

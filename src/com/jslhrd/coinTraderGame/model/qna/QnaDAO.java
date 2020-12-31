@@ -188,13 +188,14 @@ public class QnaDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
-		String sql = "insert into coin_qna(subject,contents) values(?,?)";
+		String sql = "insert into coin_qna(id,subject,contents) values(?,?,?)";
 		int row = 0;
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, vo.getSubject());
-			pstmt.setString(2, vo.getContents());
+			pstmt.setString(1, vo.getId());
+			pstmt.setString(2, vo.getSubject());
+			pstmt.setString(3, vo.getContents());
 			row = pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -213,13 +214,14 @@ public class QnaDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
-		String sql = "update coin_qna set subject=?, contents=?";
+		String sql = "update coin_qna set subject=?, contents=? where id=?";
 		int row = 0;
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getSubject());
 			pstmt.setString(2, vo.getContents());
+			pstmt.setString(3, vo.getId());
 			row = pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -257,21 +259,21 @@ public class QnaDAO {
 		}
 		return row;
 	}
-	/*//답변
-	private Boolean QnaAnswer(int check) {
+	//답변
+	public int QnaAnswer(QnaVO vo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
-		String sql = "SELECT ID FROM (SELECT ROWNUM AS RNUM, A.* FROM (SELECT * FROM COIN_QNA ORDER BY REGDATE) A) where rnum=?";
-		Boolean bool = false;
+//		String sql = "SELECT ID FROM (SELECT ROWNUM AS RNUM, A.* FROM (SELECT * FROM COIN_QNA ORDER BY REGDATE) A) where rnum=?";
+		String sql = "update into coin_qna set answer=? where id=?";
+		int row = 0;
 		try{
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, check);
-			rs = pstmt.executeQuery();
-
-			bool = (rs.next()) ? rs.getString("id").contains("admin") : false;
+			pstmt.setString(1, vo.getAnswer());
+			pstmt.setString(2, vo.getId());
+			row = pstmt.executeUpdate();
+			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -283,7 +285,7 @@ public class QnaDAO {
 				e2.printStackTrace();
 			}
 		}
-		return bool;
-	}*/
+		return row;
+	}
 
 }
