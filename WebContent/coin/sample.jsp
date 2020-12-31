@@ -19,11 +19,12 @@ function Stop() {
 }
 function requestGetPrice() {
 	$.ajax({
-	    url: "http://localhost:8181/CoinTraderWebGame/CurrentPrice",
+	    url: "http://localhost:8089/CurrentPrice",
 	    method: "GET",
 	    dataType: "JSON",
 	    success: function(data) {
 	    	// data.coin1
+	    	console.log(data);
 	    	// data.coin2
 	    	// data.coin3
 	    	// data.coin4
