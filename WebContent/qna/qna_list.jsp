@@ -30,21 +30,26 @@
                                 </tr>
                                 </c:if>
                                 <c:forEach var="vo" items="${list }">
-                                <tr>
-                                    <th scope="row">${vo.idx }</th>
-                                    <td><a href="qna?cmd=qna_view&id=${id }&idx=${vo.idx }&page=${page}">
-                                    <c:choose>
-        							<c:when test="${fn:length(vo.subject) gt 26}">
-        							<c:out value="${fn:substring(vo.subject, 0, 26)}..."></c:out>
-        							</c:when>
-       								<c:otherwise>
-       								<c:out value="${vo.subject}"></c:out>
-       								</c:otherwise>
-									</c:choose>
-                                    </a></td>
-                                    <td>${vo.regdate.substring(0,10) }</td>
-                                    <td>답변완료</td>
-                                </tr>
+	                                <tr>
+	                                    <th scope="row">${vo.idx }</th>
+	                                    <c:if test="${id.contains('admin')}">
+	                                    	<td><a href="qna?cmd=qna_view&idx=${vo.idx }">
+	                                    </c:if>
+	                                    <c:if test="${!id.contains('admin')}">
+	                                    	<td><a href="qna?cmd=qna_view&id=${id }&idx=${vo.idx }">
+	                                    </c:if>
+	                                    <c:choose>
+		        							<c:when test="${fn:length(vo.subject) gt 26}">
+		        								<c:out value="${fn:substring(vo.subject, 0, 26)}..."></c:out>
+		        							</c:when>
+		       								<c:otherwise>
+		       									<c:out value="${vo.subject}"></c:out>
+		       								</c:otherwise>
+										</c:choose>
+										</a></td>
+	                                    <td>${vo.regdate.substring(0,10) }</td>
+	                                    <td>답변완료</td>
+	                                </tr>
                                 </c:forEach>
                             </tbody>
                         </table>
@@ -66,7 +71,7 @@
                             </c:when>
                             </c:choose>
                             <c:forEach var="a" begin="1" end="${totpage }" step="1">
-            				<li class="page-item"><a class="page-link" href="qna?cmd=qna_list&page=${a}">${a}</a></li>
+            					<li class="page-item"><a class="page-link" href="qna?cmd=qna_list&page=${a}">${a}</a></li>
          					</c:forEach>
                             <!-- <li class="page-item active"><a class="page-link" href="#">1</a></li>
                             <li class="page-item"><a class="page-link" href="#">2</a></li>

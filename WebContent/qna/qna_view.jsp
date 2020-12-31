@@ -37,7 +37,9 @@
 		<!-- <button class="btn btn-outline-primary" type="button" onClick="window.open('qna?cmd=qna_delete','삭제','width=400, height=300')">삭제하기</button> -->
 		<!-- 세션추가되면 댓글추가 버튼 바꿀예정 -->
 		<%-- <c:if test="${vo.id.contain('admin') }"></c:if> --%>
-		<button class="btn btn-outline-primary" type="button" onClick="location.href='qna?cmd=qna_answer&id=${id }&idx=${vo.idx }'">답변등록</button>
+		<c:if test="${id.contains('admin')}">
+			<button class="btn btn-outline-primary" type="button" onClick="location.href='qna?cmd=qna_answer&idx=${vo.idx }'">답변등록</button>
+		</c:if>
 		<button class="btn btn-outline-primary" type="button" onClick="location.href='qna?cmd=qna_modify&id=${id }&idx=${vo.idx }'">수정하기</button>
 		<a class="btn btn-outline-primary" href="" data-toggle="modal" data-target="#deleteModalForm">삭제하기</a>
 		<button class="btn btn-outline-secondary" type="button" onClick="location.href='qna?cmd=qna_list&page=${page}'">돌아가기</button>

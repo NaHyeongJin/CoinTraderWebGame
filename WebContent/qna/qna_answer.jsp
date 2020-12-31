@@ -24,14 +24,9 @@
 				<div class="card-body">
 					<div class="table-responsive project-list">
 						<form name="aw" action="qna?cmd=qna_answer_pro" method="post">
+						<input type="hidden" name="idx" value="${vo.idx}" >
 							<table class="table project-table table-centered table-nowrap">
 								<thead>
-									<div class="col-12">
-										<label for="id" class="form-label">ID</label>
-										<div class="input-group">
-											<input type="text" class="form-control" name="id" id="id" value="${id }" readOnly>
-										</div>
-									</div>
 									<div class="col-12">
 										<label for="subject" class="form-label">제목</label>
 										<div class="input-group">
@@ -47,7 +42,7 @@
 									<div class="col-12">
 										<label for="answer" class="form-label">운영자 답변</label>
 										<div class="input-group">
-											<textarea class="form-control" rows="8" name="answer" id="answer"></textarea>
+											<textarea class="form-control" rows="8" name="answer" id="answer" required></textarea>
 										</div>
 									</div>
 								</thead>

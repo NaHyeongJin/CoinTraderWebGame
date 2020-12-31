@@ -18,7 +18,8 @@ public class QnaViewAction implements Action {
 		request.setCharacterEncoding("utf-8");
 		QnaDAO dao = QnaDAO.getInstance();
 		
-		QnaVO vo = dao.QnaView(request.getParameter("id"), Integer.parseInt(request.getParameter("idx")));
+		QnaVO vo = (request.getParameter("id") == null) ? dao.QnaView(Integer.parseInt(request.getParameter("idx"))) : dao.QnaView(request.getParameter("id"), Integer.parseInt(request.getParameter("idx")));
+		
 //		vo.setContents(vo.getContents().replace("\n", "<br>"));
 		request.setAttribute("vo", vo);
 		RequestDispatcher rd = request.getRequestDispatcher("qna/qna_view.jsp");
