@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.jslhrd.coinTraderGame.model.users.UserDAO;
-import com.jslhrd.coinTraderGame.model.users.UserVO;
 import com.jslhrd.coinTraderGame.service.Action;
 
 public class UsersModifyAction implements Action {
