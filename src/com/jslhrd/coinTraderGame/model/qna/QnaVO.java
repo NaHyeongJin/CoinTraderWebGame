@@ -1,17 +1,17 @@
 package com.jslhrd.coinTraderGame.model.qna;
 
 public class QnaVO {
-	private int rnum;
+	private int idx;
 	private String id;
 	private String subject;
 	private String contents;
 	private String regdate;
 	private String answer;
-	public int getRnum() {
-		return rnum;
+	public int getIdx() {
+		return idx;
 	}
-	public void setRnum(int rnum) {
-		this.rnum = rnum;
+	public void setIdx(int idx) {
+		this.idx = idx;
 	}
 	public String getId() {
 		return id;

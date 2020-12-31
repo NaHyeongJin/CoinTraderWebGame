@@ -19,7 +19,6 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">제목</th>
-                                    <th scope="col">ID</th>
                                     <th scope="col">문의 날짜</th>
                                     <th scope="col">답변현황</th>
                                 </tr>
@@ -32,8 +31,8 @@
                                 </c:if>
                                 <c:forEach var="vo" items="${list }">
                                 <tr>
-                                    <th scope="row">${vo.rnum }</th>
-                                    <td><a href="qna?cmd=qna_view&id=${vo.id }&page=${page}">
+                                    <th scope="row">${vo.idx }</th>
+                                    <td><a href="qna?cmd=qna_view&id=${id }&idx=${vo.idx }&page=${page}">
                                     <c:choose>
         							<c:when test="${fn:length(vo.subject) gt 26}">
         							<c:out value="${fn:substring(vo.subject, 0, 26)}..."></c:out>
@@ -43,7 +42,6 @@
        								</c:otherwise>
 									</c:choose>
                                     </a></td>
-                                    <td>${vo.id }</td>
                                     <td>${vo.regdate.substring(0,10) }</td>
                                     <td>답변완료</td>
                                 </tr>

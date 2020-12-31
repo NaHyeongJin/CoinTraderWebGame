@@ -29,7 +29,7 @@
 									<div class="col-12">
 										<label for="id" class="form-label">ID</label>
 										<div class="input-group">
-											<input type="text" class="form-control" name="id" id="id" value="${vo.id }" readOnly>
+											<input type="text" class="form-control" name="id" id="id" value="${id }" readOnly>
 										</div>
 									</div>
 									<div class="col-12">
@@ -57,7 +57,7 @@
 					<!-- end project-list -->
 
 					<div class="col-12 mt-5">
-						<button class="btn btn-outline-primary" type="submit" onClick="javascript:send()">등록하기</button>
+						<button class="btn btn-outline-primary" type="submit" onClick="send()">등록하기</button>
 						<button class="btn btn-outline-secondary" type="button" onClick="history.back()">돌아가기</button>
 					</div>
 				</div>

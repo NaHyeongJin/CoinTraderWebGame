@@ -19,7 +19,7 @@ public class QnaDeleteProAction implements Action {
 		QnaDAO dao = QnaDAO.getInstance();
 		QnaVO vo = new QnaVO();
 		
-		int row = dao.QnaDelete(request.getParameter("id"));
+		int row = dao.QnaDelete(request.getParameter("id"), request.getParameter("regdate"));
 		
 		request.setAttribute("row", row);
 		RequestDispatcher rd = request.getRequestDispatcher("qna/qna_delete_pro.jsp");

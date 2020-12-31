@@ -35,7 +35,7 @@
 									<div class="col-12">
 										<label for="id" class="form-label">ID</label>
 										<div class="input-group">
-											<input type="text" class="form-control" name="id" id="id" value="${vo.id }" readOnly>
+											<input type="text" class="form-control" name="id" id="id" value="${id }" readOnly>
 										</div>
 									</div>
 									<div class="col-12">

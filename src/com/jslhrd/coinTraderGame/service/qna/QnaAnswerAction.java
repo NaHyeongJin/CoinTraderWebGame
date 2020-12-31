@@ -18,7 +18,7 @@ public class QnaAnswerAction implements Action {
 		request.setCharacterEncoding("utf-8");
 		QnaDAO dao = QnaDAO.getInstance();
 
-		QnaVO vo = dao.QnaView(request.getParameter("id"));
+		QnaVO vo = dao.QnaView(request.getParameter("id"), Integer.parseInt(request.getParameter("idx")));
 		vo.setContents(vo.getContents().replace("\n", "<br>"));
 		
 		request.setAttribute("vo", vo);

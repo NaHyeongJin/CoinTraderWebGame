@@ -17,15 +17,11 @@ public class QnaModifyAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		QnaDAO dao = QnaDAO.getInstance();
-		int page = 1;
-		if(request.getParameter("page") != null) {
-			page = Integer.parseInt(request.getParameter("page"));
-		}
-		QnaVO vo = dao.QnaView(request.getParameter("id"));
 		
+		QnaVO vo = dao.QnaView(request.getParameter("id"), Integer.parseInt(request.getParameter("idx")));
 		vo.setContents(vo.getContents().replace("\n", "<br>"));
+		
 		request.setAttribute("vo", vo);
-		request.setAttribute("page", page);
 		RequestDispatcher rd = request.getRequestDispatcher("qna/qna_modify.jsp");
 		rd.forward(request, response);
 	}
