@@ -9,32 +9,41 @@
 </head>
 <body>
  <%@ include file = "/include/header.jsp" %>
-<table>
-	<tr>
-		<td>제목 : </td>
-		<td>${vo.subject }</td>
-	</tr>
-</table>
-<table>
-	<tr>
-		<td>내용 : </td>
-		<td>${vo.contents }</td>
-	</tr>
-</table>
-<table>
-	<tr>
-		<td>등록날짜 : </td>
-		<td>${vo.regdate.substring(0,16) }</td>
-	</tr>
-</table>
-<table>
-	<tr>
-		<td>답변상태</td>
-		<td></td>
-	</tr>
-</table>
+<div class="row">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="card-body">
+					<div class="table-responsive project-list">
+						<form name="qnam" action="qna?cmd=qna_modify_pro" method="post">
+							<table class="table project-table table-centered table-nowrap">
+								<thead>
+									<div class="col-12">
+										<label for="id" class="form-label">ID</label>
+										<div class="input-group">
+											<input type="text" class="form-control" name="id" id="id" value="${id }" readOnly>
+										</div>
+									</div>
+									<div class="col-12">
+										<label for="subject" class="form-label">제목</label>
+										<div class="input-group">
+											<input type="text" class="form-control" name="subject" id="subject" value="${vo.subject }" readOnly>
+										</div>
+									</div>
+									<div class="col-12">
+										<label for="contents" class="form-label">내용</label>
+										<div class="input-group">
+											<textarea class="form-control" rows="8" name="contents" id="contents" readOnly>${vo.contents }</textarea>
+										</div>
+									</div>
+								</thead>
+							</table>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="col-12 mt-5">
-		<!-- <button class="btn btn-outline-primary" type="button" onClick="window.open('qna?cmd=qna_delete','삭제','width=400, height=300')">삭제하기</button> -->
 		<!-- 세션추가되면 댓글추가 버튼 바꿀예정 -->
 		<%-- <c:if test="${vo.id.contain('admin') }"></c:if> --%>
 		<c:if test="${id.contains('admin')}">
@@ -42,7 +51,7 @@
 		</c:if>
 		<button class="btn btn-outline-primary" type="button" onClick="location.href='qna?cmd=qna_modify&id=${id }&idx=${vo.idx }'">수정하기</button>
 		<a class="btn btn-outline-primary" href="" data-toggle="modal" data-target="#deleteModalForm">삭제하기</a>
-		<button class="btn btn-outline-secondary" type="button" onClick="location.href='qna?cmd=qna_list&page=${page}'">돌아가기</button>
+		<button class="btn btn-outline-secondary" type="button" onClick="location.href='qna?cmd=qna_list&page=${currentPage}'">돌아가기</button>
 	</div>
 	<!-- DeleteModalForm -->
 		<div class="modal fade" id="deleteModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"

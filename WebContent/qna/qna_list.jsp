@@ -33,10 +33,10 @@
 	                                <tr>
 	                                    <th scope="row">${vo.idx }</th>
 	                                    <c:if test="${id.contains('admin')}">
-	                                    	<td><a href="qna?cmd=qna_view&idx=${vo.idx }">
+	                                    	<td><a href="qna?cmd=qna_answer&idx=${vo.idx }&page=${currentPage}">
 	                                    </c:if>
 	                                    <c:if test="${!id.contains('admin')}">
-	                                    	<td><a href="qna?cmd=qna_view&id=${id }&idx=${vo.idx }">
+	                                    	<td><a href="qna?cmd=qna_view&id=${id }&idx=${vo.idx }&page=${currentPage}">
 	                                    </c:if>
 	                                    <c:choose>
 		        							<c:when test="${fn:length(vo.subject) gt 26}">
@@ -59,14 +59,14 @@
                     <div class="pt-3">
                         <ul class="pagination justify-content-end mb-0">
                         	<c:choose>
-                        	<c:when test="${page==1 }">
+                        	<c:when test="${currentPage==1 }">
                         	<li class="page-item disabled" >
-                                <a class="page-link" href="qna?cmd=qna_list&page=${page-1}" tabindex="-1" aria-disabled="true">Previous</a>
+                                <a class="page-link" href="qna?cmd=qna_list&page=${currentPage-1}" tabindex="-1" aria-disabled="true">Previous</a>
                             </li>
                             </c:when>
-                            <c:when test="${page!=1 }">
+                            <c:when test="${currentPage!=1 }">
                             <li class="page-item" >
-                                <a class="page-link" href="qna?cmd=qna_list&page=${page-1}">Previous</a>
+                                <a class="page-link" href="qna?cmd=qna_list&page=${currentPage-1}">Previous</a>
                             </li>
                             </c:when>
                             </c:choose>
@@ -77,8 +77,7 @@
                             <li class="page-item"><a class="page-link" href="#">2</a></li>
                             <li class="page-item"><a class="page-link" href="#">3</a></li> -->
                             <li class="page-item">
-                                <a class="page-link" href="qna?cmd=qna_list&page=${page+1}">Next</a>
-                                <%-- <a class="page-link" href="qna?page=${page+1}">Next</a> --%>
+                                <a class="page-link" href="qna?cmd=qna_list&page=${currentPage+1}">Next</a>
                             </li>
                             <li><a>&nbsp&nbsp&nbsp&nbsp</a></li>
                             <li class="page-item">
