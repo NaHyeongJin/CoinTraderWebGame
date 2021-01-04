@@ -116,7 +116,7 @@ function modify(){
 			
 			<div class="col-12 mt-5">
 				<button class="btn btn-outline-primary" onclick="return modify()" type="submit">완료</button>
-				<a href="/"><button class="btn btn-outline-secondary" type="button">뒤로</button></a>
+				<a href="index"><button class="btn btn-outline-secondary" type="button">뒤로</button></a>
 			</div>
 			</div>
 	</form>
