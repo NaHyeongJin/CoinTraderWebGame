@@ -10,10 +10,10 @@
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-<script src="jquery.js"></script>
+<script src="/coin/jquery.js"></script>
 <link rel="stylesheet" href="/resource/css/bootstrap.css">
 <link rel="stylesheet" href="/resource/css/bootstrap.min.css">
-<link rel="stylesheet" href="graph.css">
+<link rel="stylesheet" href="/coin/graph.css">
 <style type="text/css">
 #coinname {
   width: 100%;
@@ -22,7 +22,7 @@
   border-radius: 4px;
   font-size: 16px;
   background-color: white;
-  background-image: url('img/Won-512.png');
+  background-image: url('/coin/img/Won-512.png');
   background-size: 23px;
   background-position: 100px 6px; 
   background-repeat: no-repeat;
@@ -47,16 +47,18 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel"><b>코인구매<a id="buyCoin" data-toggle="popover">
-		<img alt="" src="img/chat-dots.svg">
+		<img alt="" src="/coin/img/chat-dots.svg">
   		</a></b></h5>
         
-        <a id ="closemodalbutton1"><img alt="" src="img/x.svg" width="30" height="30"></a>
+        <a id ="closemodalbutton1"><img alt="" src="/coin/img/x.svg" width="30" height="30"></a>
       </div>
       
       
     
       <div class="modal-body">
-  
+  <div id = "rrr">
+  	
+	</div> 
  <div class="input-group mb-3">
   <div class="btn-group">
     <button class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" href="#" >코인<span class="caret"></span></button>
@@ -69,7 +71,10 @@
   </div>
  
   <input type="text" style=" text-align:center;" id='coinname' placeholder="코인을 선택해주세요" class="form-control" aria-label="Text input with dropdown button" readonly="readonly">
-  <input type="hidden" value="0" id="priceinput">
+  <input type="hidden" value="0" id="Apriceinput">
+  <input type="hidden" value="0" id="Bpriceinput">
+  <input type="hidden" value="0" id="Cpriceinput">
+  <input type="hidden" value="0" id="Dpriceinput">
 
 </div>
   <div class="row g-3 align-items-center">
@@ -77,7 +82,7 @@
     <label for="inputPassword6" class="col-form-label">구매수량</label>
   </div>
   <div class="col-auto" align="center">
-    <input style="text-align: center;" type="text" id="coincnt" class="form-control" aria-describedby="passwordHelpInline">
+    <input style="text-align: center;" type="number" id="coincnt" class="form-control" aria-describedby="passwordHelpInline">
   </div>
 </div>
  <div class="col-auto" style="padding-bottom: 15px;" align="center">
@@ -89,7 +94,7 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" id ="closemodalbutton2">닫기</button>
-        <button id="modalbutton2" data-bs-toggle="modal" data-bs-target="#myModal2" type="button" class="btn btn-primary">바로구매<img alt="" src="img/cart-check.svg" width="20" height="25" ></button>
+        <button id="modalbutton2" data-bs-toggle="modal" data-bs-target="#myModal2" type="button" class="btn btn-primary">바로구매<img alt="" src="/coin/img/cart-check.svg" width="20" height="25" ></button>
        </div> 
        
       </div>
@@ -103,15 +108,19 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel2"><b>코인판매<a id="sellCoin" data-toggle="popover">
-		<img alt="" src="img/chat-dots.svg">
+		<img alt="" src="/coin/img/chat-dots.svg">
   		</a></b></h5>
         
-        <a id ="closemodalbutton3"><img alt="" src="img/x.svg" width="30" height="30"></a>
+        <a id ="closemodalbutton3"><img alt="" src="/coin/img/x.svg" width="30" height="30"></a>
       </div>
 
       <div class="modal-body">
     
-   <label for="floatingInputValue"><b>구입한 코인</b></label>     
+   <label for="floatingInputValue"><b>구입한 코인</b></label>
+   <input type="hidden" id = "money" value="${money}">
+  	<div id = "rrr2">
+  	
+	</div>    
   <input type="text" style="text-align: center;" class="form-control" id="floatingInputValue" placeholder="name@example.com" value="" readonly="readonly">
  
   
@@ -149,7 +158,7 @@
       <div class="modal-footer">
       
         <button type="button" class="btn btn-secondary" id ="closemodalbutton4">닫기</button>
-        <button data-bs-toggle="modal" data-bs-target="#myModal2" type="button" class="btn btn-primary">바로팔기<img alt="" src="img/cart-check.svg" width="20" height="25" ></button>
+        <button data-bs-toggle="modal" data-bs-target="#myModal2" type="button" class="btn btn-primary">바로팔기<img alt="" src="/coin/img/cart-check.svg" width="20" height="25" ></button>
         
        </div>
       </div>
@@ -171,7 +180,7 @@
 	 	<div class="carousel-caption">
 	 	<figure class="highcharts-figure">
 		<a id="aCoin" data-toggle="popover">
-		<img alt="" src="img/question-square.svg">
+		<img alt="" src="/coin/img/question-square.svg">
   		</a>
   		<div id="Acontainer"></div>
   		<br><div class="alert alert-light" role="alert">
@@ -186,11 +195,11 @@
 	 	<div class="carousel-caption">
 	 	<figure class="highcharts-figure">
 		<a id="bCoin" data-toggle="popover">
-		<img alt="" src="img/question-square.svg">
+		<img alt="" src="/coin/img/question-square.svg">
   		</a>
   		<div id="Bcontainer"></div>
   		<br><div class="alert alert-light" role="alert">
-		가격을쓰시오
+		<div id="bsd">현재가격:0</div>
 		</div></figure>
 		 </div>
         </div>
@@ -201,11 +210,11 @@
 	 	<div class="carousel-caption">
 	 	<figure class="highcharts-figure">
 		<a id="cCoin" data-toggle="popover">
-		<img alt="" src="img/question-square.svg">
+		<img alt="" src="/coin/img/question-square.svg">
   		</a>
   		<div id="Ccontainer"></div>
   		<br><div class="alert alert-light" role="alert">
-		가격을쓰시오
+		<div id="csd">현재가격:0</div>
 		</div></figure>
 		 </div>
         </div>
@@ -216,11 +225,11 @@
           <div class="carousel-caption text-end">
             <figure class="highcharts-figure">
             <a id="dCoin" data-toggle="popover">
-			<img alt="" src="img/question-square.svg">
+			<img alt="" src="/coin/img/question-square.svg">
   			</a>
   			<div id="Dcontainer"></div>
   			<br><div class="alert alert-light" role="alert">
-		가격을쓰시오
+		<div id="dsd">현재가격:0</div>
 		</div></figure>
           </div>
         </div>
@@ -236,10 +245,16 @@
       <span class="visually-hidden"></span>
     </a>
   </div>
-
+	<c:if test="${empty id}">
+	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModalForm">
+  	로그인후 구매
+	</button>
+	</c:if>
+	<c:if test="${!empty id}">
 	<button id="modalbutton" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
   	구매하기
 	</button>
+	</c:if>
 	
 	<script type="text/javascript" src="/resource/js/bootstrap.js"></script>
 	<script type="text/javascript" src="/resource/js/bootstrap.min.js"></script>
@@ -249,7 +264,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script src="graph.js"></script>	
+	<script src="/coin/graph.js"></script>	
 </body>
 <%@ include file="/include/footer.jsp" %>
 </html>

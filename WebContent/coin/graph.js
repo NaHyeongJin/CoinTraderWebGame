@@ -16,15 +16,13 @@ $(function () {
 		    dataType: "JSON",
 		    success: function(data) {
 		    	// data.coin1
-		    	
 		    	acoin(data.coin1);
-		    	
 		    	// data.coin2
-		   
+		    	bcoin(data.coin2);
 		    	// data.coin3
-		    	
+		    	ccoin(data.coin3);
 		    	// data.coin4
-		    	
+		    	dcoin(data.coin4);
 		    	// 각각 70개 배열이고
 		    	// data.lastUpdateDate - "2020-12-28 15:10:46" String임
 		    	// 이 데이터로 그래프 출력시켜주시면 됩니다
@@ -45,7 +43,7 @@ $(function () {
 		  if(x <= 60){
 			  $("#asd").text("현재가격:"+aprice[x++]);
 			  $('#modalbutton').click(function(){
-				  $('#priceinput').val(aprice[x]);
+				  $('#Apriceinput').val(aprice[x]);
 			  });
 		  }else{
 			clearInterval(it);
@@ -117,6 +115,21 @@ $(function () {
 			  }]
 			});
 	};
+	function bcoin(bprice){
+		var c = 0;
+		var x = 0;
+
+		var it = setInterval(function(){
+			  if(x <= 60){
+				  $("#bsd").text("현재가격:"+bprice[x++]);
+				  $('#modalbutton').click(function(){
+					  $('#Bpriceinput').val(bprice[x]);
+				  });
+			  }else{
+				clearInterval(it);
+				i=0;
+			  }
+			}, 1000);
 	var chart2 = new Highcharts.stockChart('Bcontainer', {
 		  chart: {
 			    events: {
@@ -126,7 +139,7 @@ $(function () {
 			        var series = this.series[0];
 			        setInterval(function () {
 			          var x = (new Date()).getTime(), // current time
-			            y = Math.round(Math.random() * 100);
+			            y = bprice[c++];
 			          series.addPoint([x, y], true, true);
 			        }, 1000);
 			      }
@@ -170,18 +183,32 @@ $(function () {
 			        time = (new Date()).getTime(),
 			        i;
 
-			      for (i = -999; i <= 0; i += 1) {
+			      for (i = -59; i <= 0; i += 1) {
 			        data.push([
 			          time + i * 1000,
-			          Math.round(Math.random() * 100)
+			          bprice[i]
 			        ]);
 			      }
 			      return data;
 			    }())
 			  }]
 			});
-	
+	};
+	function ccoin(cprice){
+		var c = 0;
+		var x = 0;
 
+		var it = setInterval(function(){
+			  if(x <= 60){
+				  $("#csd").text("현재가격:"+cprice[x++]);
+				  $('#modalbutton').click(function(){
+					  $('#Cpriceinput').val(cprice[x]);
+				  });
+			  }else{
+				clearInterval(it);
+				i=0;
+			  }
+			}, 1000);
 	var chart3 = new Highcharts.stockChart('Ccontainer', {
 		  chart: {
 			    events: {
@@ -191,7 +218,7 @@ $(function () {
 			        var series = this.series[0];
 			        setInterval(function () {
 			          var x = (new Date()).getTime(), // current time
-			            y = Math.round(Math.random() * 100);
+			            y = cprice[c++];
 			          series.addPoint([x, y], true, true);
 			        }, 1000);
 			      }
@@ -228,24 +255,39 @@ $(function () {
 			  },
 
 			  series: [{
-			    name: 'Random data',
+			    name: 'C COIN',
 			    data: (function () {
 			      // generate an array of random data
 			      var data = [],
 			        time = (new Date()).getTime(),
 			        i;
 
-			      for (i = -999; i <= 0; i += 1) {
+			      for (i = -59; i <= 0; i += 1) {
 			        data.push([
 			          time + i * 1000,
-			          Math.round(Math.random() * 100)
+			          cprice[i]
 			        ]);
 			      }
 			      return data;
 			    }())
 			  }]
 			});
+	};
+	function dcoin(dprice){
+		var c = 0;
+		var x = 0;
 
+		var it = setInterval(function(){
+			  if(x <= 60){
+				  $("#dsd").text("현재가격:"+dprice[x++]);
+				  $('#modalbutton').click(function(){
+					  $('#Dpriceinput').val(dprice[x]);
+				  });
+			  }else{
+				clearInterval(it);
+				i=0;
+			  }
+			}, 1000);
 	var chart4 = new Highcharts.stockChart('Dcontainer', {
 		  chart: {
 			    events: {
@@ -255,7 +297,7 @@ $(function () {
 			        var series = this.series[0];
 			        setInterval(function () {
 			          var x = (new Date()).getTime(), // current time
-			            y = Math.round(Math.random() * 100);
+			            y = dprice[c++];
 			          series.addPoint([x, y], true, true);
 			        }, 1000);
 			      }
@@ -292,21 +334,23 @@ $(function () {
 			  },
 
 			  series: [{
-			    name: 'Random data',
+			    name: 'D COIN',
 			    data: (function () {
 			      // generate an array of random data
 			      var data = [],
 			        time = (new Date()).getTime(),
 			        i;
 
-			      for (i = -999; i <= 0; i += 1) {
+			      for (i = -59; i <= 0; i += 1) {
 			        data.push([
 			          time + i * 1000,
-			          Math.round(Math.random() * 100)
+			          dprice[i]
 			        ]);
 			      }
 			      return data;
 			    }())
 			  }]
 			});
-	});
+
+};
+});
