@@ -125,4 +125,52 @@ public class CoinDAO {
 			}
 		}
 	}
+	public void coinBuy(String id, int cnt, int amount, int price) {
+		moneyUpdate(id, cnt * amount * -1);
+		String receipt = (char) ('A' + cnt - 1) + "RECEIPT";
+		String sql = "INSERT ALL\r\n"
+				+ "INTO \""+ receipt +"\" (COUNT, PRICE, ID)\r\n"
+				+ "VALUES (?, ?, ?)\r\n"
+				+ "INTO COIN_MONEY (ID, MONEY)\r\n"
+				+ "VALUES (?, (SELECT MONEY FROM COIN_USER WHERE ID = ?))\r\n"
+				+ "SELECT * FROM DUAL";
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, amount);
+			pstmt.setInt(2, price);
+			for(int i = 3; i < 6; i++) {
+				pstmt.setString(i, id);
+			}
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+				pstmt.close();
+			} catch (Exception e2) {
+			}
+		}
+	}
+	
+	// id의 돈을 money만큼 증감
+	private void moneyUpdate(String id, int money) {
+		String sql = "UPDATE COIN_USER SET MONEY = (MONEY + ?) WHERE ID = ?";
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, money);
+			pstmt.setString(2, id);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+				pstmt.close();
+			} catch (Exception e2) {
+			}
+		}
+	}
 }
