@@ -66,7 +66,6 @@ $(function(){
 	<form method="post" class="needs-validation" novalidate name="coin" action="UserController?cmd=user_edit_pro">
 		<div class="row g-3">
 		
-		
 			<div class="col-12">
 				<label for="user_id" class="form-label">아이디</label>
 				<div class="input-group">
@@ -76,6 +75,7 @@ $(function(){
 			
 			<div class="col-12">
 				<label for="user_id" class="form-label">보유자산</label>
+				
 				<div class="input-group">
 					<input type="text" class="form-control" id="money" name="money" value="${vo.money} " readonly>	
 								
@@ -91,20 +91,25 @@ $(function(){
 					        <h5 class="modal-title" id="exampleModalLabel">충전 금액</h5>
 					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					      </div>
+					      
 					      <div class="modal-body">
 					        <button type="submit" class="btn btn-primary">1,000</button>
-					         <button type="submit" class="btn btn-primary">5,000</button>
-					          <button type="submit" class="btn btn-primary">10,000</button>
+					        <button type="submit" class="btn btn-primary">5,000</button>
+					        <button type="submit" class="btn btn-primary">10,000</button>
 					      </div>
+					      
 					      <div class="modal-footer">
 					        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 					        <button type="button" class="btn btn-primary">Charge</button>
 					      </div>
+					      
 					    </div>
 					  </div>
+					  
 					</div>
 					
 				</div>
+				
 			</div>
 			
 	
