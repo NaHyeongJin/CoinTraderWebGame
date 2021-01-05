@@ -39,8 +39,12 @@ $(window).bind('hashchange', function() {
 <link rel="stylesheet" href="resource/css/bootstrap.css">
 
 </head>
-
-<body onload="Start();">
+<c:if test="${empty id}">
+	<body>
+</c:if>
+<c:if test="${!empty id}">
+	<body onload="Start();">
+</c:if>
 	<header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm sticky-top">
 		<p class="h5 my-0 mr-auto fw-normal">Team Method</p>
 		<c:if test="${!empty id}">
