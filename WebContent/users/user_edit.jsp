@@ -66,7 +66,7 @@ $(function(){
 	<form method="post" class="needs-validation" novalidate name="coin" action="UserController?cmd=user_edit_pro">
 		<div class="row g-3">
 		
-		<c:forEach var="vo" items="${list}">
+		
 			<div class="col-12">
 				<label for="user_id" class="form-label">아이디</label>
 				<div class="input-group">
@@ -77,14 +77,37 @@ $(function(){
 			<div class="col-12">
 				<label for="user_id" class="form-label">보유자산</label>
 				<div class="input-group">
-					<input type="text" class="form-control" id="money" name="money" value="${vo.money} " readonly>
+					<input type="text" class="form-control" id="money" name="money" value="${vo.money} " readonly>	
+								
+			<!-- Button trigger modal -->
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+					 충전
+					</button>
 					
-				
-					
-					<button type="button" class="btn btn-outline-primary" style="margin-left: 2%" >충전</button>
+					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					   
+					        <h5 class="modal-title" id="exampleModalLabel">충전 금액</h5>
+					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					      </div>
+					      <div class="modal-body">
+					        <button type="submit" class="btn btn-primary">1,000</button>
+					         <button type="submit" class="btn btn-primary">5,000</button>
+					          <button type="submit" class="btn btn-primary">10,000</button>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					        <button type="button" class="btn btn-primary">Charge</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
 					
 				</div>
 			</div>
+			
+	
 					
 			<div class="col-12">
 				<label for="pw1" class="form-label">비밀번호 수정</label>
@@ -122,7 +145,7 @@ $(function(){
 					<input type="text" name="email2" class="form-control" id="email2" value="${email2}" readonly>
 				</div>
 			</div>
-			</c:forEach>
+		
 			
 			<div class="col-12 mt-5">
 				<button class="btn btn-outline-primary" onclick="return modify()" type="submit">완료</button>
