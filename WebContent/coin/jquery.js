@@ -76,12 +76,12 @@ $('#aCoin').popover({ //팝오버
 				return '코인 구매시 팔아야함';
       }
 	});
-	
-		$('#modalbutton').on('click', function(){//구입버튼 모달
-			$('#myModal').modal('show');
-			});
+		
+	  	$('#modalbutton').on('click', function(){//구입버튼 모달
+		  $('#myModal').modal('show');
+	  	 });
 		$('#modalbutton2').on('click', function(){//판매버튼 모달
-			var totprice = $('#priceinput').val();
+			var totprice = $('#coinname').val();
 			var totcoincnt = $('#coincnt').val();
 			if(totprice==""){
 				return $('.form-text').text('코인을 선택해주세요');
@@ -93,6 +93,7 @@ $('#aCoin').popover({ //팝오버
 			$('#myModal2').modal('show');
 			$('.form-text').text('');
 			$('#floatingInputValue').val(totprice+'  코인개수:'+totcoincnt);
+			$('#coincnt2').val(totcoincnt);
 			});
 		
 		$('#coincnt').on('keyup',function(e){//코인개수 구입시 경고문삭제
@@ -101,8 +102,8 @@ $('#aCoin').popover({ //팝오버
 		
 		$('#closemodalbutton1,#closemodalbutton2').on('click', function(){//구입모달 x/닫기버튼
 			$('#myModal').modal('hide');
-			$('#priceinput').css('background-position','100px 6px');
-			$('#priceinput').val('코인을 선택해주세요');
+			$('#coinname').css('background-position','100px 6px');
+			$('#coinname').val('코인을 선택해주세요');
 			$('.dropdown-toggle').text('코인');
 			$('#coincnt').val('');
 			$('.form-text').text('');
@@ -117,24 +118,36 @@ $('#aCoin').popover({ //팝오버
 	
 	
 	$(".dropdown-menu li a").click(function(){//모달창 버튼 클릭 쿼리
-		$('#priceinput').css('background-position','100px 6px');
+		$('#coinname').css('background-position','100px 6px');
 		  var selText = $(this).html();
 		  $(this).parents('.btn-group').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
 		});
 	$('#aprice').click(function(){
-		$('#priceinput').css('background-position','125px 6px');
-		$('#priceinput').val('A코인:aaa원');
+		$('#coinname').css('background-position','125px 6px');
+		$('#coinname').val('A코인:'+$("#priceinput").val()+"원");
+	});
+	$('#3sc').click(function(){
+		$('#selltime').val(3);
 	});
 	$('#bprice').click(function(){
-		$('#priceinput').css('background-position','125px 6px');
-		$('#priceinput').val('B코인:bbb원');
+		$('#coinname').css('background-position','125px 6px');
+		$('#coinname').val('B코인:bbb원');
+	});
+	$('#5sc').click(function(){
+		$('#selltime').val(5);
 	});
 	$('#cprice').click(function(){
-		$('#priceinput').css('background-position','125px 6px');
-		$('#priceinput').val('C코인:ccc원');
+		$('#coinname').css('background-position','125px 6px');
+		$('#coinname').val('C코인:ccc원');
+	});
+	$('#7sc').click(function(){
+		$('#selltime').val(7);
 	});
 	$('#dprice').click(function(){
-		$('#priceinput').css('background-position','125px 6px');
-		$('#priceinput').val('D코인:ddd원');
+		$('#coinname').css('background-position','125px 6px');
+		$('#coinname').val('D코인:ddd원');
+	});
+	$('#10sc').click(function(){
+		$('#selltime').val(10);
 	});
 });	

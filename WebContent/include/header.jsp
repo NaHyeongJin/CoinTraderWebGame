@@ -8,8 +8,8 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="resource/js/bootstrap.js"></script>
-<link rel="stylesheet" href="resource/css/bootstrap.css">
+<script type="text/javascript" src="/resource/js/bootstrap.js"></script>
+<link rel="stylesheet" href="/resource/css/bootstrap.css">
 
 </head>
 

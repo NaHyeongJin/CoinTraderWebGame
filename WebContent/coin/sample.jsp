@@ -25,7 +25,7 @@ function requestGetPrice() {
 	    success: function(data) {
 	    	// data.coin1
 	    	console.log(data.coin1);
-	    	Acoin(data);
+	    
 	    	// data.coin2
 	    	console.log(data.coin2);
 	    	// data.coin3

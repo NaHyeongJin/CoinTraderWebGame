@@ -3,6 +3,7 @@ package com.jslhrd.coinTraderGame.service.coin;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,6 +40,7 @@ public class CurrentPrice extends HttpServlet {
         pw.print(json);
         pw.flush();
         pw.close();
+  
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -1,4 +1,14 @@
 $(function () {
+	var Aarray = new Array;
+	var Barray = new Array;
+	var Carray = new Array;
+	var Darray = new Array;
+	
+	var timerId = null;
+	if(timerId == null) {
+			requestGetPrice();
+	    	timerId = setInterval(requestGetPrice, 60000);
+		}
 	function requestGetPrice() {
 		$.ajax({
 		    url: "http://localhost:8089/CurrentPrice",
@@ -6,22 +16,43 @@ $(function () {
 		    dataType: "JSON",
 		    success: function(data) {
 		    	// data.coin1
-		    	console.log(data.coin1);
-		    	Acoin(data);
+		    	
+		    	acoin(data.coin1);
+		    	
 		    	// data.coin2
-		    	console.log(data.coin2);
+		   
 		    	// data.coin3
-		    	console.log(data.coin3);
+		    	
 		    	// data.coin4
-		    	console.log(data.coin4);
+		    	
 		    	// 각각 70개 배열이고
 		    	// data.lastUpdateDate - "2020-12-28 15:10:46" String임
 		    	// 이 데이터로 그래프 출력시켜주시면 됩니다
 		   	}
 		})
-	};
+	}
+	$(window).bind('hashchange', function() {
+		if(timerId != null) {
+	        clearInterval(timerId);
+	    }
+	});
 	
-	function Acoin(data){
+	function acoin(aprice){
+	var c = 0;
+	var x = 0;
+
+	var it = setInterval(function(){
+		  if(x <= 60){
+			  $("#asd").text("현재가격:"+aprice[x++]);
+			  $('#modalbutton').click(function(){
+				  $('#priceinput').val(aprice[x]);
+			  });
+		  }else{
+			clearInterval(it);
+			i=0;
+		  }
+		}, 1000);
+	
 	var chart1 = new Highcharts.stockChart('Acontainer', {
 		  chart: {
 			    events: {
@@ -31,7 +62,7 @@ $(function () {
 			        var series = this.series[0];
 			        setInterval(function () {
 			          var x = (new Date()).getTime(), // current time
-			            y = Math.round(Math.random() * 100);
+			            y = aprice[c++];
 			          series.addPoint([x, y], true, true);
 			        }, 1000);
 			      }
@@ -68,17 +99,17 @@ $(function () {
 			  },
 
 			  series: [{
-			    name: 'Random data',
+			    name: 'A COIN',
 			    data: (function () {
 			      // generate an array of random data
 			      var data = [],
 			        time = (new Date()).getTime(),
 			        i;
 
-			      for (i = -60; i <= 0; i += 1) {
+			      for (i = -59; i <= 0; i += 1) {
 			        data.push([
 			          time + i * 1000,
-			          Math.round(Math.random() * 100)
+			          aprice[i]
 			        ]);
 			      }
 			      return data;

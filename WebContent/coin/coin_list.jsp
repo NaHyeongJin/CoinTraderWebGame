@@ -11,11 +11,11 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <script src="jquery.js"></script>
-<link rel="stylesheet" href="resource/css/bootstrap.css">
-<link rel="stylesheet" href="resource/css/bootstrap.min.css">
+<link rel="stylesheet" href="/resource/css/bootstrap.css">
+<link rel="stylesheet" href="/resource/css/bootstrap.min.css">
 <link rel="stylesheet" href="graph.css">
 <style type="text/css">
-#priceinput {
+#coinname {
   width: 100%;
   box-sizing: border-box;
   border: 2px solid #ccc;
@@ -35,9 +35,13 @@
 
 }
 </style>
+<script>
+
+</script>
 </head>
 
 <body>
+<form action="coin?cmd=coin_buy" method="post">
 <div class="modal fade" id="myModal" tabindex="-1" >
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -50,9 +54,9 @@
       </div>
       
       
-     
+    
       <div class="modal-body">
-        <form action="">
+  
  <div class="input-group mb-3">
   <div class="btn-group">
     <button class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" href="#" >코인<span class="caret"></span></button>
@@ -63,9 +67,9 @@
       <li id = dprice><a class="dropdown-item" href="#"><B>D코인</B></a></li>
     </ul>
   </div>
-
-  <input type="text" style=" text-align: center;" id='priceinput' placeholder="코인을 선택해주세요" class="form-control" aria-label="Text input with dropdown button" readonly="readonly">
-  
+ 
+  <input type="text" style=" text-align:center;" id='coinname' placeholder="코인을 선택해주세요" class="form-control" aria-label="Text input with dropdown button" readonly="readonly">
+  <input type="hidden" value="0" id="priceinput">
 
 </div>
   <div class="row g-3 align-items-center">
@@ -81,7 +85,7 @@
     	
     </span>
   </div>
-  </form>
+  
 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" id ="closemodalbutton2">닫기</button>
@@ -106,10 +110,10 @@
       </div>
 
       <div class="modal-body">
-        <form action="">
+    
    <label for="floatingInputValue"><b>구입한 코인</b></label>     
   <input type="text" style="text-align: center;" class="form-control" id="floatingInputValue" placeholder="name@example.com" value="" readonly="readonly">
-  
+ 
   
 <label for="floatingInputValue" style="padding-top: 10px;"><b>판매할 코인</b></label>
  <div class="input-group mb-3">
@@ -118,19 +122,19 @@
     <label for="inputPassword6" class="col-form-label">판매수량</label>
   </div>
   <div class="col-auto" style="padding-left: 0px;">
-    <input style="text-align: center;" type="text" id="coincnt2" class="form-control" aria-describedby="passwordHelpInline">
+    <input style="text-align: center;" type="text" id="coincnt2" readonly="readonly" class="form-control" aria-describedby="passwordHelpInline">
   </div>
    <div class="btn-group">
     <button class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" href="#" >시간선택<span class="caret"></span></button>
     <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="#"><B>5초후</B></a></li>
-      <li><a class="dropdown-item" href="#"><B>10초후</B></a></li>
-      <li><a class="dropdown-item" href="#"><B>15초후</B></a></li>
-      <li><a class="dropdown-item" href="#"><B>20초후</B></a></li>
-      <li><a class="dropdown-item" href="#"><B>25초후</B></a></li>
-      <li><a class="dropdown-item" href="#"><B>30초후</B></a></li>
+      <li><a class="dropdown-item" href="#" id="3sc"><B>3초후</B></a></li>
+      <li><a class="dropdown-item" href="#" id="5sc"><B>5초후</B></a></li>
+      <li><a class="dropdown-item" href="#" id="7sc"><B>7초후</B></a></li>
+      <li><a class="dropdown-item" href="#" id="10sc"><B>10초후</B></a></li>
     </ul>
   </div>
+    <input type="hidden" id = "selltime">
+    
 </div>
 </div>
 
@@ -140,7 +144,7 @@
     </span>
   </div>
        
-  </form>
+  
 
       <div class="modal-footer">
       
@@ -153,8 +157,7 @@
       </div>
     </div>
   </div>
-
-
+</form>
 <div id="myCarousel" class="carousel slide carousel-fade" data-ride='carousel' data-interval='3000' data-pause="hover">
     <ol class="carousel-indicators" >
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -172,8 +175,7 @@
   		</a>
   		<div id="Acontainer"></div>
   		<br><div class="alert alert-light" role="alert">
-  		
-		가격을쓰시오
+  		<div id="asd">현재가격:0</div>
 		</div></figure>
 		 </div>
         </div>
@@ -239,11 +241,11 @@
   	구매하기
 	</button>
 	
-	<script type="text/javascript" src="resource/js/bootstrap.js"></script>
-	<script type="text/javascript" src="resource/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="resource/js/bootstrap.bundle.js"></script>
-	<script type="text/javascript" src="resource/js/bootstrap.bundle.min.js"></script>		
-	<script type="text/javascript" src="resource/js/popper.js"></script>
+	<script type="text/javascript" src="/resource/js/bootstrap.js"></script>
+	<script type="text/javascript" src="/resource/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/resource/js/bootstrap.bundle.js"></script>
+	<script type="text/javascript" src="/resource/js/bootstrap.bundle.min.js"></script>		
+	<script type="text/javascript" src="/resource/js/popper.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
