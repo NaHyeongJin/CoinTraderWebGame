@@ -126,8 +126,8 @@ public class CoinDAO {
 		}
 	}
 	public void coinBuy(String id, int cnt, int amount, int price) {
-		moneyUpdate(id, cnt * amount * -1);
-		String receipt = (char) ('A' + cnt - 1) + "RECEIPT";
+		moneyUpdate(id, amount * price * -1);
+		String receipt = (char) ('a' + cnt - 1) + "RECEIPT";
 		String sql = "INSERT ALL\r\n"
 				+ "INTO \""+ receipt +"\" (COUNT, PRICE, ID)\r\n"
 				+ "VALUES (?, ?, ?)\r\n"
@@ -162,6 +162,35 @@ public class CoinDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, money);
 			pstmt.setString(2, id);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+				pstmt.close();
+			} catch (Exception e2) {
+			}
+		}
+	}
+	
+	public void coinSell(String id, int cnt, int amount, int price) {
+		moneyUpdate(id, amount * price);
+		String receipt = (char) ('a' + cnt - 1) + "RECEIPT";
+		String sql = "INSERT ALL\r\n"
+				+ "INTO \""+ receipt +"\" (COUNT, PRICE, ID)\r\n"
+				+ "VALUES (?, ?, ?)\r\n"
+				+ "INTO COIN_MONEY (ID, MONEY)\r\n"
+				+ "VALUES (?, (SELECT MONEY FROM COIN_USER WHERE ID = ?))\r\n"
+				+ "SELECT * FROM DUAL";
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, amount * -1);
+			pstmt.setInt(2, price);
+			for(int i = 3; i < 6; i++) {
+				pstmt.setString(i, id);
+			}
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

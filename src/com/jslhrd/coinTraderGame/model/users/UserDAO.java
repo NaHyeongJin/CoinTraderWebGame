@@ -93,4 +93,26 @@ public class UserDAO {
 		return row;
 	}
 
+	public int getUserMoney(String id) {
+		String query = "SELECT MONEY FROM COIN_USER WHERE ID = ?";
+		int money = 0;
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if (rs.next()) money = rs.getInt("money");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+			}
+		}
+		return money;
+	}
+
 }
