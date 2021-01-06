@@ -23,7 +23,7 @@ public class UsersModifyProAction implements Action {
 			session.setAttribute("id", id);
 			session.setMaxInactiveInterval(3600);
 		}
-		
+
 		RequestDispatcher rd = request.getRequestDispatcher("users/user_edit_pro.jsp");
 		rd.forward(request, response);
 	}
