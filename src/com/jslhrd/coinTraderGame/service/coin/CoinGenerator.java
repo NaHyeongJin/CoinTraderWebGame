@@ -3,7 +3,6 @@ package com.jslhrd.coinTraderGame.service.coin;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TimerTask;
 
 import com.jslhrd.coinTraderGame.model.coin.CoinDAO;
 

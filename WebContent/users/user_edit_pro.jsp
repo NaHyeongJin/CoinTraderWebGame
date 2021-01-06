@@ -5,7 +5,7 @@
 	<c:when test = "${row==1}">
 		<script>
 			alert("수정되었습니다");
-			location.href ="/" ;			
+			location.href ="index" ;			
 		</script>
 	</c:when>
 		
