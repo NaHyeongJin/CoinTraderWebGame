@@ -33,12 +33,6 @@
 							<table class="table project-table table-centered table-nowrap">
 								<thead>
 									<div class="col-12">
-										<label for="id" class="form-label">ID</label>
-										<div class="input-group">
-											<input type="text" class="form-control" name="id" id="id" value="${id }" readOnly>
-										</div>
-									</div>
-									<div class="col-12">
 										<label for="subject" class="form-label">제목</label>
 										<div class="input-group">
 											<input type="text" class="form-control" name="subject" id="subject" value="${vo.subject }">
@@ -49,6 +43,9 @@
 										<div class="input-group">
 											<textarea class="form-control" rows="8" name="contents" id="contents">${vo.contents }</textarea>
 										</div>
+									</div>
+									<div class="col-12">
+										<input type="hidden" name="regdate" id="regdate" value="${vo.regdate }">
 									</div>
 								</thead>
 							</table>

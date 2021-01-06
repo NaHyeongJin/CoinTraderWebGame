@@ -28,6 +28,12 @@
 							<table class="table project-table table-centered table-nowrap">
 								<thead>
 									<div class="col-12">
+										<label for="subject" class="form-label">회원아이디</label>
+										<div class="input-group">
+											<input type="text" class="form-control" name="id" id="id" value="${vo.id }" readOnly>
+										</div>
+									</div>
+									<div class="col-12">
 										<label for="subject" class="form-label">제목</label>
 										<div class="input-group">
 											<input type="text" class="form-control" name="subject" id="subject" value="${vo.subject }" readOnly>
@@ -42,7 +48,7 @@
 									<div class="col-12">
 										<label for="answer" class="form-label">운영자 답변</label>
 										<div class="input-group">
-											<textarea class="form-control" rows="8" name="answer" id="answer" required></textarea>
+											<textarea class="form-control" rows="8" name="answer" id="answer" required>${vo.answer }</textarea>
 										</div>
 									</div>
 								</thead>

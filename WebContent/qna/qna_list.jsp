@@ -19,6 +19,9 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">제목</th>
+                                    <%-- <c:if test="${id.contains('admin')}">
+	                                    <th>ID</th>
+	                                </c:if> --%>
                                     <th scope="col">문의 날짜</th>
                                     <th scope="col">답변현황</th>
                                 </tr>
@@ -39,8 +42,8 @@
 	                                    	<td><a href="qna?cmd=qna_view&id=${id }&idx=${vo.idx }&page=${currentPage}">
 	                                    </c:if>
 	                                    <c:choose>
-		        							<c:when test="${fn:length(vo.subject) gt 26}">
-		        								<c:out value="${fn:substring(vo.subject, 0, 26)}..."></c:out>
+		        							<c:when test="${fn:length(vo.subject) gt 20}">
+		        								<c:out value="${fn:substring(vo.subject, 0, 20)}..."></c:out>
 		        							</c:when>
 		       								<c:otherwise>
 		       									<c:out value="${vo.subject}"></c:out>
@@ -48,7 +51,12 @@
 										</c:choose>
 										</a></td>
 	                                    <td>${vo.regdate.substring(0,10) }</td>
+	                                    <c:if test="${empty vo.answer }">
+	                                    <td>답변대기상태</td>
+	                                    </c:if>
+	                                    <c:if test="${!empty vo.answer }">
 	                                    <td>답변완료</td>
+	                                    </c:if>
 	                                </tr>
                                 </c:forEach>
                             </tbody>
@@ -77,7 +85,7 @@
                             <li class="page-item"><a class="page-link" href="#">2</a></li>
                             <li class="page-item"><a class="page-link" href="#">3</a></li> -->
                             <li class="page-item">
-                                <a class="page-link" href="qna?cmd=qna_list&page=${currentPage+1}">Next</a>
+                                <a class="page-link" href="qna?cmd=qna_list&page=${pageSkip+1}">Next</a>
                             </li>
                             <li><a>&nbsp&nbsp&nbsp&nbsp</a></li>
                             <li class="page-item">

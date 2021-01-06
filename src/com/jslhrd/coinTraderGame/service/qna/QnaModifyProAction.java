@@ -1,12 +1,12 @@
 package com.jslhrd.coinTraderGame.service.qna;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.jslhrd.coinTraderGame.model.qna.QnaDAO;
 import com.jslhrd.coinTraderGame.model.qna.QnaVO;
@@ -19,10 +19,12 @@ public class QnaModifyProAction implements Action {
 		request.setCharacterEncoding("UTF-8");
 		QnaDAO dao = QnaDAO.getInstance();
 		QnaVO vo = new QnaVO();
-		vo.setId(request.getParameter("id"));
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("id");
+		vo.setId(id);
 		vo.setSubject(request.getParameter("subject"));
 		vo.setContents(request.getParameter("contents"));
-		
+		vo.setRegdate(request.getParameter("regdate"));
 		int row = dao.QnaModify(vo);
 		
 		request.setAttribute("row", row);

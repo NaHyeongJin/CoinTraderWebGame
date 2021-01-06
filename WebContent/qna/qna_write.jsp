@@ -35,13 +35,6 @@
 							<table class="table project-table table-centered table-nowrap">
 								<thead>
 									<div class="col-12">
-										<label for="subject" class="form-label">ID</label>
-										<div class="input-group">
-											<input type="text" class="form-control" id="subject" name="id"
-												placeholder="ID 입력">
-										</div>
-									</div>
-									<div class="col-12">
 										<label for="subject" class="form-label">제목</label>
 										<div class="input-group">
 											<input type="text" class="form-control" id="subject" name="subject"

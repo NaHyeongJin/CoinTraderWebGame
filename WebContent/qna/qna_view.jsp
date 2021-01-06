@@ -18,12 +18,6 @@
 							<table class="table project-table table-centered table-nowrap">
 								<thead>
 									<div class="col-12">
-										<label for="id" class="form-label">ID</label>
-										<div class="input-group">
-											<input type="text" class="form-control" name="id" id="id" value="${id }" readOnly>
-										</div>
-									</div>
-									<div class="col-12">
 										<label for="subject" class="form-label">제목</label>
 										<div class="input-group">
 											<input type="text" class="form-control" name="subject" id="subject" value="${vo.subject }" readOnly>
@@ -35,6 +29,12 @@
 											<textarea class="form-control" rows="8" name="contents" id="contents" readOnly>${vo.contents }</textarea>
 										</div>
 									</div>
+									<div class="col-12">
+										<label for="answer" class="form-label">운영자 답변</label>
+										<div class="input-group">
+											<textarea class="form-control" rows="8" name="answer" id="answer" readOnly>${vo.answer }</textarea>
+										</div>
+									</div>
 								</thead>
 							</table>
 						</form>
@@ -44,11 +44,6 @@
 		</div>
 	</div>
 	<div class="col-12 mt-5">
-		<!-- 세션추가되면 댓글추가 버튼 바꿀예정 -->
-		<%-- <c:if test="${vo.id.contain('admin') }"></c:if> --%>
-		<c:if test="${id.contains('admin')}">
-			<button class="btn btn-outline-primary" type="button" onClick="location.href='qna?cmd=qna_answer&idx=${vo.idx }'">답변등록</button>
-		</c:if>
 		<button class="btn btn-outline-primary" type="button" onClick="location.href='qna?cmd=qna_modify&id=${id }&idx=${vo.idx }'">수정하기</button>
 		<a class="btn btn-outline-primary" href="" data-toggle="modal" data-target="#deleteModalForm">삭제하기</a>
 		<button class="btn btn-outline-secondary" type="button" onClick="location.href='qna?cmd=qna_list&page=${currentPage}'">돌아가기</button>
@@ -81,7 +76,7 @@
 				                            <tbody>
 				                                <tr>
 				                                	<td>
-				                                    <button type="button" class="btn btn-outline-primary" onClick="location.href='qna?cmd=qna_delete_pro'">삭제하기</button>
+				                                    <button type="button" class="btn btn-outline-primary" onClick="location.href='qna?cmd=qna_delete_pro&id=${id}&regdate=${vo.regdate }'">삭제하기</button>
 													<button type="button" class="btn btn-outline-primary" data-dismiss="modal">취소하기</button>
 													</td>
 				                                </tr>

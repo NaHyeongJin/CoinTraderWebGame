@@ -47,6 +47,34 @@ public class QnaDAO {
 		}
 		return row;
 	}
+	// 전체 게시물 수 카운트 - admin
+	public int QnaCount() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String query = "select count(*) from coin_qna";
+		int row =0; 
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				row = rs.getInt(1);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try{
+				conn.close();
+				pstmt.close();
+				rs.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
+	}
 	// 게시물 리스트 (10개씩) 리턴 - 검색조건이 없음
 	public List<QnaVO> QnaList(String id, int startpage, int endpage){
 		Connection conn = null;
@@ -56,7 +84,6 @@ public class QnaDAO {
 		String query = "select rownum, X.subject, X.contents, X.answer, X.regdate from \r\n" + 
 				"(select rownum as rnum, A.* from coin_qna A order by regdate desc) X\r\n" + 
 				"where rnum < ? and rnum > ? and id = ?";
-		
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(query);
@@ -95,7 +122,6 @@ public class QnaDAO {
 		String query = "select rownum, X.subject, X.contents, X.answer, X.regdate from \r\n" + 
 				"(select rownum as rnum, A.* from coin_qna A order by regdate desc) X\r\n" + 
 				"where rnum < ? and rnum > ?";
-		
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(query);
@@ -158,6 +184,42 @@ public class QnaDAO {
 		}
 		return vo;
 	}
+	//상세보기(view) - admin
+	public QnaVO QnaView(int idx) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT B.RNUM, B.ID, B.SUBJECT, B.CONTENTS, B.ANSWER, B.REGDATE FROM\r\n"
+				+ "(SELECT A.*, ROWNUM AS RNUM FROM (SELECT * FROM COIN_QNA ORDER BY REGDATE DESC) A) B\r\n"
+				+ "WHERE RNUM = ?";
+		QnaVO vo = new QnaVO();
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				vo.setIdx(rs.getInt("rnum"));
+				vo.setId(rs.getString("id"));
+				vo.setSubject(rs.getString("subject"));
+				vo.setContents(rs.getString("contents"));
+				vo.setRegdate(rs.getString("regdate"));
+				vo.setAnswer(rs.getString("answer"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				conn.close();
+				pstmt.close();
+				rs.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return vo;
+	}
 	//글쓰기(write)
 	public int QnaWrite(QnaVO vo) {
 		Connection conn = null;
@@ -189,7 +251,7 @@ public class QnaDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
-		String sql = "update coin_qna set subject=?, contents=? where id=? and regdate=?";
+		String sql = "update coin_qna set subject=?, contents=? where id=? and regdate=TO_DATE(?,'YYYY-MM-DD hh24:mi:ss')";
 		int row = 0;
 		try {
 			conn = DBUtil.getConnection();
@@ -216,7 +278,7 @@ public class QnaDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
-		String sql = "delete from coin_qna where id=? and regdate=?";
+		String sql = "delete from coin_qna where id=? and regdate=TO_DATE(?,'YYYY-MM-DD hh24:mi:ss')";
 		int row = 0;
 		try {
 			conn = DBUtil.getConnection();
@@ -262,68 +324,8 @@ public class QnaDAO {
 		}
 		return row;
 	}
+	
 
-	public int QnaCount() {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		String query = "select count(*) from coin_qna";
-		int row =0; 
-		try {
-			conn = DBUtil.getConnection();
-			pstmt = conn.prepareStatement(query);
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				row = rs.getInt(1);
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			try{
-				conn.close();
-				pstmt.close();
-				rs.close();
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-		}
-		return row;
-	}
-
-	public QnaVO QnaView(int idx) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		String sql = "SELECT B.RNUM, B.SUBJECT, B.CONTENTS, B.ANSWER, B.REGDATE FROM\r\n"
-				+ "(SELECT A.*, ROWNUM AS RNUM FROM (SELECT * FROM COIN_QNA ORDER BY REGDATE DESC) A) B\r\n"
-				+ "WHERE RNUM = ?";
-		QnaVO vo = new QnaVO();
-		try {
-			conn = DBUtil.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, idx);
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				vo.setIdx(rs.getInt("rnum"));
-				vo.setSubject(rs.getString("subject"));
-				vo.setContents(rs.getString("contents"));
-				vo.setRegdate(rs.getString("regdate"));
-				vo.setAnswer(rs.getString("answer"));
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				conn.close();
-				pstmt.close();
-				rs.close();
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-		}
-		return vo;
-	}
+	
 
 }
