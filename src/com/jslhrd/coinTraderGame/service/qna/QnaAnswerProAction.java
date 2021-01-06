@@ -1,7 +1,6 @@
 package com.jslhrd.coinTraderGame.service.qna;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

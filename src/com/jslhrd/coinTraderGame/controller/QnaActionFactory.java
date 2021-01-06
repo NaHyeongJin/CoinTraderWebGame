@@ -3,7 +3,6 @@ package com.jslhrd.coinTraderGame.controller;
 import com.jslhrd.coinTraderGame.service.Action;
 import com.jslhrd.coinTraderGame.service.qna.QnaAnswerAction;
 import com.jslhrd.coinTraderGame.service.qna.QnaAnswerProAction;
-import com.jslhrd.coinTraderGame.service.qna.QnaDeleteAction;
 import com.jslhrd.coinTraderGame.service.qna.QnaDeleteProAction;
 import com.jslhrd.coinTraderGame.service.qna.QnaListAction;
 import com.jslhrd.coinTraderGame.service.qna.QnaModifyAction;
@@ -28,8 +27,6 @@ public class QnaActionFactory {
 			action = new QnaWriteAction();
 		}else if(cmd.equals("qna_modify")) {
 			action = new QnaModifyAction();
-		}else if(cmd.equals("qna_delete")) {
-			action = new QnaDeleteAction();
 		}else if(cmd.equals("qna_answer")) {
 			action = new QnaAnswerAction();
 		}else if(cmd.equals("qna_write_pro")) {
