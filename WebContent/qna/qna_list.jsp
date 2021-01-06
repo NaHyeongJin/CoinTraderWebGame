@@ -85,7 +85,7 @@
                             <li class="page-item"><a class="page-link" href="#">2</a></li>
                             <li class="page-item"><a class="page-link" href="#">3</a></li> -->
                             <li class="page-item">
-                                <a class="page-link" href="qna?cmd=qna_list&page=${pageSkip+1}">Next</a>
+                                <a class="page-link" href="qna?cmd=qna_list&page=${currentPage+1}">Next</a>
                             </li>
                             <li><a>&nbsp&nbsp&nbsp&nbsp</a></li>
                             <li class="page-item">
