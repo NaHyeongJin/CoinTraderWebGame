@@ -101,7 +101,8 @@ public class UserDAO {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-			if (rs.next()) money = rs.getInt("money");
+			if (rs.next())
+				money = rs.getInt("money");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

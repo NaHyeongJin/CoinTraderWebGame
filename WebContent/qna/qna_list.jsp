@@ -17,7 +17,7 @@
                         <table class="table project-table table-centered table-nowrap">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
+                                    <th scope="col">번호</th>
                                     <th scope="col">제목</th>
                                     <%-- <c:if test="${id.contains('admin')}">
 	                                    <th>ID</th>
@@ -84,12 +84,18 @@
                             <!-- <li class="page-item active"><a class="page-link" href="#">1</a></li>
                             <li class="page-item"><a class="page-link" href="#">2</a></li>
                             <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+                            <c:if test="${currentPage == totpage }">
+	                            <li class="page-item disabled">
+	                                <a class="page-link" href="qna?cmd=qna_list&page=${currentPage+1}">Next</a>
+	                            </li>
+                            </c:if>
+                            <c:if test="${currentPage != totpage }">
+	                            <li class="page-item">
+	                                <a class="page-link" href="qna?cmd=qna_list&page=${currentPage+1}">Next</a>
+	                            </li>
+                            </c:if>
                             <li class="page-item">
-                                <a class="page-link" href="qna?cmd=qna_list&page=${currentPage+1}">Next</a>
-                            </li>
-                            <li><a>&nbsp&nbsp&nbsp&nbsp</a></li>
-                            <li class="page-item">
-							<a class="page-link" href="qna?cmd=qna_write">글쓰기</a>
+							<a class="page-link ml-3" href="qna?cmd=qna_write">글쓰기</a>
 							</li>
                         </ul>
                     </div>

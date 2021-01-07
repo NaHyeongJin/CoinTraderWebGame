@@ -1,7 +1,6 @@
 package com.jslhrd.coinTraderGame.service.qna;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,9 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.jslhrd.coinTraderGame.model.qna.QnaDAO;
-import com.jslhrd.coinTraderGame.model.qna.QnaVO;
 import com.jslhrd.coinTraderGame.service.Action;
-import com.jslhrd.coinTraderGame.util.PageIndex;
 
 public class QnaListAction implements Action {
 

@@ -81,9 +81,8 @@ public class QnaDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<QnaVO> list = new ArrayList<QnaVO>();
-		String query = "select rownum, X.subject, X.contents, X.answer, X.regdate from \r\n" + 
-				"(select rownum as rnum, A.* from coin_qna A order by regdate desc) X\r\n" + 
-				"where rnum < ? and rnum > ? and id = ?";
+		String query = "SELECT * FROM (SELECT A.*, ROWNUM AS RNUM FROM (SELECT * FROM COIN_QNA ORDER BY REGDATE DESC) A)\r\n"
+				+ "WHERE RNUM < ? AND RNUM > ? AND ID = ?";
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(query);
@@ -93,7 +92,7 @@ public class QnaDAO {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				QnaVO vo = new QnaVO();
-				vo.setIdx(rs.getInt("rownum"));
+				vo.setIdx(rs.getInt("RNUM"));
 				vo.setSubject(rs.getString("subject"));
 				vo.setRegdate(rs.getString("regdate"));
 				vo.setAnswer(rs.getString("answer"));
@@ -119,9 +118,8 @@ public class QnaDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<QnaVO> list = new ArrayList<QnaVO>();
-		String query = "select rownum, X.subject, X.contents, X.answer, X.regdate from \r\n" + 
-				"(select rownum as rnum, A.* from coin_qna A order by regdate desc) X\r\n" + 
-				"where rnum < ? and rnum > ?";
+		String query = "SELECT * FROM (SELECT A.*, ROWNUM AS RNUM FROM (SELECT * FROM COIN_QNA ORDER BY REGDATE DESC) A)\r\n"
+				+ "WHERE RNUM < ? AND RNUM > ?";
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(query);
@@ -130,7 +128,7 @@ public class QnaDAO {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				QnaVO vo = new QnaVO();
-				vo.setIdx(rs.getInt("rownum"));
+				vo.setIdx(rs.getInt("RNUM"));
 				vo.setSubject(rs.getString("subject"));
 				vo.setRegdate(rs.getString("regdate"));
 				vo.setAnswer(rs.getString("answer"));
@@ -324,8 +322,4 @@ public class QnaDAO {
 		}
 		return row;
 	}
-	
-
-	
-
 }
