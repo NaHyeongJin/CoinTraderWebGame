@@ -116,4 +116,70 @@ public class UserDAO {
 		return money;
 	}
 
+	public Boolean idIsAble(String id) {
+		String query = "SELECT ID FROM COIN_USER WHERE ID = ?";
+		Boolean isAble = false;
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if (rs.next())
+				isAble = false;
+			else
+				isAble = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+			}
+		}
+		return isAble;
+	}
+	
+	public int signUp(UserVO vo) {
+		String query = "insert into COIN_USER(ID,PW,EMAIL1,EMAIL2) values(?,?,?,?)";
+		int row = 0;
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, vo.getId());
+			pstmt.setString(2, vo.getPw());
+			pstmt.setString(3, vo.getEmail1());
+			pstmt.setString(4, vo.getEmail2());
+			row = pstmt.executeUpdate();
+			insertCoinMoney(vo.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+				pstmt.close();
+			} catch (Exception e) {
+			}
+		}
+		return row;
+	}
+	
+	private void insertCoinMoney(String id) {
+		String query = "insert into COIN_MONEY(ID) values (?)";
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+				pstmt.close();
+			} catch (Exception e) {
+			}
+		}
+	}
 }

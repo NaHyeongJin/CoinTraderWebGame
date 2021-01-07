@@ -119,7 +119,7 @@ function modify(){
 				<button class="btn btn-outline-primary" onclick="return modify()" type="submit">완료</button>
 				<a href="index"><button class="btn btn-outline-secondary" type="button">뒤로</button></a>
 			</div>
-			</div>
+		</div>
 	</form>
 <div class="modal fade" id="chargeModal" tabindex="-1" role="dialog" aria-labelledby="chargeModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

@@ -5,6 +5,8 @@ import com.jslhrd.coinTraderGame.service.users.UsersLoginAction;
 import com.jslhrd.coinTraderGame.service.users.UsersLogoutAction;
 import com.jslhrd.coinTraderGame.service.users.UsersModifyAction;
 import com.jslhrd.coinTraderGame.service.users.UsersModifyProAction;
+import com.jslhrd.coinTraderGame.service.users.UsersSignUpAction;
+import com.jslhrd.coinTraderGame.service.users.UsersSignUpProAction;
 
 public class UserActionFactory {
 	private static UserActionFactory instance = new UserActionFactory();
@@ -23,7 +25,11 @@ public class UserActionFactory {
 			action = new UsersLoginAction();
 		} else if (cmd.equals("logout")) {
 			action = new UsersLogoutAction();
-		}
+		} else if (cmd.equals("sign_up")) {
+			action = new UsersSignUpAction();
+		} else if (cmd.equals("sign_up_pro")) {
+			action = new UsersSignUpProAction();
+		} 
 		return action;
 	}
 }
