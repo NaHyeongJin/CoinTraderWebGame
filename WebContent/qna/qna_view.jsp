@@ -29,12 +29,14 @@
 											<textarea class="form-control" rows="8" name="contents" id="contents" readOnly>${vo.contents }</textarea>
 										</div>
 									</div>
+									<c:if test="${!empty vo.answer }">
 									<div class="col-12">
 										<label for="answer" class="form-label">운영자 답변</label>
 										<div class="input-group">
 											<textarea class="form-control" rows="8" name="answer" id="answer" readOnly>${vo.answer }</textarea>
 										</div>
 									</div>
+									</c:if>
 								</thead>
 							</table>
 						</form>
@@ -44,8 +46,10 @@
 		</div>
 	</div>
 	<div class="col-12 mt-5">
+		<c:if test="${empty vo.answer }">
 		<button class="btn btn-outline-primary" type="button" onClick="location.href='qna?cmd=qna_modify&id=${id }&idx=${vo.idx }'">수정하기</button>
 		<a class="btn btn-outline-primary" href="" data-toggle="modal" data-target="#deleteModalForm">삭제하기</a>
+		</c:if>
 		<button class="btn btn-outline-secondary" type="button" onClick="location.href='qna?cmd=qna_list&page=${currentPage}'">돌아가기</button>
 	</div>
 	<!-- DeleteModalForm -->

@@ -3,6 +3,8 @@ package com.jslhrd.coinTraderGame.model.users;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.jslhrd.coinTraderGame.util.DBUtil;
 
@@ -115,5 +117,4 @@ public class UserDAO {
 		}
 		return money;
 	}
-
 }

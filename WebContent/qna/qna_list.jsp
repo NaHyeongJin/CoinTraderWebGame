@@ -17,13 +17,13 @@
                         <table class="table project-table table-centered table-nowrap">
                             <thead>
                                 <tr>
-                                    <th scope="col">번호</th>
-                                    <th scope="col">제목</th>
+                                    <th scope="col" width="10%">번호</th>
+                                    <th scope="col" width="60%">제목</th>
                                     <%-- <c:if test="${id.contains('admin')}">
 	                                    <th>ID</th>
 	                                </c:if> --%>
-                                    <th scope="col">문의 날짜</th>
-                                    <th scope="col">답변현황</th>
+                                    <th scope="col" width="15%">문의 날짜</th>
+                                    <th scope="col" width="15%">답변현황</th>
                                 </tr>
                             </thead>
                             <tbody>
