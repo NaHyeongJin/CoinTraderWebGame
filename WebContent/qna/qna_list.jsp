@@ -19,9 +19,6 @@
                                 <tr>
                                     <th scope="col" width="10%">번호</th>
                                     <th scope="col" width="60%">제목</th>
-                                    <%-- <c:if test="${id.contains('admin')}">
-	                                    <th>ID</th>
-	                                </c:if> --%>
                                     <th scope="col" width="15%">문의 날짜</th>
                                     <th scope="col" width="15%">답변현황</th>
                                 </tr>
@@ -63,7 +60,6 @@
                         </table>
                     </div>
                     <!-- end project-list -->
-
                     <div class="pt-3">
                         <ul class="pagination justify-content-end mb-0">
                         	<c:choose>
@@ -81,9 +77,6 @@
                             <c:forEach var="a" begin="1" end="${totpage }" step="1">
             					<li class="page-item"><a class="page-link" href="qna?cmd=qna_list&page=${a}">${a}</a></li>
          					</c:forEach>
-                            <!-- <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li> -->
                             <c:if test="${currentPage == totpage }">
 	                            <li class="page-item disabled">
 	                                <a class="page-link" href="qna?cmd=qna_list&page=${currentPage+1}">Next</a>
@@ -94,9 +87,11 @@
 	                                <a class="page-link" href="qna?cmd=qna_list&page=${currentPage+1}">Next</a>
 	                            </li>
                             </c:if>
+                            <c:if test="${!id.contains('admin') }">
                             <li class="page-item">
 							<a class="page-link ml-3" href="qna?cmd=qna_write">글쓰기</a>
 							</li>
+							</c:if>
                         </ul>
                     </div>
                 </div>

@@ -7,16 +7,6 @@
 <head>
 <title>상세보기</title>
 </head>
-<script>
-	function send(){
-		if(aw.answer==""){
-			alert("답변을 입력하여 주십시오");
-			aw.answer.focus();
-			return;
-		}
-		aw.submit();
-	}
-</script>
 <body>
 	<div class="row">
 		<div class="col-lg-12">
@@ -45,21 +35,31 @@
 											<textarea class="form-control" rows="8" name="contents" id="contents" readOnly>${vo.contents }</textarea>
 										</div>
 									</div>
-									<div class="col-12">
-										<label for="answer" class="form-label">운영자 답변</label>
-										<div class="input-group">
-											<textarea class="form-control" rows="8" name="answer" id="answer" required>${vo.answer }</textarea>
+									<c:if test="${empty vo.answer }">
+										<div class="col-12">
+											<label for="answer" class="form-label">운영자 답변</label>
+											<div class="input-group">
+												<textarea class="form-control" rows="8" name="answer" id="answer" required>${vo.answer }</textarea>
+											</div>
 										</div>
-									</div>
+									</c:if>
+									<c:if test="${!empty vo.answer }">
+										<div class="col-12">
+											<label for="answer" class="form-label">운영자 답변</label>
+											<div class="input-group">
+												<textarea class="form-control" rows="8" name="answer" id="answer" readOnly>${vo.answer }</textarea>
+											</div>
+										</div>
+									</c:if>
 								</thead>
 							</table>
+								<div class="col-12 mt-5">
+									<c:if test="${empty vo.answer }">
+										<input class="btn btn-outline-primary" type="submit" value="등록하기">
+									</c:if>
+									<button class="btn btn-outline-secondary" type="button" onClick="history.back()">돌아가기</button>
+								</div>
 						</form>
-					</div>
-					<!-- end project-list -->
-
-					<div class="col-12 mt-5">
-						<button class="btn btn-outline-primary" type="submit" onClick="send()">등록하기</button>
-						<button class="btn btn-outline-secondary" type="button" onClick="history.back()">돌아가기</button>
 					</div>
 				</div>
 			</div>
