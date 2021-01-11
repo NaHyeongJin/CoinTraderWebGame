@@ -50,10 +50,15 @@ function requestGetRanking() {
 	    success: function(data) {
 	    	var row = "";
 	    	var len = (data.length > 10) ? 10 : data.length;
-	    	for(var i = 0; i < len; i++) {  
+	    	for(var i = 0; i < len; i++) {
 	    	    var id = data[i].id;
 	    	    var rank = data[i].rank;
 	    	    var money = data[i].money;
+	    	    if(i > 0){
+	    	    	if (data[i].money == data[i-1].money) {
+	    	    		rank = '';
+	    	    	}
+	    	    }
 	    	    row += '<tr><th scope="col">' + rank + '</th><th scope="col">' + id + '</th><th scope="col">' + money + '</th></tr>';
 	    	}
 	    	document.getElementById("ranking").innerHTML = row;
@@ -71,7 +76,7 @@ $(window).bind('hashchange', function() {
 	<body onload="RankingStart();">
 </c:if>
 <c:if test="${!empty id}">
-	<body onload="Start();">
+	<body onload="Start();RankingStart();">
 </c:if>
 	<header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm sticky-top">
 		<p class="h5 my-0 mr-auto fw-normal"><a href="index"><img src="resource/img/logo1.png"></a></p>
