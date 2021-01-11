@@ -96,8 +96,8 @@ $(window).bind('hashchange', function() {
 							<div class="md-form pb-3">
 								<input type="password" id="Form-pass" name="pw" class="form-control validate" required>
 								<label data-error="wrong" data-success="right" for="Form-pass">Your password</label>
-								<p class="font-small blue-text d-flex justify-content-end">Forgot <a href="#" class="blue-text ml-1">
-									Id?</a><a href="#" class="blue-text ml-1">
+								<p class="font-small blue-text d-flex justify-content-end">Forgot <a href="user?cmd=id_search" class="blue-text ml-1">
+									Id?</a><a href="user?cmd=pw_search" class="blue-text ml-1">
 									Password?</a></p>
 							</div>
 			

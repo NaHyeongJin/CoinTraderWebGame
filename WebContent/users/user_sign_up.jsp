@@ -83,7 +83,7 @@ function inputCheckSpecial(){
          frm.email.focus();
          return;
       }
-      
+
       frm.submit();
    }
 	
@@ -165,7 +165,7 @@ function inputCheckSpecial(){
             </div>
             
             <div class="col-12 mt-5">
-				<button class="btn btn-outline-primary" onclick="checkValue()" type="submit">완료</button>
+				<button class="btn btn-outline-primary" onclick="checkValue()" type="button">완료</button>
 				<a href="index"><button class="btn btn-outline-secondary" type="button">뒤로</button></a>
 			</div>
         </div>

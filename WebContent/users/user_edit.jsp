@@ -8,14 +8,17 @@
 <script>
 //정규화 구분(제이쿼리에서 value에서는 val)
 var pw = /^[A-Za-z0-9~!@#$%^&*()_+|<>?:{}]{4,20}$/;
+var pwCheck = false;
 $(function(){
 	$("#pw1").blur(function(){
 		if(pw.test($("#pw1").val())){
 			$("#pw1_check").text("*사용가능한 비밀번호입니다");
 			$("#pw1_check").css("color","green");
+			pwCheck = true;
 		}else{
 			$("#pw1_check").text('*숫자,영문,특수문자로 4~20자리 입력');
 			$("#pw1_check").css('color', 'red');
+			pwCheck = false;
 		}
 		if($('#pw1').val()!=$('#pw2').val()){
 			$('#pw2_check').text('비밀번호를 확인해주세요');
@@ -50,6 +53,11 @@ function modify(){
 		alert("비밀번호가 다릅니다")
 		coin.pw2.focus();
 		return false;
+	}
+	if (!pwCheck) {
+		alert("비밀번호를 확인해 주세요")
+		coin.pw1.focus();
+		return false;	
 	}
 	coin.submit();
 }
@@ -116,7 +124,7 @@ function modify(){
 			</div>
 			
 			<div class="col-12 mt-5">
-				<button class="btn btn-outline-primary" onclick="return modify()" type="submit">완료</button>
+				<button class="btn btn-outline-primary" onclick="return modify()">완료</button>
 				<a href="index"><button class="btn btn-outline-secondary" type="button">뒤로</button></a>
 			</div>
 		</div>

@@ -1,10 +1,12 @@
 package com.jslhrd.coinTraderGame.controller;
 
 import com.jslhrd.coinTraderGame.service.Action;
+import com.jslhrd.coinTraderGame.service.users.UsersIdSearchAction;
 import com.jslhrd.coinTraderGame.service.users.UsersLoginAction;
 import com.jslhrd.coinTraderGame.service.users.UsersLogoutAction;
 import com.jslhrd.coinTraderGame.service.users.UsersModifyAction;
 import com.jslhrd.coinTraderGame.service.users.UsersModifyProAction;
+import com.jslhrd.coinTraderGame.service.users.UsersPwSearchAction;
 import com.jslhrd.coinTraderGame.service.users.UsersSignUpAction;
 import com.jslhrd.coinTraderGame.service.users.UsersSignUpProAction;
 
@@ -29,7 +31,11 @@ public class UserActionFactory {
 			action = new UsersSignUpAction();
 		} else if (cmd.equals("sign_up_pro")) {
 			action = new UsersSignUpProAction();
-		} 
+		} else if (cmd.equals("id_search")) {
+			action = new UsersIdSearchAction();
+		} else if (cmd.equals("pw_search")) {
+			action = new UsersPwSearchAction();
+		}
 		return action;
 	}
 }
