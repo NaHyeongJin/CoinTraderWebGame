@@ -50,7 +50,7 @@ function requestGetRanking() {
 	    success: function(data) {
 	    	var row = "";
 	    	var len = (data.length > 10) ? 10 : data.length;
-	    	for(var i = 0; i < len; i++) {
+	    	for(var i = 0; i < len; i++) { 
 	    	    var id = data[i].id;
 	    	    var rank = data[i].rank;
 	    	    var money = data[i].money;
