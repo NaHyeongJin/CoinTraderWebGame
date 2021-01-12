@@ -182,4 +182,29 @@ public class UserDAO {
 			}
 		}
 	}
+
+	public String emailCheck(String email1, String email2) {
+		String query = "SELECT ID FROM COIN_USER WHERE EMAIL1 = ? AND EMAIL2 = ?";
+		String id = null;
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, email1);
+			pstmt.setString(2, email2);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				id = rs.getString("id");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				conn.close();
+				pstmt.close();
+			} catch (Exception e) {
+			}
+		}
+		return id;
+	}
 }
