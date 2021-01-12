@@ -4,6 +4,7 @@ import com.jslhrd.coinTraderGame.service.Action;
 import com.jslhrd.coinTraderGame.service.users.UsersIdSearchAction;
 import com.jslhrd.coinTraderGame.service.users.UsersIdSearchProAction;
 import com.jslhrd.coinTraderGame.service.users.UsersLoginAction;
+import com.jslhrd.coinTraderGame.service.users.UsersLoginCheckAction;
 import com.jslhrd.coinTraderGame.service.users.UsersLogoutAction;
 import com.jslhrd.coinTraderGame.service.users.UsersModifyAction;
 import com.jslhrd.coinTraderGame.service.users.UsersModifyProAction;
@@ -41,6 +42,8 @@ public class UserActionFactory {
 			action = new UsersIdSearchProAction();
 		} else if (cmd.equals("pw_search_pro")) {
 			action = new UsersPwSearchProAction();
+		} else if (cmd.equals("login_check")) {
+			action = new UsersLoginCheckAction();
 		}
 		return action;
 	}

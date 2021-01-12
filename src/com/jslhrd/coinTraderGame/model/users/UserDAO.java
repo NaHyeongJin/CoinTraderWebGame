@@ -207,4 +207,28 @@ public class UserDAO {
 		}
 		return id;
 	}
+	
+	public Boolean loginCheck(String id) {
+		String query = "SELECT EMAILCHECK FROM COIN_USER WHERE ID = ?";
+		Boolean answer = false;
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);;
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				answer = (rs.getString("EMAILCHECK").equals("1")) ? true : false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				conn.close();
+				pstmt.close();
+			} catch (Exception e) {
+			}
+		}
+		return answer;
+	}
 }

@@ -18,6 +18,7 @@ public class UsersLoginAction implements Action {
 		String id = request.getParameter("id");
 		int row = UserDAO.getInstance().userLogin(id, request.getParameter("pw"));
 		request.setAttribute("row", row);
+		request.setAttribute("loginCheck", UserDAO.getInstance().loginCheck(id));
 		
 		if (row == 1) {
 			HttpSession session = request.getSession(true);
