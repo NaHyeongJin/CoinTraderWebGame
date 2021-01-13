@@ -47,7 +47,7 @@ function inputCheckSpecial(){
 	    checkId.innerHTML = '<span class="badge badge-secondary">아이디를 입력해주세요.</span>';
 		userAbleId = false;
    }
-	if(frm.email.value != "") {
+	if(frm.email.value != "" && document.getElementById('emailSelect').value != "") {
 		$.ajax({
 		    url: "http://localhost:8089/CoinTraderWebGame/UserEmailCheck?email=" + frm.email.value + "&emailSelect=" + frm.emailSelect.value,
 		    method: "GET",
