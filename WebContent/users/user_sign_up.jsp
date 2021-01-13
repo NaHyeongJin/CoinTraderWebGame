@@ -25,6 +25,7 @@ function inputCheckSpecial(){
       frm.tel.focus();
       return;
    }
+   
 	$.ajax({
 	    url: "http://localhost:8089/CoinTraderWebGame/UserIdCheck?id=" + frm.id.value,
 	    method: "GET",

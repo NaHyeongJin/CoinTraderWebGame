@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jslhrd.coinTraderGame.filter.PasswordEncoder;
 import com.jslhrd.coinTraderGame.model.users.UserDAO;
 import com.jslhrd.coinTraderGame.model.users.UserVO;
 import com.jslhrd.coinTraderGame.service.Action;
@@ -17,7 +18,7 @@ public class UsersSignUpProAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserVO vo = new UserVO();
 		vo.setId(request.getParameter("id"));
-		vo.setPw(request.getParameter("pw"));
+		vo.setPw(new PasswordEncoder().encode(request.getParameter("pw")));
 		vo.setEmail1(request.getParameter("email"));
 		vo.setEmail2(request.getParameter("emailSelect"));
 		

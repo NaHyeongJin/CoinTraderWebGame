@@ -1,6 +1,8 @@
 package com.jslhrd.coinTraderGame.controller;
 
 import com.jslhrd.coinTraderGame.service.Action;
+import com.jslhrd.coinTraderGame.service.users.UsersAuthKeyCheckAction;
+import com.jslhrd.coinTraderGame.service.users.UsersAuthKeyResendAction;
 import com.jslhrd.coinTraderGame.service.users.UsersIdSearchAction;
 import com.jslhrd.coinTraderGame.service.users.UsersIdSearchProAction;
 import com.jslhrd.coinTraderGame.service.users.UsersLoginAction;
@@ -44,6 +46,10 @@ public class UserActionFactory {
 			action = new UsersPwSearchProAction();
 		} else if (cmd.equals("login_check")) {
 			action = new UsersLoginCheckAction();
+		} else if (cmd.equals("auth_key_resend")) {
+			action = new UsersAuthKeyResendAction();
+		} else if (cmd.equals("auth_key_check")) {
+			action = new UsersAuthKeyCheckAction();
 		}
 		return action;
 	}

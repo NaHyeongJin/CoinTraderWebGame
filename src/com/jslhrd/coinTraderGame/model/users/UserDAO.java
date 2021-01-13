@@ -56,6 +56,7 @@ public class UserDAO {
 				vo.setMoney(rs.getInt("money"));
 				vo.setEmail1(rs.getString("email1"));
 				vo.setEmail2(rs.getString("email2"));
+				vo.setPw(rs.getString("pw"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -218,6 +219,67 @@ public class UserDAO {
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				answer = (rs.getString("EMAILCHECK").equals("1")) ? true : false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				conn.close();
+				pstmt.close();
+			} catch (Exception e) {
+			}
+		}
+		return answer;
+	}
+
+	public void authSuccess(String id) {
+		String query = "UPDATE COIN_USER SET EMAILCHECK = '1' WHERE ID = ?";
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+				pstmt.close();
+			} catch (Exception e) {
+			}
+		}
+	}
+
+	public void setPwCheck(String id, int i) {
+		String query = "UPDATE COIN_USER SET PWCHECK = ? WHERE ID = ?";
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, i);
+			pstmt.setString(2, id);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+				pstmt.close();
+			} catch (Exception e) {
+			}
+		}
+	}
+
+	public Boolean pwCheck(String id) {
+		String query = "SELECT PWCHECK FROM COIN_USER WHERE ID = ?";
+		Boolean answer = false;
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);;
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				answer = (rs.getString("PWCHECK").equals("1")) ? true : false;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
