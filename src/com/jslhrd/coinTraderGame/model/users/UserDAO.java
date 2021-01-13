@@ -119,7 +119,7 @@ public class UserDAO {
 
 	public Boolean idIsAble(String id) {
 		String query = "SELECT ID FROM COIN_USER WHERE ID = ?";
-		Boolean isAble = false;
+		Boolean isAble = true;
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(query);
@@ -143,6 +143,9 @@ public class UserDAO {
 	}
 	
 	public int signUp(UserVO vo) {
+		if (!isEmailAble(vo.getEmail1(), vo.getEmail2())) {
+			return 0;
+		}
 		String query = "insert into COIN_USER(ID,PW,EMAIL1,EMAIL2) values(?,?,?,?)";
 		int row = 0;
 		try {
@@ -292,5 +295,31 @@ public class UserDAO {
 			}
 		}
 		return answer;
+	}
+
+	public Boolean isEmailAble(String email1, String email2) {
+		String query = "SELECT ID FROM COIN_USER WHERE EMAIL1 = ? AND EMAIL2 = ?";
+		Boolean isAble = true;
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, email1);
+			pstmt.setString(2, email2);
+			rs = pstmt.executeQuery();
+			if (rs.next())
+				isAble = false;
+			else
+				isAble = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+			}
+		}
+		return isAble;
 	}
 }

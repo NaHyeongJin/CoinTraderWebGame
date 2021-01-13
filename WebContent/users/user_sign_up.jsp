@@ -7,6 +7,7 @@
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 var userAbleId = false;
+var userAbleEmail = false;
 var checkPw = /^[0-9a-z~`!@#$%\^&*()-+=]{4,20}$/;
 
 function inputCheckSpecial(){
@@ -26,20 +27,45 @@ function inputCheckSpecial(){
       return;
    }
    
-	$.ajax({
-	    url: "http://localhost:8089/CoinTraderWebGame/UserIdCheck?id=" + frm.id.value,
-	    method: "GET",
-	    dataType: "JSON",
-	    success: function(data) {
-	    	if(data) {
-	    		checkId.innerHTML = '<span class="badge badge-success">사용가능한 아이디입니다.</span>';
-				userAbleId = true;
-	    	} else {
-	    		checkId.innerHTML = '<span class="badge badge-danger">중복된 아이디입니다.</span>';
-	    		userAbleId = false;
-	    	}
-	   	}
-	})
+   if(frm.id.value != "") {
+		$.ajax({
+		    url: "http://localhost:8089/CoinTraderWebGame/UserIdCheck?id=" + frm.id.value,
+		    method: "GET",
+		    dataType: "JSON",
+		    success: function(data) {
+		    	if(data) {
+		    		checkId.innerHTML = '<span class="badge badge-success">사용가능한 아이디입니다.</span>';
+					userAbleId = true;
+		    	} else {
+		    		checkId.innerHTML = '<span class="badge badge-danger">중복된 아이디입니다.</span>';
+		    		userAbleId = false;
+		    	}
+		   	}
+		})
+   }
+   else {
+	    checkId.innerHTML = '<span class="badge badge-secondary">아이디를 입력해주세요.</span>';
+		userAbleId = false;
+   }
+	if(frm.email.value != "") {
+		$.ajax({
+		    url: "http://localhost:8089/CoinTraderWebGame/UserEmailCheck?email=" + frm.email.value + "&emailSelect=" + frm.emailSelect.value,
+		    method: "GET",
+		    dataType: "JSON",
+		    success: function(data) {
+		    	if(data) {
+		    		checkEmail.innerHTML = '<span class="badge badge-success">사용가능한 이메일입니다.</span>';
+					userAbleEmail = true;
+		    	} else {
+		    		checkEmail.innerHTML = '<span class="badge badge-danger">중복된 이메일입니다.</span>';
+		    		userAbleEmail = false;
+		    	}
+		   	}
+		})
+	} else {
+		checkEmail.innerHTML = '<span class="badge badge-secondary">이메일을 입력해주세요.</span>';
+		userAbleEmail = false;
+	}
 }
    function checkValue(){
 	   if(!userAbleId){
@@ -47,6 +73,13 @@ function inputCheckSpecial(){
          frm.id.focus();
          return;
 	   }
+	   
+	   if(!userAbleEmail){
+			 alert('이메일을 다시 입력해주세요.');
+	         frm.email.focus();
+	         return;
+	  }
+	   
 	   
       if(frm.id.value==""){
          alert("회원아이디를 입력해주세요");
@@ -115,6 +148,19 @@ function inputCheckSpecial(){
 			checkPwTxt2.style.color = "red";
 		}
 	}
+	
+	function emailCheck() {
+		let emailSelect = document.getElementById('emailSelect');
+		let emailSelect2 = document.getElementById('emailSelect2');
+		if(emailSelect2.value == '') {
+			// email2 readonly 해제하고 입력가능하게 변경
+			emailSelect.value = '';
+			emailSelect.readOnly = false;
+		} else {
+			emailSelect.value = emailSelect2.value;
+			emailSelect.readOnly = true;
+		}
+	}
 </script>
 <title>회원가입</title>
 </head>
@@ -155,14 +201,18 @@ function inputCheckSpecial(){
             <br>
               <label for="pw2" class="form-label">이메일</label>
               <div class="input-group">
-                <input type="text" class="form-control" id="email" name="email" placeholder="이메일을 입력해주세요" required>
+                <input type="text" class="form-control col-5" onkeyup="inputCheckSpecial()" id="email" name="email" placeholder="이메일을 입력해주세요" required>
                 <span style="margin-left: 5px; margin-right: 5px;">@</span>
-				<select class="form-control" id="emailSelect" name="emailSelect">
-			    	<option value="naver.com">naver.com</option>
-				    <option value="gmail.com">google.com</option>
-				    <option value="hanmail.com">hanmail.com</option>
+                <input type="text" class="form-control col-5" id="emailSelect" name="emailSelect">
+				<select class="form-control col-2 ml-2" id="emailSelect2" name="emailSelect2" onchange="emailCheck();inputCheckSpecial();">
+			    	<option value="">직접입력</option> 
+					<option value="naver.com">네이버</option> 
+					<option value="nate.com">네이트</option> 
+					<option value="hanmail.net">한메일</option>
+					<option value="gmail.com">Gmail</option>
 				</select>
               </div>
+              <span id="checkEmail"><span class="badge badge-secondary">이메일을 입력해주세요.</span></span>
             </div>
             
             <div class="col-12 mt-5">
