@@ -4,7 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+<script src="https://code.highcharts.com/stock/modules/data.js"></script>
+<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
 <title>개인정보 수정</title>
+
 <script>
 //정규화 구분(제이쿼리에서 value에서는 val)
 var pw = /^[A-Za-z0-9~!@#$%^&*()_+|<>?:{}]{4,20}$/;
@@ -31,6 +37,76 @@ $(function(){
 			$('#pwr').text('비밀번호가 확인되었습니다');
 			$('#pwr').css('color', 'green');
 		}
+	});
+	$('#modalclose').click(function(){
+		$('#MoneyModal').modal('hide');
+	});
+	$('#modalclose2').click(function(){
+		$('#MoneyModal').modal('hide');
+	});
+	
+	$('#moneybutton').on('click',function(){
+			$.ajax({
+			    url: "http://localhost:8089/CoinTraderWebGame/UsersCoinMoney",
+			    method: "GET",
+			    dataType: "JSON",
+			    success: function(data) {
+			    	$('#MoneyModal').modal('show');
+			    	console.log(data);
+			    	
+			    	Highcharts.stockChart('container', {
+
+					    rangeSelector: {
+					    	 buttons: [{
+							      count: 3,
+							      type: 'day',
+							      text: '3일'
+							    }, {
+							      count: 7,
+							      type: 'day',
+							      text: '7일'
+							    }, 
+							    {
+								 count: 1,
+								  type: 'month',
+								  text: '30일'
+								    },{
+							      type: 'all',
+							      text: 'All'
+							    }],
+					      selected: 0,
+					      inputEnabled: false
+					    },
+
+					    title: {
+					      text: '내 자산 그래프'
+					    },
+
+					    scrollbar: {
+					      barBackgroundColor: 'gray',
+					      barBorderRadius: 7,
+					      barBorderWidth: 0,
+					      buttonBackgroundColor: 'gray',
+					      buttonBorderWidth: 0,
+					      buttonBorderRadius: 7,
+					      trackBackgroundColor: 'none',
+					      trackBorderWidth: 1,
+					      trackBorderRadius: 8,
+					      trackBorderColor: '#CCC'
+					    },
+
+					    series: [{
+					      name: '내 자산',
+					      
+					      data: data,
+					      tooltip: {
+					        valueDecimals: 0
+					      }
+					    }]
+					  });
+			   	}
+			})
+		
 	});
 })
 
@@ -66,7 +142,7 @@ function modify(){
 			</div>
 			
 			<div class="col-12">
-				<label for="user_id" class="form-label">보유자산</label>
+				<label for="user_id" class="form-label"><button type="button" class="btn btn-link" id=moneybutton>보유자산</button></label>
 				<div class="input-group">
 					<input type="text" class="form-control" id="money" name="money" value="${vo.money} " readonly>
 					
@@ -116,10 +192,28 @@ function modify(){
 			
 			<div class="col-12 mt-5">
 				<button class="btn btn-outline-primary" onclick="return modify()" type="submit">완료</button>
-				<a href="/"><button class="btn btn-outline-secondary" type="button">뒤로</button></a>
+				<a href="index"><button class="btn btn-outline-secondary" type="button">뒤로</button></a>
 			</div>
 			</div>
 	</form>
+	
+	<div class="modal" tabindex="-1" id="MoneyModal">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">${id}님의 자산 그래프</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id = 'modalclose'></button>
+      </div>
+      <div class="modal-body">
+       <div id="container" style="height: 400px; min-width: 310px"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id = 'modalclose2'>Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 <%@ include file="/include/footer.jsp"%>
 </html>

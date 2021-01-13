@@ -1,71 +1,118 @@
 $(function () {
-	var Aarray = new Array;
-	var Barray = new Array;
-	var Carray = new Array;
-	var Darray = new Array;
+
+	var Aarray = [];
+	var Barray = [];
+	var Carray = [];
+	var Darray = [];
+	var cnt = 0;
 	
-	var timerId = null;
+	let update = null;
+	let timerId = null;
+	const firstTime = (new Date()).getTime();
+
 	if(timerId == null) {
-			requestGetPrice();
-	    	timerId = setInterval(requestGetPrice, 60000);
+			getPriceInit();
+	    	timerId = setInterval(function(){
+	    		requestGetPrice();
+	    		},60000);
 		}
+	  function getPriceInit() {
+		    $.ajax({
+		      url: "http://localhost:8089/CoinTraderWebGame/CurrentPrice",
+		      method: "GET",
+		      dataType: "JSON",
+		      success: function (data) {
+		    	let cntplus = setInterval(function(){
+					cnt = Math.round(((new Date()).getTime() - firstTime) / 1000);
+				}, 1000);
+		        update = data.lastUpdateDate;
+		        Aarray = data.coin1;
+		        Barray = data.coin2;
+		        Carray = data.coin3;
+		        Darray = data.coin4;
+		        coin();
+		       
+		      },
+		    });
+		  }
+
 	function requestGetPrice() {
 		$.ajax({
-		    url: "http://localhost:8089/CurrentPrice",
+		    url: "http://localhost:8089/CoinTraderWebGame/CurrentPrice",
 		    method: "GET",
+		    async:false,
 		    dataType: "JSON",
 		    success: function(data) {
-		    	// data.coin1
-		    	acoin(data.coin1);
-		    	// data.coin2
-		    	bcoin(data.coin2);
-		    	// data.coin3
-		    	ccoin(data.coin3);
-		    	// data.coin4
-		    	dcoin(data.coin4);
-		    	// 각각 70개 배열이고
-		    	// data.lastUpdateDate - "2020-12-28 15:10:46" String임
-		    	// 이 데이터로 그래프 출력시켜주시면 됩니다
+		    		var dif = (Date.parse(data.lastUpdateDate) - Date.parse(update)) / 1000;
+		    		update = data.lastUpdateDate;
+		    		Aarray = Aarray.concat(data.coin1.splice(0, dif));
+		    		Barray = Barray.concat(data.coin2.splice(0, dif));
+		    		Carray = Carray.concat(data.coin3.splice(0, dif));
+		    		Darray = Darray.concat(data.coin4.splice(0, dif));		
+		    		
+		    		console.log(Aarray);
 		   	}
 		})
 	}
+	
+	
+	
 	$(window).bind('hashchange', function() {
 		if(timerId != null) {
 	        clearInterval(timerId);
 	    }
 	});
-	
-	function acoin(aprice){
-	var c = 0;
-	var x = 0;
 
+	
+	
+function coin(){
+	 $('#sellbutton').click(function(){
+		  let y=$('#selltime').val();
+		  $('#Asellpriceinput').val(Aarray[cnt+y]);
+		  $('#Bsellpriceinput').val(Barray[cnt+y]);
+		  $('#Csellpriceinput').val(Carray[cnt+y]);
+		  $('#Dsellpriceinput').val(Darray[cnt+y]);
+	  });
 	var it = setInterval(function(){
-		  if(x <= 60){
-			  $("#asd").text("현재가격:"+aprice[x++]);
-			  $('#modalbutton').click(function(){
-				  $('#Apriceinput').val(aprice[x]);
-			  });
-		  }else{
-			clearInterval(it);
-			i=0;
-		  }
+			  var aput = Aarray[cnt];
+			  var bput = Barray[cnt];
+			  var cput = Carray[cnt];
+			  var dput = Darray[cnt];
+			  
+			  $("#asd").text("현재가격:"+aput);
+			  $("#bsd").text("현재가격:"+bput);
+			  $("#csd").text("현재가격:"+cput);
+			  $("#dsd").text("현재가격:"+dput);
+			  
+			  $('#Asellpriceinput').val(aput);
+			  $('#Bsellpriceinput').val(bput);
+			  $('#Csellpriceinput').val(cput);
+			  $('#Dsellpriceinput').val(dput);	
 		}, 1000);
 	
+	  $('#modalbutton').click(function(){
+		  $('#Apriceinput').val(Aarray[cnt]);
+		  $('#Bpriceinput').val(Barray[cnt]);
+		  $('#Cpriceinput').val(Carray[cnt]);
+		  $('#Dpriceinput').val(Darray[cnt]);
+	  });
+	
 	var chart1 = new Highcharts.stockChart('Acontainer', {
-		  chart: {
-			    events: {
-			      load: function () {
+		
+			chart: {
+				events: {
+					load: function () {
 
-			        // set up the updating of the chart each second
-			        var series = this.series[0];
-			        setInterval(function () {
-			          var x = (new Date()).getTime(), // current time
-			            y = aprice[c++];
-			          series.addPoint([x, y], true, true);
-			        }, 1000);
-			      }
-			    }
-			  },
+				// set up the updating of the chart each second
+		        var series = this.series[0];
+		        setInterval(function () {
+		          var x = (new Date()).getTime(), // current time
+		            y = Aarray[cnt];
+		          series.addPoint([x, y], true, true);
+		        }, 1000);
+		      }
+		    }
+		  },
 
 			  time: {
 			    useUTC: false
@@ -97,86 +144,71 @@ $(function () {
 			  },
 
 			  series: [{
-			    name: 'A COIN',
-			    data: (function () {
-			      // generate an array of random data
-			      var data = [],
-			        time = (new Date()).getTime(),
-			        i;
+				    name: 'A coin',
+				    data: (function () {
+				      // generate an array of random data
+				      var data = [],
+				        time = (new Date()).getTime(),
+				        i;
 
-			      for (i = -59; i <= 0; i += 1) {
-			        data.push([
-			          time + i * 1000,
-			          aprice[i]
-			        ]);
-			      }
-			      return data;
-			    }())
-			  }]
+				      for (i = -59; i <= 0; i += 1) {
+				        data.push([
+				          time + i * 1000,
+				          Aarray[i]
+				        ]);
+				      }
+				      return data;
+				    }())
+				  }]
 			});
-	};
-	function bcoin(bprice){
-		var c = 0;
-		var x = 0;
-
-		var it = setInterval(function(){
-			  if(x <= 60){
-				  $("#bsd").text("현재가격:"+bprice[x++]);
-				  $('#modalbutton').click(function(){
-					  $('#Bpriceinput').val(bprice[x]);
-				  });
-			  }else{
-				clearInterval(it);
-				i=0;
-			  }
-			}, 1000);
 	var chart2 = new Highcharts.stockChart('Bcontainer', {
-		  chart: {
-			    events: {
-			      load: function () {
+		
+		chart: {
+			events: {
+				load: function () {
 
-			        // set up the updating of the chart each second
-			        var series = this.series[0];
-			        setInterval(function () {
-			          var x = (new Date()).getTime(), // current time
-			            y = bprice[c++];
-			          series.addPoint([x, y], true, true);
-			        }, 1000);
-			      }
-			    }
-			  },
+			// set up the updating of the chart each second
+	        var series = this.series[0];
+	        setInterval(function () {
+	          var x = (new Date()).getTime(), // current time
+	            y = Barray[cnt];
+	          series.addPoint([x, y], true, true);
+	        }, 1000);
+	      }
+	    }
+	  },
 
-			  time: {
-			    useUTC: false
-			  },
+		  time: {
+		    useUTC: false
+		  },
 
-			  rangeSelector: {
-			    buttons: [{
-			      count: 10,
-			      type: 'second',
-			      text: '10초'
-			    }, {
-			      count: 30,
-			      type: 'second',
-			      text: '30초'
-			    }, {
-			      type: 'all',
-			      text: 'All'
-			    }],
-			    inputEnabled: false,
-			    selected: 0
-			  },
+		  rangeSelector: {
+		    buttons: [{
+		      count: 10,
+		      type: 'second',
+		      text: '10초'
+		    }, {
+		      count: 30,
+		      type: 'second',
+		      text: '30초'
+		    }, {
+		      type: 'all',
+		      text: 'All'
+		    }],
+		    inputEnabled: false,
+		    selected: 0
+		  },
 
-			  title: {
-			    text: 'BCOIN'
-			  },
+		  title: {
+		    text: 'BCOIN'
+		  },
 
-			  exporting: {
-			    enabled: false
-			  },
+		  exporting: {
+		    enabled: false
+		  },
 
-			  series: [{
-			    name: 'Random data',
+		  series: [{
+			    name: 'B COIN',
 			    data: (function () {
 			      // generate an array of random data
 			      var data = [],
@@ -186,76 +218,61 @@ $(function () {
 			      for (i = -59; i <= 0; i += 1) {
 			        data.push([
 			          time + i * 1000,
-			          bprice[i]
+			          Barray[i]
 			        ]);
 			      }
 			      return data;
 			    }())
 			  }]
-			});
-	};
-	function ccoin(cprice){
-		var c = 0;
-		var x = 0;
-
-		var it = setInterval(function(){
-			  if(x <= 60){
-				  $("#csd").text("현재가격:"+cprice[x++]);
-				  $('#modalbutton').click(function(){
-					  $('#Cpriceinput').val(cprice[x]);
-				  });
-			  }else{
-				clearInterval(it);
-				i=0;
-			  }
-			}, 1000);
+		});
 	var chart3 = new Highcharts.stockChart('Ccontainer', {
-		  chart: {
-			    events: {
-			      load: function () {
+		
+		chart: {
+			events: {
+				load: function () {
 
-			        // set up the updating of the chart each second
-			        var series = this.series[0];
-			        setInterval(function () {
-			          var x = (new Date()).getTime(), // current time
-			            y = cprice[c++];
-			          series.addPoint([x, y], true, true);
-			        }, 1000);
-			      }
-			    }
-			  },
+			// set up the updating of the chart each second
+	        var series = this.series[0];
+	        setInterval(function () {
+	          var x = (new Date()).getTime(), // current time
+	            y = Carray[cnt];
+	          series.addPoint([x, y], true, true);
+	        }, 1000);
+	      }
+	    }
+	  },
 
-			  time: {
-			    useUTC: false
-			  },
+		  time: {
+		    useUTC: false
+		  },
 
-			  rangeSelector: {
-			    buttons: [{
-			      count: 10,
-			      type: 'second',
-			      text: '10초'
-			    }, {
-			      count: 30,
-			      type: 'second',
-			      text: '30초'
-			    }, {
-			      type: 'all',
-			      text: 'All'
-			    }],
-			    inputEnabled: false,
-			    selected: 0
-			  },
+		  rangeSelector: {
+		    buttons: [{
+		      count: 10,
+		      type: 'second',
+		      text: '10초'
+		    }, {
+		      count: 30,
+		      type: 'second',
+		      text: '30초'
+		    }, {
+		      type: 'all',
+		      text: 'All'
+		    }],
+		    inputEnabled: false,
+		    selected: 0
+		  },
 
-			  title: {
-			    text: 'CCOIN'
-			  },
+		  title: {
+		    text: 'CCOIN'
+		  },
 
-			  exporting: {
-			    enabled: false
-			  },
+		  exporting: {
+		    enabled: false
+		  },
 
-			  series: [{
-			    name: 'C COIN',
+		  series: [{
+			    name: 'C coin',
 			    data: (function () {
 			      // generate an array of random data
 			      var data = [],
@@ -265,76 +282,61 @@ $(function () {
 			      for (i = -59; i <= 0; i += 1) {
 			        data.push([
 			          time + i * 1000,
-			          cprice[i]
+			          Carray[i]
 			        ]);
 			      }
 			      return data;
 			    }())
 			  }]
-			});
-	};
-	function dcoin(dprice){
-		var c = 0;
-		var x = 0;
-
-		var it = setInterval(function(){
-			  if(x <= 60){
-				  $("#dsd").text("현재가격:"+dprice[x++]);
-				  $('#modalbutton').click(function(){
-					  $('#Dpriceinput').val(dprice[x]);
-				  });
-			  }else{
-				clearInterval(it);
-				i=0;
-			  }
-			}, 1000);
+		});
 	var chart4 = new Highcharts.stockChart('Dcontainer', {
-		  chart: {
-			    events: {
-			      load: function () {
+		
+		chart: {
+			events: {
+				load: function () {
 
-			        // set up the updating of the chart each second
-			        var series = this.series[0];
-			        setInterval(function () {
-			          var x = (new Date()).getTime(), // current time
-			            y = dprice[c++];
-			          series.addPoint([x, y], true, true);
-			        }, 1000);
-			      }
-			    }
-			  },
+			// set up the updating of the chart each second
+	        var series = this.series[0];
+	        setInterval(function () {
+	          var x = (new Date()).getTime(), // current time
+	            y = Darray[cnt];
+	          series.addPoint([x, y], true, true);
+	        }, 1000);
+	      }
+	    }
+	  },
 
-			  time: {
-			    useUTC: false
-			  },
+		  time: {
+		    useUTC: false
+		  },
 
-			  rangeSelector: {
-			    buttons: [{
-			      count: 10,
-			      type: 'second',
-			      text: '10초'
-			    }, {
-			      count: 30,
-			      type: 'second',
-			      text: '30초'
-			    }, {
-			      type: 'all',
-			      text: 'All'
-			    }],
-			    inputEnabled: false,
-			    selected: 0
-			  },
+		  rangeSelector: {
+		    buttons: [{
+		      count: 10,
+		      type: 'second',
+		      text: '10초'
+		    }, {
+		      count: 30,
+		      type: 'second',
+		      text: '30초'
+		    }, {
+		      type: 'all',
+		      text: 'All'
+		    }],
+		    inputEnabled: false,
+		    selected: 0
+		  },
 
-			  title: {
-			    text: 'DCOIN'
-			  },
+		  title: {
+		    text: 'DCOIN'
+		  },
 
-			  exporting: {
-			    enabled: false
-			  },
+		  exporting: {
+		    enabled: false
+		  },
 
-			  series: [{
-			    name: 'D COIN',
+		  series: [{
+			    name: 'D coin',
 			    data: (function () {
 			      // generate an array of random data
 			      var data = [],
@@ -344,13 +346,12 @@ $(function () {
 			      for (i = -59; i <= 0; i += 1) {
 			        data.push([
 			          time + i * 1000,
-			          dprice[i]
+			          Darray[i]
 			        ]);
 			      }
 			      return data;
 			    }())
 			  }]
-			});
-
+		});
 };
 });

@@ -8,21 +8,75 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="/resource/js/bootstrap.js"></script>
-<link rel="stylesheet" href="/resource/css/bootstrap.css">
+
+<script type="text/javascript" src="resource/js/bootstrap.js"></script>
+<link rel="stylesheet" href="resource/css/bootstrap.css">
+
+<script type="text/javascript" src="resource/js/bootstrap.js"></script>
+<script type="text/javascript">
+var timerId = null;
+function Start() {
+	
+	if(timerId == null) {
+		requestGetUserMoney();
+    	timerId = setInterval(requestGetUserMoney, 1000);
+	}
+}
+function Stop() {
+	
+	if(timerId != null) {
+        clearInterval(timerId);
+    }
+}
+function requestGetUserMoney() {
+	$.ajax({
+	    url: "http://localhost:8089/CoinTraderWebGame/UserGetMoney",
+	    method: "GET",
+	    dataType: "JSON",
+	    success: function(money) {
+	    	document.getElementById("money").innerHTML = money;
+	    	
+	   	}
+	})
+}
+$(window).bind('hashchange', function() {
+   
+});
+$(function (){
+	$('#hrefgocoin').click(function(){
+		$('#gocoin').val(1);
+	});
+})
+</script>
+<link rel="stylesheet" href="resource/css/bootstrap.css">
+
 
 </head>
-
-<body>
+<c:if test="${empty id}">
+	<body>
+</c:if>
+<form method="post" action="user?cmd=login">
+<c:if test="${!empty id}">
+	<body onload="Start();">
+</c:if>
 	<header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm sticky-top">
 		<p class="h5 my-0 mr-auto fw-normal">Team Method</p>
 		<c:if test="${!empty id}">
 			<p class="h7 my-0 mr-3 fw-normal">${id}님 환영합니다.</p>
-			<p class="h7 my-0 mr-auto fw-normal">현재 남은 자금은 10000원입니다.</p>
+			<p class="h7 my-0 fw-normal">현재 남은 자금은&nbsp;</p>
+			<p class="h7 my-0 fw-normal" id="money"></p>
+			<p class="h7 my-0 mr-auto fw-normal">원입니다.</p>
 		</c:if>
 		<nav class="my-2 my-md-0 me-md-3">
-			
+			<c:if test="${!empty id}">
 	    	<a class="p-2 text-dark" href="coin?cmd=coin_list">Coin</a>
+	    	</c:if>
+	    	<c:if test="${empty id}">
+	    	
+	    	<a class="p-2 text-dark" href="" data-toggle="modal" data-target="#loginModalForm" id = hrefgocoin>Coin</a>
+	    	<input name = gocoin id = gocoin value="0" type="hidden">
+	    	
+	    	</c:if>
 	    	<a class="p-2 text-dark" href="ranking?cmd=ranking_list">Ranking</a>
 
 
@@ -52,7 +106,7 @@
 						</button>
 					</div>
 					<!--Body-->
-					<form method="post" action="user?cmd=login">
+					
 						<div class="modal-body mx-4">
 							<!--Body-->
 							<div class="md-form mb-5">
@@ -75,7 +129,7 @@
 								</a>
 							</div>
 						</div>
-					</form>
+					
 				</div>
 			<!--/.Content-->
 			</div>
@@ -84,5 +138,8 @@
 	<main class="container">
 		<div style="min-height: 400px;"
 		class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+		
+	
+</form>
 </body>
 </html>

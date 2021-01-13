@@ -1,34 +1,46 @@
 
 $(function () {
+	
+	var priceinput;
+	var cnt;
+	var amount;
+	var sellprice;
+	var timer;
+	
+	function CoinBuy() {
+		var code = "http://localhost:8089/CoinTraderWebGame/coin?cmd=coin_buy&cnt="+cnt+"&amount="+amount+"&price="+priceinput+"";
+		var url = encodeURI(code);
+	
+		$.ajax({
+		    url: url,
+		    method: "GET",
+		    dataType: "JSON",
+		    success: function(data) {
+		   	}
+		})
+	}
+	function CoinSell() {
+		var code = "http://localhost:8089/CoinTraderWebGame/coin?cmd=coin_sell&cnt="+cnt+"&amount="+amount+"&sellprice="+sellprice+"&timer="+timer+"";
+		var url = encodeURI(code);
+		
+		$.ajax({
+		    url: url,
+		    method: "GET",
+		    dataType: "JSON",
+		    success: function(data) {
+		   	}
+		})
+	}
+	
+	
 $('#aCoin').popover({ //팝오버
-		// fade 효과 사용 여부
 		animation: true,
-		// 지연 설정
-		//delay: {show:500, hide:100},
-		// 템필릿
-		//html: false,
-		// html false 경우 지정할 요소 selector
-		//selector: false,
-		// html true일 경우 사용되는 popover 템플릿
-		//template: '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
-		// 방향 (설정하면 요소의 data-placement 설정의 무효된다.)
-		//viewport: { selector: 'body', padding: 0 },
-		// 팝오버을 나타낼 특정 요소
-		//container: false,
 		 placement : 'right',
 	     trigger : 'hover focus',
 	     html: true,
 	     content: function () {
-				return 'aaa';
-       }
-		//placement: 'bottom',
-		// 제목 (설정하면 요소의 title 설정의 무효된다.)
-		//title: '',
-		// 컨텐츠 값 (설정하면 요소의 data-content값은 무효된다.)
-		// content: '',
-		//sanitize: true,
-		//sanitizeFn: null,
-		//whiteList: ''    	 
+				return 'A COIN - 상승 하락폭이 B 코인에 비해 현저히 낮은 코인';
+       }   	 
 	});
 	$('#sellCoin').popover({
 		animation: true,
@@ -36,7 +48,7 @@ $('#aCoin').popover({ //팝오버
 	     trigger : 'hover focus',
 	     html: true,
 	     content: function () {
-				return '판매시 시간을 정해주세요';
+				return '판매시 시간을 정하여 판매를 눌러주세요 정한시간뒤에 가격으로 판매가 됩니다';
       }
 	});
 	$('#bCoin').popover({
@@ -45,7 +57,7 @@ $('#aCoin').popover({ //팝오버
 	     trigger : 'hover focus',
 	     html: true,
 	     content: function () {
-				return 'bbbbb';
+				return 'B COIN - 상승,하락폭이 큰 코인';
       }
 	});
 	$('#cCoin').popover({
@@ -54,7 +66,7 @@ $('#aCoin').popover({ //팝오버
 	     trigger : 'hover focus',
 	     html: true,
 	     content: function () {
-				return 'bbbbb';
+				return 'C COIN - 상승폭이 작은 대신 상승 확률이 높고 하락시 폭락하는 코인';
       }
 	});
 	$('#dCoin').popover({
@@ -63,9 +75,10 @@ $('#aCoin').popover({ //팝오버
 	     trigger : 'hover focus',
 	     html: true,
 	     content: function () {
-				return 'bbbbb';
+				return 'D COIN - 하락폭이 작지만 하락확률이 높고 상승시 대박을 치는 코인';
       }
 	});
+	
 	$('#buyCoin').popover({
 		
 		animation: true,
@@ -73,21 +86,25 @@ $('#aCoin').popover({ //팝오버
 	     trigger : 'hover focus',
 	     html: true,
 	     content: function () {
-				return '코인 구매시 팔아야함';
+				return '코인 구매시 반드시 팔아야 합니다 결정후 구매버튼을 눌러주세요';
       }
 	});
 		
 	  	$('#modalbutton').on('click', function(){//구입버튼 모달
 		  $('#myModal').modal('show');
-		  var money = $("#money").val();
+		  var money = $("#prmoney").val();
 		  $('#rrr').text('내 자산 :'+money);
+		  
 	  	 });
 	  	
 	  	function pricechk(price){
 		$('#modalbutton2').on('click', function(){//판매버튼 모달
+			$("#priceinput").val(priceinput);
 			var totprice = $('#coinname').val();
 			var totcoincnt = $('#coincnt').val();
-			var money = $("#money").val();
+			amount=totcoincnt
+			var money = $("#prmoney").val();
+			
 			var reprice = price*totcoincnt;
 			var chk = money-reprice;
 			if(totprice==""){
@@ -100,18 +117,71 @@ $('#aCoin').popover({ //팝오버
 				return $('.form-text').text('자산을 초과하였습니다.');
 			}
 			
-			$('#rrr2').text('구입시 고객님의 남은 자산 :'+chk);
+			
+			$('#rrr2').text('구입시 고객님의 남은 자산 :'+chk+"원");
 			$("#rrr2").css( "color", "red" );
 			$('#myModal').modal('hide');
 			$('#myModal2').modal('show');
 			$('.form-text').text('');
 			$('#floatingInputValue').val(totprice+'  코인개수:'+totcoincnt);
 			$('#coincnt2').val(totcoincnt);
+		
 			});
 	  	}
+	  	
+	  	$('#sellbutton').on('click',function(){
+	  		var coinname = $('#coinname').val();
+	  		timer = $('#selltime').val();
+	  		
+	  		var asellprice = $('#Asellpriceinput').val();
+	  		var bsellprice = $('#Bsellpriceinput').val();
+	  		var csellprice = $('#Csellpriceinput').val();
+	  		var dsellprice = $('#Dsellpriceinput').val();
+	  		
+	  		if(timer==0){
+	  			$('.form-text').css('color','red');
+				return $('.form-text').text('판매할시간을 선택해주세요');
+			}
+	  		
+	  		if(coinname.indexOf('A')!==-1){
+	  			cnt = 1;
+	  			$('#sellpriceinput').val(asellprice);
+	  			sellprice=$('#sellpriceinput').val();
+	  			
+	  		}else if(coinname.indexOf('B')!==-1){
+	  			cnt = 2;
+	  			$('#sellpriceinput').val(bsellprice);
+	  			sellprice=$('#sellpriceinput').val();
+	  			
+	  		}else if(coinname.indexOf('C')!==-1){
+	  			cnt = 3;
+	  			$('#sellpriceinput').val(csellprice);
+	  			sellprice=$('#sellpriceinput').val();
+	  			
+	  			
+	  		}else if(coinname.indexOf('D')!==-1){
+	  			cnt = 4;
+	  			$('#sellpriceinput').val(dsellprice);
+	  			sellprice=$('#sellpriceinput').val();
+	  			
+	  		}
+	  		
+			$('#myModal2').modal('hide');
+			CoinBuy();
+			CoinSell();
+			$('#rrr2').text('');
+			$('#coincnt').val('');
+			$('.form-text').text('');
+			$('#coinname').css('background-position','100px 6px');
+			$('#coinname').val('코인을 선택해주세요');
+			$('.dropdown-toggle').text('코인');
+			$('#floatingInputValue').val('');
+			$('#coincnt2').val('');
+	  	});
+	  	
 		function cntkey(price){
 		$('#coincnt').on('keyup',function(e){//코인개수 구입시 경고문삭제
-			var money = $("#money").val();
+			var money = $("#prmoney").val();
 			var totcoincnt = $('#coincnt').val();
 			
 			var totprice = price*totcoincnt;
@@ -136,15 +206,7 @@ $('#aCoin').popover({ //팝오버
 			$('#coincnt').val('');
 			$('.form-text').text('');
 			});
-		$('#closemodalbutton3,#closemodalbutton4').on('click', function(){//판매모달 x/닫기 삭제 예정
-			$('#myModal2').modal('hide');
-			$('#coincnt2').val('');
-			$('#priceinput').val('');
-			});
-    
-
-	
-	
+		
 	$(".dropdown-menu li a").click(function(){//모달창 버튼 클릭 쿼리
 		$('#coinname').css('background-position','100px 6px');
 		  var selText = $(this).html();
@@ -152,11 +214,12 @@ $('#aCoin').popover({ //팝오버
 		});
 	$('#aprice').click(function(){
 		$('.form-text').text('');
-		var money = $("#money").val();
+		var money = $("#prmoney").val();
 		$('#rrr').text('내 자산 :'+money);
 		$('#coincnt').val("");
 		var apr = $("#Apriceinput").val();
-		$('#coinname').css('background-position','125px 6px');
+		priceinput=apr;
+		$('#coinname').css('background-position','125px 5px');
 		$('#coinname').val('A코인:'+$("#Apriceinput").val()+"원");
 		cntkey(apr);
 		pricechk(apr);
@@ -166,10 +229,11 @@ $('#aCoin').popover({ //팝오버
 	});
 	$('#bprice').click(function(){
 		$('.form-text').text('');
-		var money = $("#money").val();
+		var money = $("#prmoney").val();
 		$('#rrr').text('내 자산 :'+money);
 		$('#coincnt').val("");
 		var bpr = $("#Bpriceinput").val();
+		priceinput=bpr;
 		$('#coinname').css('background-position','125px 6px');
 		$('#coinname').val('B코인:'+$("#Bpriceinput").val()+"원");
 		cntkey(bpr);
@@ -180,10 +244,11 @@ $('#aCoin').popover({ //팝오버
 	});
 	$('#cprice').click(function(){
 		$('.form-text').text('');
-		var money = $("#money").val();
+		var money = $("#prmoney").val();
 		$('#rrr').text('내 자산 :'+money);
 		$('#coincnt').val("");
 		var cpr = $("#Cpriceinput").val();
+		priceinput=cpr;
 		$('#coinname').css('background-position','125px 6px');
 		$('#coinname').val('C코인:'+$("#Cpriceinput").val()+'원');
 		cntkey(cpr);
@@ -194,10 +259,11 @@ $('#aCoin').popover({ //팝오버
 	});
 	$('#dprice').click(function(){
 		$('.form-text').text('');
-		var money = $("#money").val();
+		var money = $("#prmoney").val();
 		$('#rrr').text('내 자산 :'+money);
 		$('#coincnt').val("");
 		var dpr = $("#Dpriceinput").val();
+		priceinput=dpr;
 		$('#coinname').css('background-position','125px 6px');
 		$('#coinname').val('D코인:'+$("#Dpriceinput").val()+"원");
 		cntkey(dpr);
@@ -205,5 +271,6 @@ $('#aCoin').popover({ //팝오버
 	});
 	$('#10sc').click(function(){
 		$('#selltime').val(10);
+		
 	});
 });	
