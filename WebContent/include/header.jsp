@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script type="text/javascript" src="resource/js/bootstrap.js"></script>
@@ -60,7 +60,7 @@ $(function (){
 	<body onload="Start();">
 </c:if>
 	<header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm sticky-top">
-		<p class="h5 my-0 mr-auto fw-normal">Team Method</p>
+		<p class="h5 my-0 mr-auto fw-normal"><a href="index"><img src="resource/img/logo1.png"></a></p>
 		<c:if test="${!empty id}">
 			<p class="h7 my-0 mr-3 fw-normal">${id}님 환영합니다.</p>
 			<p class="h7 my-0 fw-normal">현재 남은 자금은&nbsp;</p>
@@ -123,10 +123,7 @@ $(function (){
 							</div>
 			
 							<div class="text-center mb-3">
-								<a href="로그인주소" style="text-decoration: none;">
 								<button type="submit" class="btn btn-primary btn-block btn-rounded z-depth-1a">Sign in</button>
-								
-								</a>
 							</div>
 						</div>
 					

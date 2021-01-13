@@ -8,9 +8,11 @@ import com.jslhrd.coinTraderGame.service.users.UsersModifyProAction;
 
 public class UserActionFactory {
 	private static UserActionFactory instance = new UserActionFactory();
+
 	public static UserActionFactory getInstance() {
 		return instance;
 	}
+
 	public Action getAction(String cmd) {
 		Action action = null;
 		if (cmd.equals("user_edit")) {
