@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ include file="/include/header.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -64,46 +64,46 @@ function modify(){
 </script>
 </head>
 <body>
-	<h4 class="mb-3">개인정보 수정</h4>
-	<form method="post" class="needs-validation" novalidate name="coin" action="user?cmd=user_edit_pro">
-		<div class="row g-3">
-			<div class="col-12">
-				<label for="user_id" class="form-label">아이디</label>
-				<div class="input-group">
-					<input type="text" class="form-control" id="user_id" name="user_id" value="${vo.id}" readonly>
-				</div>
-			</div>
-			
-			<div class="col-12">
-				<label for="user_id" class="form-label">보유자산</label>
-				<div class="input-group">
-					<input type="text" class="form-control" id="money" name="money" value="${vo.money} " readonly>
-					
-				
-					
-					<button type="button" class="btn btn-outline-primary ml-3" data-toggle="modal" data-target="#chargeModal">충전</button>
-					
-				</div>
-			</div>
-					
-			<div class="col-12">
-				<label for="pw1" class="form-label">비밀번호 수정</label>
-			<div class="input-group">
-					<input type="password" id="pw1" name="pw1" class="form-control" placeholder="비밀번호 수정" maxlength="20">
-			</div>
-			
-			</div>
-			<div class="coin" id="pw1_check"></div>
-			
-			<div class="col-12">
-				<label for="pw2" class="form-label">비밀번호 확인</label>
-				<div class="input-group">
-					<input type="password" id="pw2" name="pw2" class="form-control" id="pw2"
-						placeholder="비밀번호 수정 확인" maxlength="20">
-			</div>
-			<div class="coin" id="pw2_check"></div>
-			
-			</div>
+   <h4 class="mb-3">개인정보 수정</h4>
+   <form method="post" class="needs-validation" novalidate name="coin" action="user?cmd=user_edit_pro">
+      <div class="row g-3">
+         <div class="col-12">
+            <label for="user_id" class="form-label">아이디</label>
+            <div class="input-group">
+               <input type="text" class="form-control" id="user_id" name="user_id" value="${vo.id}" readonly>
+            </div>
+         </div>
+         
+         <div class="col-12">
+            <label for="user_id" class="form-label">보유자산</label>
+            <div class="input-group">
+               <input type="text" class="form-control" id="money" name="money" value="${vo.money} " readonly>
+               
+            
+               
+               <button type="button" class="btn btn-outline-primary ml-3" data-toggle="modal" data-target="#chargeModal">충전</button>
+               
+            </div>
+         </div>
+               
+         <div class="col-12">
+            <label for="pw1" class="form-label">비밀번호 수정</label>
+         <div class="input-group">
+               <input type="password" id="pw1" name="pw1" class="form-control" placeholder="비밀번호 수정" maxlength="20">
+         </div>
+         
+         </div>
+         <div class="coin" id="pw1_check"></div>
+         
+         <div class="col-12">
+            <label for="pw2" class="form-label">비밀번호 확인</label>
+            <div class="input-group">
+               <input type="password" id="pw2" name="pw2" class="form-control" id="pw2"
+                  placeholder="비밀번호 수정 확인" maxlength="20">
+         </div>
+         <div class="coin" id="pw2_check"></div>
+         
+         </div>
 
 
 			<div class="col-sm-6">

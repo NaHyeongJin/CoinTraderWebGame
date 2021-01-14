@@ -7,22 +7,6 @@
 <head>
 <title>상세보기</title>
 </head>
-<script>
-	function send(){
-		if(qnam.subject==""){
-			alert("제목을 입력하여 주십시오");
-			qnam.subject.focus();
-			return;
-		}
-		if(qnam.contents==""){
-			alert("내용을 입력하여 주십시오");
-			qnam.contents.focus();
-			return;
-		}
-		/* action="qna?cmd=qna_modify_pro&id=${vo.id}"; */
-		qnam.submit();
-	}
-</script>
 <body>
 	<div class="row">
 		<div class="col-lg-12">
@@ -49,13 +33,11 @@
 									</div>
 								</thead>
 							</table>
+								<div class="col-12 mt-5">
+									<input class="btn btn-outline-primary" type="submit" value="수정하기">
+									<button class="btn btn-outline-secondary" type="button" onClick="history.back()">돌아가기</button>
+								</div>
 						</form>
-					</div>
-					<!-- end project-list -->
-
-					<div class="col-12 mt-5">
-						<button class="btn btn-outline-primary" type="submit" onClick="javascript:send()">수정하기</button>
-						<button class="btn btn-outline-secondary" type="button" onClick="history.back()">돌아가기</button>
 					</div>
 				</div>
 			</div>

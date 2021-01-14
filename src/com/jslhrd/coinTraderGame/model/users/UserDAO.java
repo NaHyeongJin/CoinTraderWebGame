@@ -141,7 +141,7 @@ public class UserDAO {
 		}
 		return isAble;
 	}
-	
+
 	public int signUp(UserVO vo) {
 		if (!isEmailAble(vo.getEmail1(), vo.getEmail2())) {
 			return 0;
@@ -168,7 +168,7 @@ public class UserDAO {
 		}
 		return row;
 	}
-	
+
 	private void insertCoinMoney(String id) {
 		String query = "insert into COIN_MONEY(ID) values (?)";
 		try {
@@ -211,14 +211,15 @@ public class UserDAO {
 		}
 		return id;
 	}
-	
+
 	public Boolean loginCheck(String id) {
 		String query = "SELECT EMAILCHECK FROM COIN_USER WHERE ID = ?";
 		Boolean answer = false;
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, id);;
+			pstmt.setString(1, id);
+			;
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				answer = (rs.getString("EMAILCHECK").equals("1")) ? true : false;
@@ -279,7 +280,8 @@ public class UserDAO {
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, id);;
+			pstmt.setString(1, id);
+			;
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				answer = (rs.getString("PWCHECK").equals("1")) ? true : false;
