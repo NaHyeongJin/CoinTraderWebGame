@@ -55,7 +55,7 @@
 							</table>
 								<div class="col-12 mt-5">
 									<c:if test="${empty vo.answer }">
-										<input class="btn btn-outline-primary" type="submit" value="등록하기">
+										<button class="btn btn-outline-primary" type="submit">등록하기</button>
 									</c:if>
 									<button class="btn btn-outline-secondary" type="button" onClick="history.back()">돌아가기</button>
 								</div>
