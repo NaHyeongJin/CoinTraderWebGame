@@ -115,5 +115,4 @@ public class UserDAO {
 		}
 		return money;
 	}
-
 }

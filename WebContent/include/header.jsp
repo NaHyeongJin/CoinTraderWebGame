@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,16 +11,26 @@
 <script type="text/javascript" src="resource/js/bootstrap.js"></script>
 <script type="text/javascript">
 var timerId = null;
+var timerRanking = null;
+function RankingStart() {
+	if(timerRanking == null) {
+		requestGetRanking();
+    	timerRanking = setInterval(requestGetRanking, 5000);
+	}
+}
 function Start() {
 	if(timerId == null) {
 		requestGetUserMoney();
     	timerId = setInterval(requestGetUserMoney, 1000);
-	}
+    }
 }
 function Stop() {
 	if(timerId != null) {
         clearInterval(timerId);
     }
+	if(timerRanking != null) {
+		clearInterval(timerRanking);
+	}
 }
 function requestGetUserMoney() {
 	$.ajax({
@@ -32,6 +42,29 @@ function requestGetUserMoney() {
 	   	}
 	})
 }
+function requestGetRanking() {
+	$.ajax({
+	    url: "http://localhost:8089/CoinTraderWebGame/RankingListGet",
+	    method: "GET",
+	    dataType: "JSON",
+	    success: function(data) {
+	    	var row = "";
+	    	var len = (data.length > 10) ? 10 : data.length;
+	    	for(var i = 0; i < len; i++) {
+	    	    var id = data[i].id;
+	    	    var rank = data[i].rank;
+	    	    var money = data[i].money;
+	    	    if(i > 0){
+	    	    	if (data[i].money == data[i-1].money) {
+	    	    		rank = '';
+	    	    	}
+	    	    }
+	    	    row += '<tr><th scope="col">' + rank + '</th><th scope="col">' + id + '</th><th scope="col">' + money + '</th></tr>';
+	    	}
+	    	document.getElementById("ranking").innerHTML = row;
+	   	}
+	})
+}
 $(window).bind('hashchange', function() {
     Stop();
 });
@@ -40,10 +73,10 @@ $(window).bind('hashchange', function() {
 
 </head>
 <c:if test="${empty id}">
-	<body>
+	<body onload="RankingStart();">
 </c:if>
 <c:if test="${!empty id}">
-	<body onload="Start();">
+	<body onload="Start();RankingStart();">
 </c:if>
 	<header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm sticky-top">
 		<p class="h5 my-0 mr-auto fw-normal"><a href="index"><img src="resource/img/logo1.png"></a></p>
@@ -56,7 +89,7 @@ $(window).bind('hashchange', function() {
 		<nav class="my-2 my-md-0 me-md-3">
 			
 	    	<a class="p-2 text-dark" href="coin?cmd=coin_list">Coin</a>
-	    	<a class="p-2 text-dark" href="ranking?cmd=ranking_list">Ranking</a>
+	    	<a class="p-2 text-dark" href="" data-toggle="modal" data-target="#rankingModalForm">Ranking</a>
 
 
 	  		<c:if test="${empty id}">
@@ -66,7 +99,7 @@ $(window).bind('hashchange', function() {
 	  		<c:if test="${!(empty id)}">
 	  			<a class="btn btn-outline-primary" href="user?cmd=logout">Sign out</a>
 	  			<a class="btn btn-outline-primary" href="user?cmd=user_edit">Your profile</a>
-	  			<a class="btn btn-outline-primary" href="">Help</a>
+	  			<a class="btn btn-outline-primary" href="qna?cmd=qna_list">Help</a>
 	  		</c:if>
 		</nav>
 		
@@ -106,6 +139,47 @@ $(window).bind('hashchange', function() {
 							</div>
 						</div>
 					</form>
+				</div>
+			<!--/.Content-->
+			</div>
+		</div>
+		<!-- Modal -->
+		<!-- RankingModal -->
+		<div class="modal fade" id="rankingModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+		aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<!--Content-->
+				<div class="modal-content form-elegant">
+					<!--Header-->
+					<div class="modal-header text-center">
+					<h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel"><strong>Ranking</strong></h3>
+					<h7 class="modal-title w-100 dark-grey-text font-weight-bold my-3">*랭킹은 상위 10명만 출력됩니다.</h7>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<!--Body-->
+					<div class="row">
+				        <div class="col-lg-12">
+				            <div class="card">
+				                <div class="card-body">
+				                    <div class="table-responsive project-list">
+				                        <table class="table project-table table-centered table-nowrap">
+				                            <thead>
+				                                <tr>
+				                                    <th scope="col">순위</th>
+				                                    <th scope="col">아이디</th>
+				                                    <th scope="col">보유 자산</th>
+				                                </tr>
+				                            </thead>
+				                            <tbody id="ranking">
+				                            </tbody>
+				                        </table>
+				                    </div>
+				                </div>
+				            </div>
+				        </div>
+				    </div>
 				</div>
 			<!--/.Content-->
 			</div>
