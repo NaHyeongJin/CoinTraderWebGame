@@ -13,26 +13,28 @@ import com.jslhrd.coinTraderGame.service.Action;
 @WebServlet("/qna")
 public class QnaActionController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public QnaActionController() {
 
-    }
+	public QnaActionController() {
+		super();
+	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String cmd = "";
-		if(request.getParameter("cmd") != null) {
+		if (request.getParameter("cmd") != null) {
 			cmd = request.getParameter("cmd");
 		}
 		request.getParameter("cmd");
 		QnaActionFactory gf = QnaActionFactory.getInstance();
 		Action action = gf.getAction(cmd);
-		
-		if(action !=null) {
+
+		if (action != null) {
 			action.execute(request, response);
 		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		doGet(request, response);
 	}

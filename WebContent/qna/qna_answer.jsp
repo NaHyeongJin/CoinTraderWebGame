@@ -35,22 +35,17 @@
 											<textarea class="form-control" rows="8" name="contents" id="contents" readOnly>${vo.contents }</textarea>
 										</div>
 									</div>
-									<c:if test="${empty vo.answer }">
 										<div class="col-12">
 											<label for="answer" class="form-label">운영자 답변</label>
 											<div class="input-group">
-												<textarea class="form-control" rows="8" name="answer" id="answer" required>${vo.answer }</textarea>
+												<c:if test="${empty vo.answer }">
+													<textarea class="form-control" rows="8" name="answer" id="answer" required>${vo.answer }</textarea>
+												</c:if>
+												<c:if test="${!empty vo.answer }">
+													<textarea class="form-control" rows="8" name="answer" id="answer" readOnly>${vo.answer }</textarea>
+												</c:if>
 											</div>
 										</div>
-									</c:if>
-									<c:if test="${!empty vo.answer }">
-										<div class="col-12">
-											<label for="answer" class="form-label">운영자 답변</label>
-											<div class="input-group">
-												<textarea class="form-control" rows="8" name="answer" id="answer" readOnly>${vo.answer }</textarea>
-											</div>
-										</div>
-									</c:if>
 								</thead>
 							</table>
 								<div class="col-12 mt-5">

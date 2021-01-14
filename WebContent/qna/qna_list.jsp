@@ -88,9 +88,9 @@
 	                            </li>
                             </c:if>
                             <c:if test="${!id.contains('admin') }">
-                            <li class="page-item">
-							<a class="page-link ml-3" href="qna?cmd=qna_write">글쓰기</a>
-							</li>
+                                <li class="page-item">
+                                    <a class="page-link ml-3" href="qna?cmd=qna_write">글쓰기</a>
+                                </li>
 							</c:if>
                         </ul>
                     </div>

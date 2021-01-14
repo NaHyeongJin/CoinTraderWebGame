@@ -29,12 +29,12 @@
 										</div>
 									</div>
 									<c:if test="${!empty vo.answer }">
-									<div class="col-12">
-										<label for="answer" class="form-label">운영자 답변</label>
-										<div class="input-group">
-											<textarea class="form-control" rows="8" name="answer" id="answer" readOnly>${vo.answer }</textarea>
+										<div class="col-12">
+											<label for="answer" class="form-label">운영자 답변</label>
+											<div class="input-group">
+												<textarea class="form-control" rows="8" name="answer" id="answer" readOnly>${vo.answer }</textarea>
+											</div>
 										</div>
-									</div>
 									</c:if>
 								</thead>
 							</table>

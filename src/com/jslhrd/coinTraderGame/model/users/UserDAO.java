@@ -56,6 +56,7 @@ public class UserDAO {
 				vo.setMoney(rs.getInt("money"));
 				vo.setEmail1(rs.getString("email1"));
 				vo.setEmail2(rs.getString("email2"));
+				vo.setPw(rs.getString("pw"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -114,5 +115,213 @@ public class UserDAO {
 			}
 		}
 		return money;
+	}
+
+	public Boolean idIsAble(String id) {
+		String query = "SELECT ID FROM COIN_USER WHERE ID = ?";
+		Boolean isAble = true;
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if (rs.next())
+				isAble = false;
+			else
+				isAble = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+			}
+		}
+		return isAble;
+	}
+
+	public int signUp(UserVO vo) {
+		if (!isEmailAble(vo.getEmail1(), vo.getEmail2())) {
+			return 0;
+		}
+		String query = "insert into COIN_USER(ID,PW,EMAIL1,EMAIL2) values(?,?,?,?)";
+		int row = 0;
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, vo.getId());
+			pstmt.setString(2, vo.getPw());
+			pstmt.setString(3, vo.getEmail1());
+			pstmt.setString(4, vo.getEmail2());
+			row = pstmt.executeUpdate();
+			insertCoinMoney(vo.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+				pstmt.close();
+			} catch (Exception e) {
+			}
+		}
+		return row;
+	}
+
+	private void insertCoinMoney(String id) {
+		String query = "insert into COIN_MONEY(ID) values (?)";
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+				pstmt.close();
+			} catch (Exception e) {
+			}
+		}
+	}
+
+	public String emailCheck(String email1, String email2) {
+		String query = "SELECT ID FROM COIN_USER WHERE EMAIL1 = ? AND EMAIL2 = ?";
+		String id = null;
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, email1);
+			pstmt.setString(2, email2);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				id = rs.getString("id");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				conn.close();
+				pstmt.close();
+			} catch (Exception e) {
+			}
+		}
+		return id;
+	}
+
+	public Boolean loginCheck(String id) {
+		String query = "SELECT EMAILCHECK FROM COIN_USER WHERE ID = ?";
+		Boolean answer = false;
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			;
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				answer = (rs.getString("EMAILCHECK").equals("1")) ? true : false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				conn.close();
+				pstmt.close();
+			} catch (Exception e) {
+			}
+		}
+		return answer;
+	}
+
+	public void authSuccess(String id) {
+		String query = "UPDATE COIN_USER SET EMAILCHECK = '1' WHERE ID = ?";
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+				pstmt.close();
+			} catch (Exception e) {
+			}
+		}
+	}
+
+	public void setPwCheck(String id, int i) {
+		String query = "UPDATE COIN_USER SET PWCHECK = ? WHERE ID = ?";
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, i);
+			pstmt.setString(2, id);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+				pstmt.close();
+			} catch (Exception e) {
+			}
+		}
+	}
+
+	public Boolean pwCheck(String id) {
+		String query = "SELECT PWCHECK FROM COIN_USER WHERE ID = ?";
+		Boolean answer = false;
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			;
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				answer = (rs.getString("PWCHECK").equals("1")) ? true : false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				conn.close();
+				pstmt.close();
+			} catch (Exception e) {
+			}
+		}
+		return answer;
+	}
+
+	public Boolean isEmailAble(String email1, String email2) {
+		String query = "SELECT ID FROM COIN_USER WHERE EMAIL1 = ? AND EMAIL2 = ?";
+		Boolean isAble = true;
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, email1);
+			pstmt.setString(2, email2);
+			rs = pstmt.executeQuery();
+			if (rs.next())
+				isAble = false;
+			else
+				isAble = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+			}
+		}
+		return isAble;
 	}
 }
