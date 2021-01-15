@@ -123,7 +123,7 @@
       <div class="modal-body">
     
    <label for="floatingInputValue"><b>구입한 코인</b></label>
-   <input type="hidden" id = "prmoney" value="${prmoney}">
+   <input type="hidden" id = "prmoney" value=0>
   	<div id = "rrr2">
   	
 	</div>    

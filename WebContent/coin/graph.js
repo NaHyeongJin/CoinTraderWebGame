@@ -17,6 +17,7 @@ $(function () {
 	    		},60000);
 		}
 	  function getPriceInit() {
+		  
 		    $.ajax({
 		      url: "http://localhost:8089/CoinTraderWebGame/CurrentPrice",
 		      method: "GET",
@@ -50,7 +51,7 @@ $(function () {
 		    		Carray = Carray.concat(data.coin3.splice(0, dif));
 		    		Darray = Darray.concat(data.coin4.splice(0, dif));		
 		    		
-		    		console.log(Aarray);
+		    		
 		   	}
 		})
 	}

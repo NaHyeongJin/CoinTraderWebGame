@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ include file="/include/header.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -14,14 +14,17 @@
 <script>
 //정규화 구분(제이쿼리에서 value에서는 val)
 var pw = /^[A-Za-z0-9~!@#$%^&*()_+|<>?:{}]{4,20}$/;
+var pwCheck = false;
 $(function(){
 	$("#pw1").blur(function(){
 		if(pw.test($("#pw1").val())){
 			$("#pw1_check").text("*사용가능한 비밀번호입니다");
 			$("#pw1_check").css("color","green");
+			pwCheck = true;
 		}else{
 			$("#pw1_check").text('*숫자,영문,특수문자로 4~20자리 입력');
 			$("#pw1_check").css('color', 'red');
+			pwCheck = false;
 		}
 		if($('#pw1').val()!=$('#pw2').val()){
 			$('#pw2_check').text('비밀번호를 확인해주세요');
@@ -127,11 +130,17 @@ function modify(){
 		coin.pw2.focus();
 		return false;
 	}
+	if (!pwCheck) {
+		alert("비밀번호를 확인해 주세요")
+		coin.pw1.focus();
+		return false;	
+	}
 	coin.submit();
 }
 </script>
 </head>
 <body>
+
 	<h4 class="mb-3">개인정보 수정</h4>
 	<form method="post" class="needs-validation" novalidate name="coin" action="user?cmd=user_edit_pro">
 		<div class="row g-3">
@@ -172,8 +181,6 @@ function modify(){
 			<div class="coin" id="pw2_check"></div>
 			
 			</div>
-
-
 			<div class="col-sm-6">
 				<label for="email1" class="form-label">이메일</label>
 				<div class="input-group">
@@ -192,10 +199,10 @@ function modify(){
 			</div>
 			
 			<div class="col-12 mt-5">
-				<button class="btn btn-outline-primary" onclick="return modify()" type="submit">완료</button>
+				<button class="btn btn-outline-primary" onclick="return modify()">완료</button>
 				<a href="index"><button class="btn btn-outline-secondary" type="button">뒤로</button></a>
 			</div>
-			</div>
+		</div>
 	</form>
 
 	

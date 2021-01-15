@@ -21,17 +21,17 @@ public class CoinSell implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		Logger log = Logger.global;
-		Integer timer = Integer.parseInt(request.getParameter("timer"));
+		
+		int timer = Integer.parseInt(request.getParameter("timer"));
 		
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 		int cnt = Integer.parseInt(request.getParameter("cnt"));
 		
 		if (id != null) {
-			Integer amount = Integer.parseInt(request.getParameter("amount"));
-			Integer sellprice = Integer.parseInt(request.getParameter("sellprice"));
-			log.info("판매가격:"+sellprice.toString());
+			int amount = Integer.parseInt(request.getParameter("amount"));
+			int sellprice = Integer.parseInt(request.getParameter("sellprice"));
+			
 			new Timer().schedule(new CoinSellAction(id, cnt, amount, sellprice), timer * 1000);
 			
 		}
