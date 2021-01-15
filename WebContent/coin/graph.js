@@ -62,32 +62,78 @@ $(function () {
 	        clearInterval(timerId);
 	    }
 	});
-
-	
 	
 function coin(){
-	 $('#sellbutton').click(function(){
+	$('#sellbutton').click(function(){
 		  let y=$('#selltime').val();
-		  $('#Asellpriceinput').val(Aarray[cnt+y]);
-		  $('#Bsellpriceinput').val(Barray[cnt+y]);
-		  $('#Csellpriceinput').val(Carray[cnt+y]);
-		  $('#Dsellpriceinput').val(Darray[cnt+y]);
+		  y = Number(y);
+		  cnt = Number(cnt);
+		  var aput = Aarray[cnt+y];
+		  var bput = Barray[cnt+y];
+		  var cput = Carray[cnt+y];
+		  var dput = Darray[cnt+y];
+		
+		  $('#Asellpriceinput').val(aput);
+		  $('#Bsellpriceinput').val(bput);
+		  $('#Csellpriceinput').val(cput);
+		  $('#Dsellpriceinput').val(dput);
 	  });
 	var it = setInterval(function(){
-			  var aput = Aarray[cnt];
-			  var bput = Barray[cnt];
-			  var cput = Carray[cnt];
-			  var dput = Darray[cnt];
-			  
-			  $("#asd").text("현재가격:"+aput);
-			  $("#bsd").text("현재가격:"+bput);
-			  $("#csd").text("현재가격:"+cput);
-			  $("#dsd").text("현재가격:"+dput);
-			  
-			  $('#Asellpriceinput').val(aput);
-			  $('#Bsellpriceinput').val(bput);
-			  $('#Csellpriceinput').val(cput);
-			  $('#Dsellpriceinput').val(dput);	
+			var aput = Aarray[cnt];
+			var bput = Barray[cnt];
+			var cput = Carray[cnt];
+			var dput = Darray[cnt];
+			if(aput>Aarray[cnt-1]){
+				$("#asd").css("color","blue");
+				$("#asd").text(aput+"▲");
+			}else if(aput==Aarray[cnt-1]){
+				$("#asd").css("color","black");
+				$("#asd").text(aput+"=");
+			}else if(aput<Aarray[cnt-1]){
+				$("#asd").css("color","red");
+				$("#asd").text(aput+"▼");
+			}else{
+				$("#asd").text(aput);
+			}
+			
+			if(bput>Barray[cnt-1]){
+				$("#bsd").css("color","blue");
+				$("#bsd").text(bput+"▲");
+			}else if(bput==Barray[cnt-1]){
+				$("#bsd").css("color","black");
+				$("#bsd").text(bput+"=");
+			}else if(bput<Barray[cnt-1]){
+				$("#bsd").css("color","red");
+				$("#bsd").text(bput+"▼");
+			}else{
+				$("#bsd").text(bput);
+			}
+			
+			if(cput>Carray[cnt-1]){
+				$("#csd").css("color","blue");
+				$("#csd").text(cput+"▲");
+			}else if(cput==Carray[cnt-1]){
+				$("#csd").css("color","black");
+				$("#csd").text(cput+"=");
+			}else if(cput<Carray[cnt-1]){
+				$("#csd").css("color","red");
+				$("#csd").text(cput+"▼");
+			}else{
+				$("#csd").text(cput);
+			}
+			
+			if(dput>Darray[cnt-1]){
+				$("#dsd").css("color","blue");
+				$("#dsd").text(dput+"▲");
+			}else if(dput==Darray[cnt-1]){
+				$("#dsd").css("color","black");
+				$("#dsd").text(dput+"=");
+			}else if(dput<Darray[cnt-1]){
+				$("#dsd").css("color","red");
+				$("#dsd").text(dput+"▼");
+			}else{
+				$("#dsd").text(dput);
+			}	
 		}, 1000);
 	
 	  $('#modalbutton').click(function(){

@@ -172,6 +172,14 @@
     </div>
   </div>
 </form>
+<div>
+<pre><b>A COIN         B COIN         C COIN         D COIN</b></pre>
+<pre><span id="asd"></span>         <span id="bsd">          </span>          <span id="csd"></span>         <span id="dsd"></span></pre>
+</div>
+
+
+
+
 <div id="myCarousel" class="carousel slide carousel-fade" data-ride='carousel' data-interval='3000' data-pause="hover">
     <ol class="carousel-indicators" >
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -188,9 +196,7 @@
 		<img alt="" src="coin/img/question-square.svg">
   		</a>
   		<div id="Acontainer"></div>
-  		<br><div class="alert alert-light" role="alert">
-  		<div id="asd">현재가격:0</div>
-		</div></figure>
+  		</figure>
 		 </div>
         </div>
       </div>
@@ -203,9 +209,7 @@
 		<img alt="" src="coin/img/question-square.svg">
   		</a>
   		<div id="Bcontainer"></div>
-  		<br><div class="alert alert-light" role="alert">
-		<div id="bsd">현재가격:0</div>
-		</div></figure>
+  		</figure>
 		 </div>
         </div>
       </div>
@@ -218,9 +222,7 @@
 		<img alt="" src="coin/img/question-square.svg">
   		</a>
   		<div id="Ccontainer"></div>
-  		<br><div class="alert alert-light" role="alert">
-		<div id="csd">현재가격:0</div>
-		</div></figure>
+  		</figure>
 		 </div>
         </div>
       </div>
@@ -233,9 +235,7 @@
 			<img alt="" src="coin/img/question-square.svg">
   			</a>
   			<div id="Dcontainer"></div>
-  			<br><div class="alert alert-light" role="alert">
-		<div id="dsd">현재가격:0</div>
-		</div></figure>
+  			</figure>
           </div>
         </div>
       </div>
