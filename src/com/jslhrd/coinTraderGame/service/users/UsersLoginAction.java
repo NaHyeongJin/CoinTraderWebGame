@@ -17,25 +17,17 @@ public class UsersLoginAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
-
-		int gocoin = Integer.parseInt(request.getParameter("gocoin"));
-		int row = UserDAO.getInstance().userLogin(id, request.getParameter("pw"));
-		request.setAttribute("row", row);
-		RequestDispatcher rd = request.getRequestDispatcher("users/user_login_pro.jsp");
-
-		row = UserDAO.getInstance().userLogin(id, new PasswordEncoder().encode(request.getParameter("pw")));
+		int gocoin = Integer.parseInt(request.getParameter("gocoin"));//비로그인때 헤더코인 클릭시 sign in모달 띄우기위한 것
+		int row = UserDAO.getInstance().userLogin(id, new PasswordEncoder().encode(request.getParameter("pw")));
 		request.setAttribute("row", row);
 		request.setAttribute("loginCheck", UserDAO.getInstance().loginCheck(id));
 		request.setAttribute("pwCheck", UserDAO.getInstance().pwCheck(id));
-
 		if (row == 1) {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("id", id);
 			session.setMaxInactiveInterval(3600);
-			if(gocoin==1) {
-				rd=request.getRequestDispatcher("coin?cmd=coin_list");
-			}
 		}
+		RequestDispatcher rd = request.getRequestDispatcher((gocoin == 1) ? "coin?cmd=coin_list" : "users/user_login_pro.jsp");
 		rd.forward(request, response);
 	}
 }

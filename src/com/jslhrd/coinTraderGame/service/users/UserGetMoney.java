@@ -2,8 +2,6 @@ package com.jslhrd.coinTraderGame.service.users;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Logger;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,7 +28,7 @@ public class UserGetMoney extends HttpServlet {
 		
 		if (id != null) {
 			Gson gson = new GsonBuilder().create();
-			Integer money = UserDAO.getInstance().getUserMoney(id);
+			int money = UserDAO.getInstance().getUserMoney(id);
 			String json = gson.toJson(money);
 			response.setHeader("Content-Type", "application/json");
 	        PrintWriter pw = response.getWriter();
@@ -38,12 +36,8 @@ public class UserGetMoney extends HttpServlet {
 	        pw.flush();
 	        pw.close();
 	        
-		}
-		
-		
-		
+		}	
 	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

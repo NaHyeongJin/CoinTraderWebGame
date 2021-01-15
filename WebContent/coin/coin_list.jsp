@@ -11,7 +11,7 @@
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-<script src="coin/jquery.js"></script>
+<script src="coin/coin_support.js"></script>
 <link rel="stylesheet" href="resource/css/bootstrap.css">
 <link rel="stylesheet" href="resource/css/bootstrap.min.css">
 <link rel="stylesheet" href="coin/graph.css">
@@ -36,13 +36,9 @@
 
 }
 </style>
-<script>
-
-</script>
 </head>
 
 <body>
-<form action="" method="post" name="coin">
 <div class="modal fade" id="myModal" tabindex="-1" >
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -57,9 +53,8 @@
       
     
       <div class="modal-body">
-  <div id = "rrr">
-  	
-	</div> 
+      
+  <div id = "rrr"></div> <!-- 구입모달창 자산표시 -->
  <div class="input-group mb-3">
   <div class="btn-group">
     <button class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" href="#" >코인<span class="caret"></span></button>
@@ -171,7 +166,6 @@
       </div>
     </div>
   </div>
-</form>
 <div>
 <pre><b>A COIN         B COIN         C COIN         D COIN</b></pre>
 <pre><span id="asd"></span>         <span id="bsd">          </span>          <span id="csd"></span>         <span id="dsd"></span></pre>

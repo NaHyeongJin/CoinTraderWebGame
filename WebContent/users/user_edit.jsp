@@ -57,8 +57,6 @@ $(function(){
 			    dataType: "JSON",
 			    success: function(data) {
 			    	$('#MoneyModal').modal('show');
-			    	console.log(data);
-			    	
 			    	Highcharts.stockChart('container', {
 
 					    rangeSelector: {

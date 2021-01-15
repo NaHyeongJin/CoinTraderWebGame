@@ -124,7 +124,7 @@ public class UserDAO {
 	
 	public List getMoneyList(String id) {
 		List list = new ArrayList();
-		String query = "SELECT MONEY,regdate FROM COIN_MONEY WHERE ID = ?";
+		String query = "SELECT MONEY,regdate FROM COIN_MONEY WHERE ID = ? ORDER BY REGDATE";
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(query);

@@ -1,7 +1,6 @@
 package com.jslhrd.coinTraderGame.controller;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,46 +10,26 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jslhrd.coinTraderGame.service.Action;
 
-/**
- * Servlet implementation class CoinController
- */
 @WebServlet("/coin")
 public class CoinController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public CoinController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Logger log = Logger.global;
 		String cmd = request.getParameter("cmd");
-
 		CoinActionFactory cf = CoinActionFactory.getInstance();
-		
 		Action action = cf.getAction(cmd);
-		
-		if(action != null) {
+		if (action != null) {
 			action.execute(request, response);
 		}
-	
 	}
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	request.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("utf-8");
 		doGet(request, response);
 	}
 
-	
 }

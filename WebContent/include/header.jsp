@@ -8,10 +8,6 @@
 <meta name="viewport"
    content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<script type="text/javascript" src="resource/js/bootstrap.js"></script>
-<link rel="stylesheet" href="resource/css/bootstrap.css">
-
 <script type="text/javascript" src="resource/js/bootstrap.js"></script>
 <script type="text/javascript">
 var timerId = null;
@@ -73,13 +69,11 @@ function requestGetRanking() {
 	})
 }
 $(window).bind('hashchange', function() {
-   
+   	Stop();
 });
-$(function (){
-	$('#hrefgocoin').click(function(){
+$('#hrefgocoin').click(function(){
 		$('#gocoin').val(1);
-	});
-})
+});
 </script>
 <link rel="stylesheet" href="resource/css/bootstrap.css">
 
@@ -108,7 +102,7 @@ $(function (){
 	    	<c:if test="${empty id}">
 	    	
 	    	<a class="p-2 text-dark" href="" data-toggle="modal" data-target="#loginModalForm" id = hrefgocoin>Coin</a>
-	    	<input name = gocoin id = gocoin value="0" type="hidden">
+	    	<input name = 'gocoin' id = 'gocoin' value="0" type="hidden">
 	    	
 	    	</c:if>
 	    	

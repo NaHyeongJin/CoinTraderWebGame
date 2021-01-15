@@ -1,3 +1,4 @@
+
 package com.jslhrd.coinTraderGame.service.coin;
 
 import java.io.IOException;
@@ -18,8 +19,6 @@ public class CoinListAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/coin/coin_list.jsp");
 		String uri;
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
@@ -41,16 +40,7 @@ public class CoinListAction implements Action {
 			uri = "users/user_login_check.jsp";
 		}
 		
-		rd = request.getRequestDispatcher(uri);
-
+		RequestDispatcher rd = request.getRequestDispatcher(uri);
 		rd.forward(request, response);
-		
-		//response.sendRedirect("coin/coin_list.jsp");
-		
-
-	
-
-
 	}
-
 }

@@ -173,7 +173,7 @@ public class CoinDAO {
 			} catch (Exception e2) {
 			}
 		}
-	};
+	}
 	
 	public void coinSell(String id, int cnt, int amount, int price) {
 		moneyUpdate(id, amount * price);
@@ -202,6 +202,6 @@ public class CoinDAO {
 			} catch (Exception e2) {
 			}
 		}
-	};
+	}
 
 }
