@@ -19,23 +19,24 @@ import com.jslhrd.coinTraderGame.model.users.UserDAO;
 @WebServlet("/UsersCoinMoney")
 public class UsersCoinMoney extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public UsersCoinMoney() {
-        super();
-    }
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 	HttpSession session = request.getSession();
-			Gson gson = new GsonBuilder().create();
-			List list = new ArrayList();
-	        list = UserDAO.getInstance().getMoneyList((String)session.getAttribute("id"));
-	        String json = gson.toJson(list);
-	        response.setHeader("Content-Type", "application/json");
-	        PrintWriter pw = response.getWriter();
-	        pw.print(json);
-	        pw.flush();
-	        pw.close();
+
+	public UsersCoinMoney() {
+		super();
 	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Gson gson = new GsonBuilder().create();
+		String json = gson.toJson(UserDAO.getInstance().getMoneyList((String) session.getAttribute("id")));
+		response.setHeader("Content-Type", "application/json");
+		PrintWriter pw = response.getWriter();
+		pw.print(json);
+		pw.flush();
+		pw.close();
+	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		doGet(request, response);
 	}
 

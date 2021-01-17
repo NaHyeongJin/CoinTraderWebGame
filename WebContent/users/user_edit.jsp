@@ -57,16 +57,15 @@
 				success : function(data) {
 					$('#MoneyModal').modal('show');
 					Highcharts.stockChart('container', {
-
 						rangeSelector : {
 							buttons : [ {
-								count : 3,
+								count : 5,
 								type : 'day',
-								text : '3일'
+								text : '5일'
 							}, {
-								count : 7,
+								count : 10,
 								type : 'day',
-								text : '7일'
+								text : '10일'
 							}, {
 								count : 1,
 								type : 'month',
@@ -99,7 +98,13 @@
 						series : [ {
 							name : '내 자산',
 
-							data : data,
+							data: (function () {
+					            let list = [];
+					            for (let i = 0; i < data.length; i++) {
+					            	list.push([Date.parse(data[i].regdate), data[i].money]);
+					            }
+					            return list;
+					          })(),
 							tooltip : {
 								valueDecimals : 0
 							}
