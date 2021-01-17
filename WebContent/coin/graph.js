@@ -1,5 +1,10 @@
 $(function () {
-
+	var priceinput;
+	var coincnt;
+	var amount;
+	var sellprice;
+	var timer;
+	
 	var Aarray = [];
 	var Barray = [];
 	var Carray = [];
@@ -50,34 +55,80 @@ $(function () {
 		    		Barray = Barray.concat(data.coin2.splice(0, dif));
 		    		Carray = Carray.concat(data.coin3.splice(0, dif));
 		    		Darray = Darray.concat(data.coin4.splice(0, dif));		
-		    		
-		    		
 		   	}
 		})
 	}
-	
-	
-	
 	$(window).bind('hashchange', function() {
 		if(timerId != null) {
 	        clearInterval(timerId);
 	    }
 	});
+	function CoinBuy() {
+		var code = "http://localhost:8089/CoinTraderWebGame/coin?cmd=coin_buy&cnt="+coincnt+"&amount="+amount+"&price="+priceinput+"";
+		var url = encodeURI(code);
+		alert(url);
+		$.ajax({
+		    url: url,
+		    method: "GET",
+		    dataType: "JSON",
+		    success: function(data) {
+		   	}
+		})
+	}
+	function CoinSell() {
+		var code = "http://localhost:8089/CoinTraderWebGame/coin?cmd=coin_sell&cnt="+coincnt+"&amount="+amount+"&sellprice="+sellprice+"&timer="+timer+"";
+		var url = encodeURI(code);
+		$.ajax({
+		    url: url,
+		    method: "GET",
+		    dataType: "JSON",
+		    success: function(data) {
+		   	}
+		})
+	}
+	
 	
 function coin(){
 	$('#sellbutton').click(function(){
+		  let coinname = $('#coinname').val();
 		  let y=$('#selltime').val();
+		  timer = y;
+		  amount = $('#coincnt').val();
 		  y = Number(y);
 		  cnt = Number(cnt);
 		  var aput = Aarray[cnt+y];
 		  var bput = Barray[cnt+y];
 		  var cput = Carray[cnt+y];
 		  var dput = Darray[cnt+y];
-		
-		  $('#Asellpriceinput').val(aput);
-		  $('#Bsellpriceinput').val(bput);
-		  $('#Csellpriceinput').val(cput);
-		  $('#Dsellpriceinput').val(dput);
+	  		if(coinname.indexOf('A')!==-1){
+	  			coincnt=1;
+	  			sellprice = aput;
+	  		}else if(coinname.indexOf('B')!==-1){
+	  			coincnt=2;
+	  			sellprice = bput;
+	  		}else if(coinname.indexOf('C')!==-1){
+	  			coincnt=3;
+	  			sellprice = cput;
+	  		}else if(coinname.indexOf('D')!==-1){
+	  			coincnt=4;
+	  			sellprice = dput;
+	  		}
+	  		if(y==0){
+	  			$('.form-text').css('color','red');
+				return $('.form-text').text('판매할시간을 선택해주세요');
+			}
+			$('#myModal2').modal('hide');
+			priceinput=$("#priceinput").val();
+			CoinBuy();
+			CoinSell();
+			$('#rrr2').text('');
+			$('#coincnt').val('');
+			$('.form-text').text('');
+			$('#coinname').css('background-position','100px 6px');
+			$('#coinname').val('코인을 선택해주세요');
+			$('.dropdown-toggle').text('코인');
+			$('#floatingInputValue').val('');
+			$('#coincnt2').val('');
 	  });
 	var it = setInterval(function(){
 			var aput = Aarray[cnt];

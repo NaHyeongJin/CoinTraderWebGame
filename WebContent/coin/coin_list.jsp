@@ -69,10 +69,6 @@
   <input type="text" style=" text-align:center;" name="coinname"id='coinname' placeholder="코인을 선택해주세요" class="form-control" aria-label="Text input with dropdown button" readonly="readonly">
   <input type="hidden" value="0" name="priceinput" id="priceinput">
   <input type="hidden" value="0" name="sellpriceinput" id="sellpriceinput">
-  <input type="hidden" value="0" id="Asellpriceinput">
-  <input type="hidden" value="0" id="Bsellpriceinput">
-  <input type="hidden" value="0" id="Csellpriceinput">
-  <input type="hidden" value="0" id="Dsellpriceinput">
   <input type="hidden" value="0" id="Apriceinput">
   <input type="hidden" value="0" id="Bpriceinput">
   <input type="hidden" value="0" id="Cpriceinput">
