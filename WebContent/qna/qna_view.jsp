@@ -14,30 +14,30 @@
 			<div class="card">
 				<div class="card-body">
 					<div class="table-responsive project-list">
-							<table class="table project-table table-centered table-nowrap">
-								<thead>
+						<table class="table project-table table-centered table-nowrap">
+							<thead>
+								<div class="col-12">
+									<label for="subject" class="form-label">제목</label>
+									<div class="input-group">
+										<input type="text" class="form-control" name="subject" id="subject" value="${vo.subject }" readOnly>
+									</div>
+								</div>
+								<div class="col-12">
+									<label for="contents" class="form-label">내용</label>
+									<div class="input-group">
+										<textarea class="form-control" rows="8" name="contents" id="contents" readOnly>${vo.contents }</textarea>
+									</div>
+								</div>
+								<c:if test="${!empty vo.answer }">
 									<div class="col-12">
-										<label for="subject" class="form-label">제목</label>
+										<label for="answer" class="form-label">운영자 답변</label>
 										<div class="input-group">
-											<input type="text" class="form-control" name="subject" id="subject" value="${vo.subject }" readOnly>
+											<textarea class="form-control" rows="8" name="answer" id="answer" readOnly>${vo.answer }</textarea>
 										</div>
 									</div>
-									<div class="col-12">
-										<label for="contents" class="form-label">내용</label>
-										<div class="input-group">
-											<textarea class="form-control" rows="8" name="contents" id="contents" readOnly>${vo.contents }</textarea>
-										</div>
-									</div>
-									<c:if test="${!empty vo.answer }">
-										<div class="col-12">
-											<label for="answer" class="form-label">운영자 답변</label>
-											<div class="input-group">
-												<textarea class="form-control" rows="8" name="answer" id="answer" readOnly>${vo.answer }</textarea>
-											</div>
-										</div>
-									</c:if>
-								</thead>
-							</table>
+								</c:if>
+							</thead>
+						</table>
 					</div>
 				</div>
 			</div>
@@ -78,8 +78,8 @@
 				                            <tbody>
 				                                <tr>
 				                                	<td>
-				                                    <button type="button" class="btn btn-outline-primary" onClick="location.href='qna?cmd=qna_delete_pro&id=${id}&regdate=${vo.regdate }'">삭제하기</button>
-													<button type="button" class="btn btn-outline-primary" data-dismiss="modal">취소하기</button>
+					                                    <button type="button" class="btn btn-outline-primary" onClick="location.href='qna?cmd=qna_delete_pro&id=${id}&regdate=${vo.regdate }'">삭제하기</button>
+														<button type="button" class="btn btn-outline-primary" data-dismiss="modal">취소하기</button>
 													</td>
 				                                </tr>
 				                            </tbody>

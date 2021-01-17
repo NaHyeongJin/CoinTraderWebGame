@@ -14,14 +14,15 @@ import com.jslhrd.coinTraderGame.model.coin.CoinVO;
 
 @WebServlet("/CurrentPrice")
 public class CurrentPrice extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+    private static final long serialVersionUID = 1L;
+
     public CurrentPrice() {
         super();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CoinGenerator manager = CoinGenerator.getInstance();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        CoinGenerator manager = CoinGenerator.getInstance();
         manager.run();
         Gson gson = new GsonBuilder().create();
         CoinVO vo = new CoinVO();
@@ -37,11 +38,11 @@ public class CurrentPrice extends HttpServlet {
         pw.print(json);
         pw.flush();
         pw.close();
-  
-	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doGet(request, response);
+    }
 }

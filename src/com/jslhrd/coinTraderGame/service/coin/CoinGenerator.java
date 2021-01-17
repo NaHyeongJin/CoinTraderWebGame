@@ -31,40 +31,40 @@ public class CoinGenerator {
 	private CoinGenerator() {
 		upPer[0] = 40;
 		upPer[1] = 40;
-		upPer[2] = 80;
+		upPer[2] = 95;
 		upPer[3] = 10;
 
 		keepPer[0] = 20;
 		keepPer[1] = 20;
-		keepPer[2] = 10;
+		keepPer[2] = 2;
 		keepPer[3] = 10;
 
 		downPer[0] = 40;
 		downPer[1] = 40;
-		downPer[2] = 10;
+		downPer[2] = 3;
 		downPer[3] = 80;
-		
+
 		maxUp[0] = LOW_VALUE;
 		maxUp[1] = HIGH_VALUE;
 		maxUp[2] = LOW_VALUE;
 		maxUp[3] = HIGH_VALUE;
-		
+
 		minUp[0] = maxUp[0] / 5;
 		minUp[1] = maxUp[1] / 5;
 		minUp[2] = maxUp[2] / 5;
 		minUp[3] = maxUp[3] / 5;
-		
+
 		maxDown[0] = LOW_VALUE;
 		maxDown[1] = HIGH_VALUE;
-		maxDown[2] = HIGH_VALUE;
+		maxDown[2] = HIGH_VALUE * 3;
 		maxDown[3] = LOW_VALUE;
-		
+
 		minDown[0] = maxDown[0] / 5;
 		minDown[1] = maxDown[1] / 5;
-		minDown[2] = maxDown[2] / 5;
+		minDown[2] = maxDown[2] / 3 * 2;
 		minDown[3] = maxDown[3] / 5;
 	}
-	
+
 	public void run() {
 		CoinDAO manager = CoinDAO.getInstance();
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -88,8 +88,8 @@ public class CoinGenerator {
 		return instance;
 	}
 
-	static private int[] CoinPriceGenerator(Date lastUpdateDate, int[] prices, int maxUp, int minUp, int maxDown, int minDown,
-			int upPer, int keepPer, int downPer) {
+	static private int[] CoinPriceGenerator(Date lastUpdateDate, int[] prices, int maxUp, int minUp, int maxDown,
+			int minDown, int upPer, int keepPer, int downPer) {
 		int cnt = 0;
 		long dif = (new Date().getTime() - lastUpdateDate.getTime()) / 1000; // 현재시간 - 마지막 업데이트 시간
 		dif = (dif > 69) ? 69 : dif;
@@ -101,10 +101,10 @@ public class CoinGenerator {
 			cnt++;
 		}
 		for (int i = cnt; i < prices.length; i++) {
+			prices[i] = (prices[i] < 2000) ? prices[i] + 500 : prices[i]; // 2000원 미만이면 +500원으로 설정
 			int rand = (int) Math.round(Math.random() * 100); // 0~100 사이 랜덤 수 설정
 			if (rand < downPer) {
 				prices[i] = prices[i - 1] - (int) Math.round(Math.random() * (maxDown - minDown)) - minDown;
-				prices[i] = (prices[i] < 0) ? 0 : prices[i]; // 0원 미만이면 0원으로 설정
 			} // 감소
 			else if (rand < downPer + keepPer) {
 				prices[i] = prices[i - 1];

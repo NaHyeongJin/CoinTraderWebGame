@@ -20,13 +20,13 @@ public class QnaModifyProAction implements Action {
 		QnaDAO dao = QnaDAO.getInstance();
 		QnaVO vo = new QnaVO();
 		HttpSession session = request.getSession();
-		String id = (String)session.getAttribute("id");
+		String id = (String) session.getAttribute("id");
 		vo.setId(id);
 		vo.setSubject(request.getParameter("subject"));
 		vo.setContents(request.getParameter("contents"));
 		vo.setRegdate(request.getParameter("regdate"));
 		int row = dao.QnaModify(vo);
-		
+
 		request.setAttribute("row", row);
 		RequestDispatcher rd = request.getRequestDispatcher("qna/qna_modify_pro.jsp");
 		rd.forward(request, response);
