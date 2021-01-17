@@ -166,7 +166,7 @@
 </head>
 <body>
 	<h4 class="mb-3">회원가입</h4>
-	(회원가입을 완료하시면 자본금 1만원을 드립니다.)
+	(회원가입을 완료하시면 자본금 5만원을 드립니다.)
 	<br>
 	<br>
 	<form name="frm" method="post" action="user?cmd=sign_up_pro">

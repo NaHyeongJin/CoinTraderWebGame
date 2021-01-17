@@ -51,12 +51,6 @@ $(function () {
     });
   }
 
-  $(window).bind("hashchange", function () {
-    if (timerId != null) {
-      clearInterval(timerId);
-    }
-  });
-
   function coin() {
     $("#sellbutton").click(function () {
       let y = $("#selltime").val();

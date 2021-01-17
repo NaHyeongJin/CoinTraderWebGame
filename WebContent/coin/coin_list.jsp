@@ -144,7 +144,7 @@
 					</div>
 
 					<div class="modal-footer">
-						<button id=sellbutton type="button" class="btn btn-primary">
+						<button id="sellbutton" type="button" class="btn btn-primary">
 							바로팔기<img alt="" src="coin/img/cart-check.svg" width="20" height="25">
 						</button>
 					</div>
@@ -165,8 +165,7 @@
 				<div class="container">
 					<div class="carousel-caption">
 						<figure class="highcharts-figure">
-							<a id="aCoin" data-toggle="popover"> <img alt="" src="coin/img/question-square.svg">
-							</a>
+							<a id="aCoin" data-toggle="popover"> <img alt="" src="coin/img/question-square.svg"></a>
 							<div id="Acontainer"></div>
 						</figure>
 					</div>
@@ -177,8 +176,7 @@
 				<div class="container">
 					<div class="carousel-caption">
 						<figure class="highcharts-figure">
-							<a id="bCoin" data-toggle="popover"> <img alt="" src="coin/img/question-square.svg">
-							</a>
+							<a id="bCoin" data-toggle="popover"> <img alt="" src="coin/img/question-square.svg"></a>
 							<div id="Bcontainer"></div>
 						</figure>
 					</div>
@@ -189,8 +187,7 @@
 				<div class="container">
 					<div class="carousel-caption">
 						<figure class="highcharts-figure">
-							<a id="cCoin" data-toggle="popover"> <img alt="" src="coin/img/question-square.svg">
-							</a>
+							<a id="cCoin" data-toggle="popover"> <img alt="" src="coin/img/question-square.svg"></a>
 							<div id="Ccontainer"></div>
 						</figure>
 					</div>
@@ -201,8 +198,7 @@
 				<div class="container">
 					<div class="carousel-caption text-end">
 						<figure class="highcharts-figure">
-							<a id="dCoin" data-toggle="popover"> <img alt="" src="coin/img/question-square.svg">
-							</a>
+							<a id="dCoin" data-toggle="popover"> <img alt="" src="coin/img/question-square.svg"></a>
 							<div id="Dcontainer"></div>
 						</figure>
 					</div>
@@ -210,9 +206,8 @@
 			</div>
 		</div>
 
-		<a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden"></span>
-		</a> <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden"></span>
-		</a>
+		<a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden"></span></a>
+		<a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden"></span></a>
 	</div>
   <div style="display: inline-flex;">
     <div>
