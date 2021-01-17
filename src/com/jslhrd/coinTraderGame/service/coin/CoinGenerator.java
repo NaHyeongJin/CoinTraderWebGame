@@ -101,7 +101,6 @@ public class CoinGenerator {
 			cnt++;
 		}
 		for (int i = cnt; i < prices.length; i++) {
-			prices[i] = (prices[i] < 2000) ? prices[i] + 500 : prices[i]; // 2000원 미만이면 +500원으로 설정
 			int rand = (int) Math.round(Math.random() * 100); // 0~100 사이 랜덤 수 설정
 			if (rand < downPer) {
 				prices[i] = prices[i - 1] - (int) Math.round(Math.random() * (maxDown - minDown)) - minDown;
@@ -112,6 +111,7 @@ public class CoinGenerator {
 			else {
 				prices[i] = prices[i - 1] + (int) Math.round(Math.random() * (maxUp - minUp)) + minUp;
 			} // 상승
+			prices[i] = (prices[i] < 2000) ? prices[i] + 500 : prices[i]; // 2000원 미만이면 +500원으로 설정
 		} // 확률에 따라 prices 가격 바꿔서 배열에 저장
 		return prices;
 	}
