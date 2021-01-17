@@ -31,9 +31,9 @@ public class EmailModel {
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
 			message.setSubject(title);
 			message.setText(authKey);
-		
+
 			Transport.send(message);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

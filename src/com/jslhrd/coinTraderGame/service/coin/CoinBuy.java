@@ -11,7 +11,7 @@ import com.jslhrd.coinTraderGame.service.Action;
 public class CoinBuy implements Action {
 
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
@@ -21,12 +21,9 @@ public class CoinBuy implements Action {
 			int amount = Integer.parseInt(request.getParameter("amount"));
 			int price = Integer.parseInt(request.getParameter("price"));
 			CoinDAO.getInstance().coinBuy(id, cnt, amount, price); // id가 cnt번째 코인을 price가격으로 amount만큼 삼
-			
-			
+
 		}
-		
-		
-		
+
 	}
 
 }

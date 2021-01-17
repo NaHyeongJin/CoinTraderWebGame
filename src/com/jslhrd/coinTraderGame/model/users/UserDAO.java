@@ -7,7 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 
 import com.jslhrd.coinTraderGame.util.DBUtil;
 
@@ -121,7 +120,7 @@ public class UserDAO {
 		}
 		return money;
 	}
-	
+
 	public List getMoneyList(String id) {
 		List list = new ArrayList();
 		String query = "SELECT MONEY,regdate FROM COIN_MONEY WHERE ID = ? ORDER BY REGDATE";
@@ -130,14 +129,14 @@ public class UserDAO {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				
+			while (rs.next()) {
+
 				Integer money = rs.getInt("money");
-				String regdate = rs.getString("regdate").substring(0,10);
-				SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-				Date date=sdf.parse(regdate);
-				long timestamp=date.getTime();
-				long[] test = new long[]{timestamp,money};
+				String regdate = rs.getString("regdate").substring(0, 10);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				Date date = sdf.parse(regdate);
+				long timestamp = date.getTime();
+				long[] test = new long[] { timestamp, money };
 				list.add(test);
 			}
 		} catch (Exception e) {
@@ -152,7 +151,6 @@ public class UserDAO {
 		}
 		return list;
 	}
-	
 
 	public Boolean idIsAble(String id) {
 		String query = "SELECT ID FROM COIN_USER WHERE ID = ?";
