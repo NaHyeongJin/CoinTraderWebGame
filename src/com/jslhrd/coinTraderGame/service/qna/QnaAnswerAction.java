@@ -17,10 +17,9 @@ public class QnaAnswerAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		QnaDAO dao = QnaDAO.getInstance();
-		
+
 		QnaVO vo = dao.QnaView(Integer.parseInt(request.getParameter("idx")));
-		vo.setContents(vo.getContents().replace("\n", "<br>"));
-		
+
 		request.setAttribute("vo", vo);
 		RequestDispatcher rd = request.getRequestDispatcher("qna/qna_answer.jsp");
 		rd.forward(request, response);

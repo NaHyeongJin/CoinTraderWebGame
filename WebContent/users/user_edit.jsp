@@ -8,50 +8,79 @@
 <script>
 //정규화 구분(제이쿼리에서 value에서는 val)
 var pw = /^[A-Za-z0-9~!@#$%^&*()_+|<>?:{}]{4,20}$/;
+var pwCheck = false;
 $(function(){
-   $("#pw1").blur(function(){
-      if(pw.test($("#pw1").val())){
-         $("#pw1_check").text("*사용가능한 비밀번호입니다");
-         $("#pw1_check").css("color","green");
-      }else{
-         $("#pw1_check").text('*숫자,영문,특수문자로 4~20자리 입력');
-         $("#pw1_check").css('color', 'red');
-      }
-      if($('#pw1').val()!=$('#pw2').val()){
-         $('#pw2_check').text('비밀번호를 확인해주세요');
-         $('#pw2_check').css('color', 'red');
-      }else{
-         $('#pw2_check').text('비밀번호가 확인되었습니다');
-         $('#pw2_check').css('color', 'green');
-      }
-   });
-   $('#pw2').blur(function(){
-      if($('#pw1').val()!=$(this).val()||$(this).val()==""){
-         $('#pw2_check').text('비밀번호를 확인해주세요');
-         $('#pw2_check').css('color', 'red');
-      }else{
-         $('#pw2_check').text('비밀번호가 확인되었습니다');
-         $('#pw2_check').css('color', 'green');
-      }
-   });
+	$("#pw1").blur(function(){
+		if(pw.test($("#pw1").val())){
+			$("#pw1_check").text("*사용가능한 비밀번호입니다");
+			$("#pw1_check").css("color","green");
+			pwCheck = true;
+		}else{
+			$("#pw1_check").text('*숫자,영문,특수문자로 4~20자리 입력');
+			$("#pw1_check").css('color', 'red');
+			pwCheck = false;
+		}
+		if($('#pw1').val()!=$('#pw2').val()){
+			$('#pw2_check').text('비밀번호를 확인해주세요');
+			$('#pw2_check').css('color', 'red');
+		}else{
+			$('#pw2_check').text('비밀번호가 확인되었습니다');
+			$('#pw2_check').css('color', 'green');
+		}
+	});
+	$('#pw2').blur(function(){
+		if($('#pw1').val()!=$(this).val()||$(this).val()==""){
+			$('#pw2_check').text('비밀번호를 확인해주세요');
+			$('#pw2_check').css('color', 'red');
+		}else{
+			$('#pw2_check').text('비밀번호가 확인되었습니다');
+			$('#pw2_check').css('color', 'green');
+		}
+	});
 })
 function modify(){
-   if (coin.pw1.value=="") {
-      alert("비밀번호를 입력해 주세요")
-      coin.pw1.focus();
-      return false;   
-   }
-   if (coin.pw2.value=="") {
-      alert("비밀번호를 확인해 주세요")
-      coin.pw2.focus();
-      return false;   
-   }
-   if(coin.pw1.value != coin.pw2.value ){
-      alert("비밀번호가 다릅니다")
-      coin.pw2.focus();
-      return false;
-   }
-   coin.submit();
+	if (coin.pw1.value=="") {
+		alert("비밀번호를 입력해 주세요")
+		coin.pw1.focus();
+		return false;	
+	}
+	if (coin.pw2.value=="") {
+		alert("비밀번호를 확인해 주세요")
+		coin.pw2.focus();
+		return false;	
+	}
+	if(coin.pw1.value != coin.pw2.value ){
+		alert("비밀번호가 다릅니다")
+		coin.pw2.focus();
+		return false;
+	}
+	if (!pwCheck) {
+		alert("비밀번호를 확인해 주세요")
+		coin.pw1.focus();
+		return false;	
+	}
+	coin.submit();
+}
+function Charge_1000(){
+	(charge.moneySelect1000.value == 1000) ? charge.money.value = charge.moneySelect1000.value : charge.money.value = "";
+}
+function Charge_2000(){
+	(charge.moneySelect2000.value == 2000) ? charge.money.value = charge.moneySelect2000.value : charge.money.value = "";
+}
+function Charge_5000(){
+	(charge.moneySelect5000.value == 5000) ? charge.money.value = charge.moneySelect5000.value : charge.money.value = "";
+}
+function Charge_10000(){
+	(charge.moneySelect10000.value == 10000) ? charge.money.value = charge.moneySelect10000.value : charge.money.value = "";
+}
+function Charge_50000(){
+	(charge.moneySelect50000.value == 50000) ? charge.money.value = charge.moneySelect50000.value : charge.money.value = "";
+}
+function clear(){
+	charge.reset();
+}
+function MoneyCheck(){
+	(charge.money.value == 0) ? alert("금액을 입력해주세요") : charge.submit(); 
 }
 </script>
 </head>
@@ -98,46 +127,96 @@ function modify(){
          </div>
 
 
-         <div class="col-sm-6">
-            <label for="email1" class="form-label">이메일</label>
-            <div class="input-group">
-               <input type="text" name="email1" class="form-control" id="email1"
-                  value="${vo.email1}" readonly>
-                  
-            </div>
-         </div>
-         
-         <div class="col-sm-6">
-            <label for="email2" class="form-label">도메인</label>
-            <div class="input-group">
-               <span class="input-group-text">@</span> 
-               <input type="text" name="email2" class="form-control" id="email2" value="${vo.email2}" readonly>
-            </div>
-         </div>
-         
-         <div class="col-12 mt-5">
-            <button class="btn btn-outline-primary" onclick="return modify()" type="submit">완료</button>
-            <a href="index"><button class="btn btn-outline-secondary" type="button">뒤로</button></a>
-         </div>
-         </div>
-   </form>
+			<div class="col-sm-6">
+				<label for="email1" class="form-label">이메일</label>
+				<div class="input-group">
+					<input type="text" name="email1" class="form-control" id="email1"
+						value="${vo.email1}" readonly>
+						
+				</div>
+			</div>
+			
+			<div class="col-sm-6">
+				<label for="email2" class="form-label">도메인</label>
+				<div class="input-group">
+					<span class="input-group-text">@</span> 
+					<input type="text" name="email2" class="form-control" id="email2" value="${vo.email2}" readonly>
+				</div>
+			</div>
+			
+		</div>
+	</form>
+			<div class="col-12 mt-5">
+				<button class="btn btn-outline-primary" onclick="return modify()">완료</button>
+				<a href="index"><button class="btn btn-outline-secondary" type="button">뒤로</button></a>
+				<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#WithdrawalForm">회원탈퇴</button>
+			</div>
+	<!-- WithdrawalForm -->
+		<div class="modal fade" id="WithdrawalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+		aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<!--Content-->
+				<div class="modal-content form-elegant">
+					<!--Header-->
+					<div class="modal-header text-center">
+					<h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel"><strong>Withdrawal</strong></h3>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<!--Body-->
+					<form method="post" action="user?cmd=user_withdrawal">
+						<div class="modal-body mx-4">
+							<!--Body-->
+							<div class="md-form pb-3">
+								<label>회원탈퇴를 위해 비밀번호를 입력해주세요</label>
+							</div>
+							<div class="md-form pb-3">
+								<input type="hidden" id="withdrawal_id" name="withdrawal_id" class="form-control" value="${vo.id}">
+								<input type="password" id="withdrawal_pw" name="withdrawal_pw" class="form-control validate" placeholder="비밀번호 입력" required><br>
+								<h6  style="color:red;">※회원 탈퇴 시 복구는 불가합니다</h6>
+							</div>
+			
+							<div class="text-center mb-3">
+								<button type="submit" class="btn btn-primary">탈퇴하기</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			<!--/.Content-->
+			</div>
+		</div>
+		<!-- ChargeModal -->
 <div class="modal fade" id="chargeModal" tabindex="-1" role="dialog" aria-labelledby="chargeModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="chargeModalLabel">충전 금액</h5>
+        <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel"><strong>Charge</strong></h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+     <form name="charge" method="post" action="user?cmd=user_chargemoney">
+	  <div class="md-form pb-3">
+		<label>충전할 금액을 선택해주세요</label>
+	  </div>
       <div class="modal-body">
-        <button type="submit" class="btn btn-primary">1,000</button>
-        <button type="submit" class="btn btn-primary">5,000</button>
-        <button type="submit" class="btn btn-primary">10,000</button>
+      	<button type="button" class="btn btn-primary" name="moneySelect1000" onClick="Charge_1000()" value="1000">1000</button>
+        <button type="button" class="btn btn-primary" name="moneySelect2000" onClick="Charge_2000()" value="2000">2000</button>
+        <button type="button" class="btn btn-primary" name="moneySelect5000" onClick="Charge_5000()" value="5000">5000</button><br><br>
+        <button type="button" class="btn btn-primary" name="moneySelect10000" onClick="Charge_10000()" value="10000">10000</button>
+        <button type="button" class="btn btn-primary" name="moneySelect50000" onClick="Charge_50000()" value="50000">50000</button>
+        <a href="javascript:clear()"><button type="button" class="btn btn-primary">reset</button></a>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <div class="modal-body mx-4">
+      	<div class="md-form pb-3">
+			<input type="hidden" id="charge_id" name="charge_id" class="form-control" value="${vo.id}">
+			<input type="text" id="money" name="money" class="form-control" value="0" readOnly><br>
+			<button type="button" class="btn btn-primary" onClick="MoneyCheck()">충전하기</button>
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">뒤로가기</button>
+	  	</div>
       </div>
+     </form>
     </div>
   </div>
 </div>

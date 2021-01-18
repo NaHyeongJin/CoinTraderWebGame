@@ -1,4 +1,4 @@
-package com.jslhrd.coinTraderGame.service.coin;
+package com.jslhrd.coinTraderGame.service.users;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -14,32 +14,25 @@ import com.jslhrd.coinTraderGame.model.users.UserVO;
 import com.jslhrd.coinTraderGame.service.Action;
 import com.jslhrd.coinTraderGame.util.EmailModel;
 
-public class CoinListAction implements Action {
+public class UsersLoginCheckAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String uri;
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
-		if (UserDAO.getInstance().loginCheck(id)) {
-			uri = "coin/coin_list.jsp";
-		} else {
-			UserVO vo = UserDAO.getInstance().getUser(id);
-			String email = vo.getEmail1() + "@" + vo.getEmail2();
-			UUID uuId = UUID.randomUUID();
-			String authKey = uuId.toString().substring(0, 8);
-			session.setAttribute("authKey", authKey);
-			
-			try {
-				new EmailModel().send("[CoinTraderWebGame]이메일 인증 번호입니다.", email, "인증번호 : " + authKey);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			uri = "users/user_login_check.jsp";
+		UserVO vo = UserDAO.getInstance().getUser(id);
+		String email = vo.getEmail1() + "@" + vo.getEmail2();
+		UUID uuId = UUID.randomUUID();
+		String authKey = uuId.toString().substring(0, 8);
+		session.setAttribute("authKey", authKey);
+		
+		try {
+			new EmailModel().send("[CoinTraderWebGame]이메일 인증 번호입니다.", email, "인증번호 : " + authKey);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher(uri);
+		RequestDispatcher rd = request.getRequestDispatcher("users/user_login_check.jsp");
 		rd.forward(request, response);
 	}
 }
