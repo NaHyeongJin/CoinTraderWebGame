@@ -6,23 +6,25 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.jslhrd.coinTraderGame.filter.PasswordEncoder;
 import com.jslhrd.coinTraderGame.model.users.UserDAO;
 import com.jslhrd.coinTraderGame.service.Action;
 
-public class UsersModifyProAction implements Action {
+public class UsersAuthKeyCheckAction implements Action {
+
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		String id = request.getParameter("user_id");
-		int row = UserDAO.getInstance().userModify(id, new PasswordEncoder().encode(request.getParameter("pw1")));
-		if (row == 1) {
-			UserDAO.getInstance().setPwCheck(id, 1);
-		}
+		HttpSession session = request.getSession();
+		int row = (request.getParameter("emailCheck").equals((String) session.getAttribute("authKey"))) ? 1 : 0;
 		request.setAttribute("row", row);
-
-		RequestDispatcher rd = request.getRequestDispatcher("users/user_edit_pro.jsp");
+		if (row == 1) {
+			UserDAO.getInstance().authSuccess((String) session.getAttribute("id"));
+			session.removeAttribute("authKey");
+		}
+		
+		RequestDispatcher rd = request.getRequestDispatcher("users/user_login_check_pro.jsp");
 		rd.forward(request, response);
 	}
+
 }

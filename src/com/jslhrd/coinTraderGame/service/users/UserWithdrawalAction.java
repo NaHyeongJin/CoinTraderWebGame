@@ -6,23 +6,29 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.jslhrd.coinTraderGame.filter.PasswordEncoder;
 import com.jslhrd.coinTraderGame.model.users.UserDAO;
 import com.jslhrd.coinTraderGame.service.Action;
 
-public class UsersModifyProAction implements Action {
+public class UserWithdrawalAction implements Action {
+
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		String id = request.getParameter("user_id");
-		int row = UserDAO.getInstance().userModify(id, new PasswordEncoder().encode(request.getParameter("pw1")));
-		if (row == 1) {
-			UserDAO.getInstance().setPwCheck(id, 1);
+		UserDAO dao = UserDAO.getInstance();
+		String id = request.getParameter("withdrawal_id");
+		String pw = new PasswordEncoder().encode(request.getParameter("withdrawal_pw"));
+		int row = dao.Withdrawal(id, pw);
+		
+		if(row==1) {
+		HttpSession session = request.getSession();
+		session.removeAttribute("withdrawal_id");
+		session.invalidate();
 		}
 		request.setAttribute("row", row);
-
-		RequestDispatcher rd = request.getRequestDispatcher("users/user_edit_pro.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("users/user_withdrawal.jsp");
 		rd.forward(request, response);
 	}
+
 }

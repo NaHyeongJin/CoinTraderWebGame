@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+ <%@ include file = "/include/header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,13 +9,11 @@
 <title>상세보기</title>
 </head>
 <body>
- <%@ include file = "/include/header.jsp" %>
 <div class="row">
 		<div class="col-lg-12">
 			<div class="card">
 				<div class="card-body">
 					<div class="table-responsive project-list">
-						<form name="qnam" action="qna?cmd=qna_modify_pro" method="post">
 							<table class="table project-table table-centered table-nowrap">
 								<thead>
 									<div class="col-12">
@@ -30,16 +29,15 @@
 										</div>
 									</div>
 									<c:if test="${!empty vo.answer }">
-									<div class="col-12">
-										<label for="answer" class="form-label">운영자 답변</label>
-										<div class="input-group">
-											<textarea class="form-control" rows="8" name="answer" id="answer" readOnly>${vo.answer }</textarea>
+										<div class="col-12">
+											<label for="answer" class="form-label">운영자 답변</label>
+											<div class="input-group">
+												<textarea class="form-control" rows="8" name="answer" id="answer" readOnly>${vo.answer }</textarea>
+											</div>
 										</div>
-									</div>
 									</c:if>
 								</thead>
 							</table>
-						</form>
 					</div>
 				</div>
 			</div>

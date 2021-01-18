@@ -9,20 +9,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jslhrd.coinTraderGame.filter.PasswordEncoder;
 import com.jslhrd.coinTraderGame.model.users.UserDAO;
+import com.jslhrd.coinTraderGame.model.users.UserVO;
 import com.jslhrd.coinTraderGame.service.Action;
 
-public class UsersModifyProAction implements Action {
+public class UsersSignUpProAction implements Action {
+
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		String id = request.getParameter("user_id");
-		int row = UserDAO.getInstance().userModify(id, new PasswordEncoder().encode(request.getParameter("pw1")));
-		if (row == 1) {
-			UserDAO.getInstance().setPwCheck(id, 1);
-		}
-		request.setAttribute("row", row);
-
-		RequestDispatcher rd = request.getRequestDispatcher("users/user_edit_pro.jsp");
+		UserVO vo = new UserVO();
+		vo.setId(request.getParameter("id"));
+		vo.setPw(new PasswordEncoder().encode(request.getParameter("pw")));
+		vo.setEmail1(request.getParameter("email"));
+		vo.setEmail2(request.getParameter("emailSelect"));
+		
+		request.setAttribute("row", UserDAO.getInstance().signUp(vo));
+		RequestDispatcher rd = request.getRequestDispatcher("users/user_sign_up_pro.jsp");
 		rd.forward(request, response);
 	}
 }
