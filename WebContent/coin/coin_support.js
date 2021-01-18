@@ -1,4 +1,5 @@
 $(function () {
+	let price;
 $('#aCoin').popover({ //팝오버
 		animation: true,
 		 placement : 'right',
@@ -45,8 +46,7 @@ $('#aCoin').popover({ //팝오버
       }
 	});
 	
-	$('#buyCoin').popover({
-		
+	$('#buyCoin').popover({		
 		animation: true,
 		placement : 'right',
 	     trigger : 'hover focus',
@@ -54,25 +54,16 @@ $('#aCoin').popover({ //팝오버
 	     content: function () {
 				return '코인 구매시 반드시 팔아야 합니다 결정후 구매버튼을 눌러주세요';
       }
-	});
-		
-	  	$('#modalbutton').on('click', function(){//구입버튼 모달
-		  $('#myModal').modal('show');
-		  var money = $("#prmoney").val();
-		  $('#rrr').text('내 자산 :'+money);
-		  
-	  	 });
+	});	  	
 	  	
-	  	function pricechk(price){
-		$('#modalbutton2').on('click', function(){//판매버튼 모달
-			$("#priceinput").val(priceinput);
+		$('#modalbutton2').on('click', function(){//판매모달버튼이벤트
+			$("#priceinput").val(price);
 			var totprice = $('#coinname').val();
 			var totcoincnt = $('#coincnt').val();
-			var money = $("#prmoney").val();
-			
+			var money = $("#prmoney").val();			
 			var reprice = price*totcoincnt;
 			var chk = money-reprice;
-			if(totprice==""){
+			if(totprice==""||totprice=="코인을 선택해주세요"){
 				return $('.form-text').text('코인을 선택해주세요');
 			}
 			if(totcoincnt==""){
@@ -81,6 +72,9 @@ $('#aCoin').popover({ //팝오버
 			if(money<reprice){
 				return $('.form-text').text('자산을 초과하였습니다.');
 			}
+			if($("#flexCheckDefault").val()==0){
+				return $('.form-text').text('구매확정체크를 확인해주세요.');
+			}
 			$('#rrr2').text('구입시 고객님의 남은 자산 :'+chk+"원");
 			$("#rrr2").css( "color", "red" );
 			$('#myModal').modal('hide');
@@ -88,29 +82,36 @@ $('#aCoin').popover({ //팝오버
 			$('.form-text').text('');
 			$('#floatingInputValue').val(totprice+'  코인개수:'+totcoincnt);
 			$('#coincnt2').val(totcoincnt);
-		
 			});
-	  	}
-
-		function cntkey(price){
+	    $("#flexCheckDefault").change(function(){
+		if($(this).is(":checked")){
+			$(this).val(1);
+			$('.form-text').text('');
+		}else{
+			$(this).val(0);
+		}
+	    });
 		$('#coincnt').on('keyup',function(e){//코인개수 구입시 경고문삭제
 			var money = $("#prmoney").val();
 			var totcoincnt = $('#coincnt').val();
-			
+			var cn = $('#coinname').val();
 			var totprice = price*totcoincnt;
 			var my = money-totprice;
-			
-			$('#rrr').text('내 자산 :'+my);
-			
+						
 			if(money<totprice){
+				$('#rrr').text('내 자산 : 0');
 				return $('.form-text').text('자산을 초과하였습니다.');
 			}
 			if(totcoincnt==""){
 				$('#rrr').text('내 자산 :'+money);
 			}
+			if(cn==""){
+				return $('.form-text').text('코인을 선택해주세요.');
+			}
+			$('#rrr').text('내 자산 :'+my);
 			$('.form-text').text('');
 		});
-		}
+	
 		$('#closemodalbutton1,#closemodalbutton2').on('click', function(){//구입모달 x/닫기버튼
 			$('#myModal').modal('hide');
 			$('#coinname').css('background-position','100px 6px');
@@ -133,8 +134,7 @@ $('#aCoin').popover({ //팝오버
 		var apr = $("#Apriceinput").val();
 		$('#coinname').css('background-position','125px 5px');
 		$('#coinname').val('A코인:'+$("#Apriceinput").val()+"원");
-		cntkey(apr);
-		pricechk(apr);
+		price = apr;
 	});
 	$('#3sc').click(function(){
 		$('#selltime').val(3);
@@ -147,8 +147,7 @@ $('#aCoin').popover({ //팝오버
 		var bpr = $("#Bpriceinput").val();
 		$('#coinname').css('background-position','125px 6px');
 		$('#coinname').val('B코인:'+$("#Bpriceinput").val()+"원");
-		cntkey(bpr);
-		pricechk(bpr);
+		price = bpr;
 	});
 	$('#5sc').click(function(){
 		$('#selltime').val(5);
@@ -161,8 +160,7 @@ $('#aCoin').popover({ //팝오버
 		var cpr = $("#Cpriceinput").val();
 		$('#coinname').css('background-position','125px 6px');
 		$('#coinname').val('C코인:'+$("#Cpriceinput").val()+'원');
-		cntkey(cpr);
-		pricechk(cpr);
+		price = cpr;
 	});
 	$('#7sc').click(function(){
 		$('#selltime').val(7);
@@ -175,8 +173,7 @@ $('#aCoin').popover({ //팝오버
 		var dpr = $("#Dpriceinput").val();
 		$('#coinname').css('background-position','125px 6px');
 		$('#coinname').val('D코인:'+$("#Dpriceinput").val()+"원");
-		cntkey(dpr);
-		pricechk(dpr);
+		price = dpr;
 	});
 	$('#10sc').click(function(){
 		$('#selltime').val(10);

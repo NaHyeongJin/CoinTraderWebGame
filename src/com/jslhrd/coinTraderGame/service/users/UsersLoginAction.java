@@ -27,7 +27,7 @@ public class UsersLoginAction implements Action {
 			session.setAttribute("id", id);
 			session.setMaxInactiveInterval(3600);
 		}
-		RequestDispatcher rd = request.getRequestDispatcher((gocoin == 1) ? "coin?cmd=coin_list" : "users/user_login_pro.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher((gocoin == 1) ? "/coin?cmd=coin_list" : "users/user_login_pro.jsp");
 		rd.forward(request, response);
 	}
 }

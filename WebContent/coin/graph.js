@@ -4,7 +4,6 @@ $(function () {
 	var amount;
 	var sellprice;
 	var timer;
-	
 	var Aarray = [];
 	var Barray = [];
 	var Carray = [];
@@ -66,7 +65,6 @@ $(function () {
 	function CoinBuy() {
 		var code = "http://localhost:8089/CoinTraderWebGame/coin?cmd=coin_buy&cnt="+coincnt+"&amount="+amount+"&price="+priceinput+"";
 		var url = encodeURI(code);
-		alert(url);
 		$.ajax({
 		    url: url,
 		    method: "GET",
@@ -92,8 +90,11 @@ function coin(){
 	$('#sellbutton').click(function(){
 		  let coinname = $('#coinname').val();
 		  let y=$('#selltime').val();
+		  let buyalert;
+		  let sellalert;
 		  timer = y;
 		  amount = $('#coincnt').val();
+		  priceinput=$("#priceinput").val();
 		  y = Number(y);
 		  cnt = Number(cnt);
 		  var aput = Aarray[cnt+y];
@@ -103,23 +104,31 @@ function coin(){
 	  		if(coinname.indexOf('A')!==-1){
 	  			coincnt=1;
 	  			sellprice = aput;
+	  			buyalert="A코인 "+amount+"개를 총 "+amount*priceinput+"원에 구매되었습니다.";
+	  			sellalert="A코인 "+amount+"개가 총 "+amount*sellprice+"원에 판매되었습니다.";
 	  		}else if(coinname.indexOf('B')!==-1){
 	  			coincnt=2;
 	  			sellprice = bput;
+	  			buyalert="B코인 "+amount+"개를 총 "+amount*priceinput+"원에 구매하셨습니다.";
+	  			sellalert="B코인 "+amount+"개가 총 "+amount*sellprice+"원에 판매되었습니다.";
 	  		}else if(coinname.indexOf('C')!==-1){
 	  			coincnt=3;
 	  			sellprice = cput;
+	  			buyalert="C코인 "+amount+"개를 총 "+amount*priceinput+"원에 구매하셨습니다.";
+	  			sellalert="C코인 "+amount+"개가 총 "+amount*sellprice+"원에 판매되었습니다.";
 	  		}else if(coinname.indexOf('D')!==-1){
 	  			coincnt=4;
 	  			sellprice = dput;
+	  			buyalert="D코인 "+amount+"개를 총 "+amount*priceinput+"원에 구매하셨습니다.";
+	  			sellalert="D코인 "+amount+"개가 총 "+amount*sellprice+"원에 판매되었습니다.";
 	  		}
 	  		if(y==0){
 	  			$('.form-text').css('color','red');
 				return $('.form-text').text('판매할시간을 선택해주세요');
 			}
 			$('#myModal2').modal('hide');
-			priceinput=$("#priceinput").val();
 			CoinBuy();
+			alert(buyalert);
 			CoinSell();
 			$('#rrr2').text('');
 			$('#coincnt').val('');
@@ -129,7 +138,10 @@ function coin(){
 			$('.dropdown-toggle').text('코인');
 			$('#floatingInputValue').val('');
 			$('#coincnt2').val('');
-	  });
+			setTimeout(function() {
+				  alert(sellalert);
+				}, y*1000);	
+			});
 	var it = setInterval(function(){
 			var aput = Aarray[cnt];
 			var bput = Barray[cnt];
@@ -188,7 +200,10 @@ function coin(){
 			}	
 		}, 1000);
 	
-	  $('#modalbutton').click(function(){
+	  $('#modalbutton').click(function(){//구입모달버튼이벤트
+		  $('#myModal').modal('show');
+		  var money = $("#prmoney").val();
+		  $('#rrr').text('내 자산 :'+money);
 		  $('#Apriceinput').val(Aarray[cnt]);
 		  $('#Bpriceinput').val(Barray[cnt]);
 		  $('#Cpriceinput').val(Carray[cnt]);

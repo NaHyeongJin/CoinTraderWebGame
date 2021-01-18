@@ -82,6 +82,12 @@
   <div class="col-auto" align="center">
     <input style="text-align: center;" type="number" id="coincnt" name="coincnt"class="form-control" aria-describedby="passwordHelpInline">
   </div>
+  <div class="form-check">
+  <input class="form-check-input" type="checkbox" value="0" id="flexCheckDefault">
+  <label class="form-check-label" for="flexCheckDefault">
+    구매 확정
+  </label>
+</div>
 </div>
  <div class="col-auto" style="padding-bottom: 15px;" align="center">
     <span id="passwordHelpInline" class="form-text" style="color: red;">
