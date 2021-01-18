@@ -23,10 +23,12 @@
 			<div class="col-12">
 				<br> <label for="pw2" class="form-label">이메일</label>
 				<div class="input-group">
-					<input type="text" class="form-control" id="email" name="email" placeholder="회원가입시 입력한 이메일을 입력해주세요"> <span style="margin-left: 5px; margin-right: 5px;">@</span> <select class="form-control" id="emailSelect" name="emailSelect">
-						<option value="naver.com">naver.com</option>
-						<option value="gmail.com">google.com</option>
-						<option value="hanmail.com">hanmail.com</option>
+					<input type="text" class="form-control col-5" onkeyup="inputCheckSpecial()" id="email" name="email" placeholder="이메일을 입력해주세요" required> <span style="margin-left: 5px; margin-right: 5px;">@</span> <input type="text" class="form-control col-5" id="emailSelect" name="emailSelect"> <select class="form-control col-2 ml-2" id="emailSelect2" name="emailSelect2" onchange="emailCheck();inputCheckSpecial();">
+						<option value="">직접입력</option>
+						<option value="naver.com">네이버</option>
+						<option value="nate.com">네이트</option>
+						<option value="hanmail.net">한메일</option>
+						<option value="gmail.com">Gmail</option>
 					</select>
 				</div>
 			</div>
