@@ -194,7 +194,6 @@ function MoneyCheck(){
       </div>
       <div class="modal-body mx-4">
       	<div class="md-form pb-3">
-			<input type="hidden" id="charge_id" name="charge_id" class="form-control" value="${vo.id}">
 			<input type="text" id="charge_money" name="charge_money" class="form-control" value="0" readOnly><br>
 			<button type="button" class="btn btn-primary" onClick="MoneyCheck()">충전하기</button>
 			<button type="button" class="btn btn-secondary" data-dismiss="modal">뒤로가기</button>
