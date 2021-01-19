@@ -16,15 +16,13 @@ public class UserWithdrawalAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UserDAO dao = UserDAO.getInstance();
-		String id = request.getParameter("withdrawal_id");
-		String pw = new PasswordEncoder().encode(request.getParameter("withdrawal_pw"));
-		int row = dao.Withdrawal(id, pw);
-		
-		if(row==1) {
 		HttpSession session = request.getSession();
-		session.removeAttribute("withdrawal_id");
-		session.invalidate();
+		int row = UserDAO.getInstance().Withdrawal((String) session.getAttribute("id"),
+				new PasswordEncoder().encode(request.getParameter("withdrawal_pw")));
+
+		if (row == 1) {
+			session.removeAttribute("id");
+			session.invalidate();
 		}
 		request.setAttribute("row", row);
 		RequestDispatcher rd = request.getRequestDispatcher("users/user_withdrawal.jsp");

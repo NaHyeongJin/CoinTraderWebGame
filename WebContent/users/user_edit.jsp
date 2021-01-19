@@ -61,26 +61,14 @@ function modify(){
 	}
 	coin.submit();
 }
-function Charge_1000(){
-	(charge.moneySelect1000.value == 1000) ? charge.money.value = charge.moneySelect1000.value : charge.money.value = "";
-}
-function Charge_2000(){
-	(charge.moneySelect2000.value == 2000) ? charge.money.value = charge.moneySelect2000.value : charge.money.value = "";
-}
-function Charge_5000(){
-	(charge.moneySelect5000.value == 5000) ? charge.money.value = charge.moneySelect5000.value : charge.money.value = "";
-}
-function Charge_10000(){
-	(charge.moneySelect10000.value == 10000) ? charge.money.value = charge.moneySelect10000.value : charge.money.value = "";
-}
-function Charge_50000(){
-	(charge.moneySelect50000.value == 50000) ? charge.money.value = charge.moneySelect50000.value : charge.money.value = "";
+function Charge(money) {
+	charge.charge_money.value = money;
 }
 function clear(){
 	charge.reset();
 }
 function MoneyCheck(){
-	(charge.money.value == 0) ? alert("금액을 입력해주세요") : charge.submit(); 
+	(charge.charge_money.value == 0) ? alert("금액을 입력해주세요") : charge.submit(); 
 }
 </script>
 </head>
@@ -172,7 +160,6 @@ function MoneyCheck(){
 								<label>회원탈퇴를 위해 비밀번호를 입력해주세요</label>
 							</div>
 							<div class="md-form pb-3">
-								<input type="hidden" id="withdrawal_id" name="withdrawal_id" class="form-control" value="${vo.id}">
 								<input type="password" id="withdrawal_pw" name="withdrawal_pw" class="form-control validate" placeholder="비밀번호 입력" required><br>
 								<h6  style="color:red;">※회원 탈퇴 시 복구는 불가합니다</h6>
 							</div>
@@ -201,17 +188,17 @@ function MoneyCheck(){
 		<label>충전할 금액을 선택해주세요</label>
 	  </div>
       <div class="modal-body">
-      	<button type="button" class="btn btn-primary" name="moneySelect1000" onClick="Charge_1000()" value="1000">1000</button>
-        <button type="button" class="btn btn-primary" name="moneySelect2000" onClick="Charge_2000()" value="2000">2000</button>
-        <button type="button" class="btn btn-primary" name="moneySelect5000" onClick="Charge_5000()" value="5000">5000</button><br><br>
-        <button type="button" class="btn btn-primary" name="moneySelect10000" onClick="Charge_10000()" value="10000">10000</button>
-        <button type="button" class="btn btn-primary" name="moneySelect50000" onClick="Charge_50000()" value="50000">50000</button>
+      	<button type="button" class="btn btn-primary" onClick="Charge(1000)">1000</button>
+        <button type="button" class="btn btn-primary" onClick="Charge(2000)">2000</button>
+        <button type="button" class="btn btn-primary" onClick="Charge(5000)">5000</button><br><br>
+        <button type="button" class="btn btn-primary" onClick="Charge(10000)">10000</button>
+        <button type="button" class="btn btn-primary" onClick="Charge(50000)">50000</button>
         <a href="javascript:clear()"><button type="button" class="btn btn-primary">reset</button></a>
       </div>
       <div class="modal-body mx-4">
       	<div class="md-form pb-3">
 			<input type="hidden" id="charge_id" name="charge_id" class="form-control" value="${vo.id}">
-			<input type="text" id="money" name="money" class="form-control" value="0" readOnly><br>
+			<input type="text" id="charge_money" name="charge_money" class="form-control" value="0" readOnly><br>
 			<button type="button" class="btn btn-primary" onClick="MoneyCheck()">충전하기</button>
 			<button type="button" class="btn btn-secondary" data-dismiss="modal">뒤로가기</button>
 	  	</div>

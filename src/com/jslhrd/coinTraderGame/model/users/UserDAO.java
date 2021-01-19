@@ -324,7 +324,7 @@ public class UserDAO {
 		}
 		return isAble;
 	}
-	
+
 	public int Withdrawal(String id, String pw) {
 		String query = "DELETE FROM COIN_USER WHERE ID = ? AND PW = ?";
 		int row = 0;
@@ -334,11 +334,10 @@ public class UserDAO {
 			pstmt.setString(1, id);
 			pstmt.setString(2, pw);
 			row = pstmt.executeUpdate();
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
-				rs.close();
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
@@ -346,25 +345,25 @@ public class UserDAO {
 		}
 		return row;
 	}
-	
+
 	public int ChargeMoney(int money, String id) {
+		int row = 0;
 		String query = "update coin_user set money = money + ? where id = ?";
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, money);
 			pstmt.setString(2, id);
-			money = pstmt.executeUpdate();
-		}catch(Exception e){
+			row = pstmt.executeUpdate();
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
-				rs.close();
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
 			}
 		}
-		return money;
+		return row;
 	}
 }
