@@ -64,9 +64,6 @@ function modify(){
 function Charge(money) {
 	charge.charge_money.value = money;
 }
-function clear(){
-	charge.reset();
-}
 function MoneyCheck(){
 	(charge.charge_money.value == 0) ? alert("금액을 입력해주세요") : charge.submit(); 
 }
@@ -193,7 +190,7 @@ function MoneyCheck(){
         <button type="button" class="btn btn-primary" onClick="Charge(5000)">5000</button><br><br>
         <button type="button" class="btn btn-primary" onClick="Charge(10000)">10000</button>
         <button type="button" class="btn btn-primary" onClick="Charge(50000)">50000</button>
-        <a href="javascript:clear()"><button type="button" class="btn btn-primary">reset</button></a>
+        <button type="button" class="btn btn-primary" onClick="reset()">reset</button>
       </div>
       <div class="modal-body mx-4">
       	<div class="md-form pb-3">
