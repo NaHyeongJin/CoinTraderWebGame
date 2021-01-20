@@ -3,6 +3,8 @@ package com.jslhrd.coinTraderGame.model.users;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.jslhrd.coinTraderGame.util.DBUtil;
 
@@ -115,6 +117,35 @@ public class UserDAO {
 			}
 		}
 		return money;
+	}
+
+	public List<UserGraphVO> getMoneyList(String id) {
+		List<UserGraphVO> list = new ArrayList<UserGraphVO>();
+		String query = "SELECT MONEY,regdate FROM COIN_MONEY WHERE ID = ? ORDER BY REGDATE";
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Integer money = rs.getInt("money");
+				String regdate = rs.getString("regdate");
+				UserGraphVO vo = new UserGraphVO();
+				vo.setMoney(money);
+				vo.setRegdate(regdate);
+				list.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+			}
+		}
+		return list;
 	}
 
 	public Boolean idIsAble(String id) {

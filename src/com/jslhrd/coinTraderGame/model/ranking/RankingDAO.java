@@ -10,11 +10,13 @@ import com.jslhrd.coinTraderGame.util.DBUtil;
 
 public class RankingDAO {
 	private static RankingDAO instance = new RankingDAO();
+
 	public static RankingDAO getInstance() {
 		return instance;
 	}
-	//랭킹
-	public List<RankingVO> Ranking(){
+
+	// 랭킹
+	public List<RankingVO> Ranking() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -25,21 +27,21 @@ public class RankingDAO {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(query);
 			rs = pstmt.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				RankingVO vo = new RankingVO();
 				vo.setRank(rs.getInt("rnum"));
 				vo.setId(rs.getString("id"));
 				vo.setMoney(rs.getInt("money"));
 				list.add(vo);
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			try{
+		} finally {
+			try {
 				conn.close();
 				pstmt.close();
 				rs.close();
-			}catch(Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}

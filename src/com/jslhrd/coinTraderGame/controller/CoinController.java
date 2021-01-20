@@ -14,11 +14,12 @@ import com.jslhrd.coinTraderGame.service.Action;
 public class CoinController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public CoinController() {
-        super();
-    }
+	public CoinController() {
+		super();
+	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String cmd = request.getParameter("cmd");
 		CoinActionFactory cf = CoinActionFactory.getInstance();
 		Action action = cf.getAction(cmd);
@@ -27,7 +28,9 @@ public class CoinController extends HttpServlet {
 		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		doGet(request, response);
 	}
 

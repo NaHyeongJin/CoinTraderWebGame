@@ -20,12 +20,12 @@ public class QnaWriteProAction implements Action {
 		QnaDAO dao = QnaDAO.getInstance();
 		QnaVO vo = new QnaVO();
 		HttpSession session = request.getSession();
-		String id = (String)session.getAttribute("id");
-		
+		String id = (String) session.getAttribute("id");
+
 		vo.setId(id);
 		vo.setSubject(request.getParameter("subject"));
 		vo.setContents(request.getParameter("contents"));
-		
+
 		int row = dao.QnaWrite(vo);
 		request.setAttribute("row", row);
 		RequestDispatcher rd = request.getRequestDispatcher("qna/qna_write_pro.jsp");

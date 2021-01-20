@@ -83,14 +83,14 @@ public class QnaDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<QnaVO> list = new ArrayList<QnaVO>();
-		String query = "SELECT * FROM (SELECT A.*, ROWNUM AS RNUM FROM (SELECT * FROM COIN_QNA ORDER BY REGDATE DESC) A)\r\n"
-				+ "WHERE RNUM < ? AND RNUM > ? AND ID = ?";
+		String query = "SELECT X.* FROM (SELECT A.*, ROWNUM RNUM FROM (SELECT * FROM (SELECT * FROM COIN_QNA ORDER BY REGDATE DESC) WHERE ID = ?) A) X\r\n"
+				+ "WHERE RNUM < ? AND RNUM > ?";
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, endpage);
-			pstmt.setInt(2, startpage);
-			pstmt.setString(3, id);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, endpage);
+			pstmt.setInt(3, startpage);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				QnaVO vo = new QnaVO();

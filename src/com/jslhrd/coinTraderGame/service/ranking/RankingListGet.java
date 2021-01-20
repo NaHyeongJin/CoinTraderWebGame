@@ -25,14 +25,14 @@ public class RankingListGet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-        Gson gson = new GsonBuilder().create();
-        List<RankingVO> list = RankingDAO.getInstance().Ranking();
-        String json = gson.toJson(list);
-        response.setHeader("Content-Type", "application/json");
-        PrintWriter pw = response.getWriter();
-        pw.print(json);
-        pw.flush();
-        pw.close();
+		Gson gson = new GsonBuilder().create();
+		List<RankingVO> list = RankingDAO.getInstance().Ranking();
+		String json = gson.toJson(list);
+		response.setHeader("Content-Type", "application/json");
+		PrintWriter pw = response.getWriter();
+		pw.print(json);
+		pw.flush();
+		pw.close();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

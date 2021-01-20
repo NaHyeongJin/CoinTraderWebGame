@@ -10,15 +10,18 @@ public class CoinDAO {
 	PreparedStatement pstmt = null;
 	Connection conn = null;
 	ResultSet rs = null;
-	
+
 	private static CoinDAO instance;
-	private CoinDAO() {}
+
+	private CoinDAO() {
+	}
+
 	static public CoinDAO getInstance() {
-		if (instance == null) 
+		if (instance == null)
 			instance = new CoinDAO();
 		return instance;
 	}
-	
+
 	public String coinUpdateDate() {
 		String date = "";
 		String sql = "SELECT TIME FROM (SELECT TIME FROM ACOIN ORDER BY TIME) WHERE ROWNUM <= 1";
@@ -34,11 +37,12 @@ public class CoinDAO {
 				rs.close();
 				conn.close();
 				pstmt.close();
-			} catch (Exception e2) {}
+			} catch (Exception e2) {
+			}
 		}
 		return date;
 	}
-	
+
 	public int[][] coinPrices() {
 		int[][] prices = new int[4][70];
 		String sql = "SELECT A.PRICE A_PRICE, B.PRICE B_PRICE, C.PRICE C_PRICE, D.PRICE D_PRICE\r\n"
@@ -64,25 +68,20 @@ public class CoinDAO {
 				rs.close();
 				conn.close();
 				pstmt.close();
-			} catch (Exception e2) {}
+			} catch (Exception e2) {
+			}
 		}
-		
+
 		return prices;
 	}
-	
+
 	public void addPrices(int[][] prices) {
 		deletePrices();
-		for(int i = 0; i < prices[0].length; i++) {
-			String sql = "INSERT ALL\r\n"
-					+ "INTO ACOIN (TIME, PRICE)\r\n"
-					+ "VALUES (SYSDATE + ?/86400, ?)\r\n"
-					+ "INTO BCOIN (TIME, PRICE)\r\n"
-					+ "VALUES (SYSDATE + ?/86400, ?)\r\n"
-					+ "INTO CCOIN (TIME, PRICE)\r\n"
-					+ "VALUES (SYSDATE + ?/86400, ?)\r\n"
-					+ "INTO DCOIN (TIME, PRICE)\r\n"
-					+ "VALUES (SYSDATE + ?/86400, ?)\r\n"
-					+ "SELECT * FROM DUAL";
+		for (int i = 0; i < prices[0].length; i++) {
+			String sql = "INSERT ALL\r\n" + "INTO ACOIN (TIME, PRICE)\r\n" + "VALUES (SYSDATE + ?/86400, ?)\r\n"
+					+ "INTO BCOIN (TIME, PRICE)\r\n" + "VALUES (SYSDATE + ?/86400, ?)\r\n"
+					+ "INTO CCOIN (TIME, PRICE)\r\n" + "VALUES (SYSDATE + ?/86400, ?)\r\n"
+					+ "INTO DCOIN (TIME, PRICE)\r\n" + "VALUES (SYSDATE + ?/86400, ?)\r\n" + "SELECT * FROM DUAL";
 			try {
 				conn = DBUtil.getConnection();
 				pstmt = conn.prepareStatement(sql);
@@ -102,7 +101,7 @@ public class CoinDAO {
 			}
 		}
 	}
-	
+
 	private void deletePrices() {
 		String[] sql = new String[4];
 		sql[0] = "DELETE ACOIN";
@@ -125,21 +124,19 @@ public class CoinDAO {
 			}
 		}
 	}
+
 	public void coinBuy(String id, int cnt, int amount, int price) {
 		moneyUpdate(id, amount * price * -1);
 		String receipt = (char) ('a' + cnt - 1) + "RECEIPT";
-		String sql = "INSERT ALL\r\n"
-				+ "INTO \""+ receipt +"\" (COUNT, PRICE, ID)\r\n"
-				+ "VALUES (?, ?, ?)\r\n"
-				+ "INTO COIN_MONEY (ID, MONEY)\r\n"
-				+ "VALUES (?, (SELECT MONEY FROM COIN_USER WHERE ID = ?))\r\n"
+		String sql = "INSERT ALL\r\n" + "INTO \"" + receipt + "\" (COUNT, PRICE, ID)\r\n" + "VALUES (?, ?, ?)\r\n"
+				+ "INTO COIN_MONEY (ID, MONEY)\r\n" + "VALUES (?, (SELECT MONEY FROM COIN_USER WHERE ID = ?))\r\n"
 				+ "SELECT * FROM DUAL";
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, amount);
 			pstmt.setInt(2, price);
-			for(int i = 3; i < 6; i++) {
+			for (int i = 3; i < 6; i++) {
 				pstmt.setString(i, id);
 			}
 			pstmt.executeUpdate();
@@ -153,7 +150,7 @@ public class CoinDAO {
 			}
 		}
 	}
-	
+
 	// id의 돈을 money만큼 증감
 	private void moneyUpdate(String id, int money) {
 		String sql = "UPDATE COIN_USER SET MONEY = (MONEY + ?) WHERE ID = ?";
@@ -173,22 +170,19 @@ public class CoinDAO {
 			}
 		}
 	}
-	
+
 	public void coinSell(String id, int cnt, int amount, int price) {
 		moneyUpdate(id, amount * price);
 		String receipt = (char) ('a' + cnt - 1) + "RECEIPT";
-		String sql = "INSERT ALL\r\n"
-				+ "INTO \""+ receipt +"\" (COUNT, PRICE, ID)\r\n"
-				+ "VALUES (?, ?, ?)\r\n"
-				+ "INTO COIN_MONEY (ID, MONEY)\r\n"
-				+ "VALUES (?, (SELECT MONEY FROM COIN_USER WHERE ID = ?))\r\n"
+		String sql = "INSERT ALL\r\n" + "INTO \"" + receipt + "\" (COUNT, PRICE, ID)\r\n" + "VALUES (?, ?, ?)\r\n"
+				+ "INTO COIN_MONEY (ID, MONEY)\r\n" + "VALUES (?, (SELECT MONEY FROM COIN_USER WHERE ID = ?))\r\n"
 				+ "SELECT * FROM DUAL";
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, amount * -1);
 			pstmt.setInt(2, price);
-			for(int i = 3; i < 6; i++) {
+			for (int i = 3; i < 6; i++) {
 				pstmt.setString(i, id);
 			}
 			pstmt.executeUpdate();
@@ -202,4 +196,5 @@ public class CoinDAO {
 			}
 		}
 	}
+
 }

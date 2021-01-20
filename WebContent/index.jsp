@@ -6,7 +6,7 @@
 <title>메인 화면입니다.</title>
 </head>
 <body>
-	<a href="index.jsp"><img src="resource/img/indexcoin.jpg" width="180px" height="45px"></a>
+	<a href="index"><img src="resource/img/indexcoin.jpg" width="180px" height="45px"></a>
 	<br>
 	<img src="resource/img/graph.gif">
 	<div align="left">

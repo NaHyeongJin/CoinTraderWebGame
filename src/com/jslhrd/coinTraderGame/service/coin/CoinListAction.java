@@ -1,3 +1,4 @@
+
 package com.jslhrd.coinTraderGame.service.coin;
 
 import java.io.IOException;
@@ -29,16 +30,16 @@ public class CoinListAction implements Action {
 			UUID uuId = UUID.randomUUID();
 			String authKey = uuId.toString().substring(0, 8);
 			session.setAttribute("authKey", authKey);
-			
+
 			try {
 				new EmailModel().send("[CoinTraderWebGame]이메일 인증 번호입니다.", email, "인증번호 : " + authKey);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 			uri = "users/user_login_check.jsp";
 		}
-		
+
 		RequestDispatcher rd = request.getRequestDispatcher(uri);
 		rd.forward(request, response);
 	}

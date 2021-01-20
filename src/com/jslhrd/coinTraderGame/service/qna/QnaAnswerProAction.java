@@ -20,9 +20,9 @@ public class QnaAnswerProAction implements Action {
 		QnaVO vo = new QnaVO();
 		vo.setAnswer(request.getParameter("answer"));
 		vo.setIdx(Integer.parseInt(request.getParameter("idx")));
-		
+
 		int row = dao.QnaAnswer(vo);
-		
+
 		request.setAttribute("row", row);
 		RequestDispatcher rd = request.getRequestDispatcher("qna/qna_answer_pro.jsp");
 		rd.forward(request, response);
