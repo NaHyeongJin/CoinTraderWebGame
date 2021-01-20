@@ -16,8 +16,7 @@
 			<div class="col-6 col-md">
 				<h5> Introduce </h5>
 				<ul class="list-unstyled text-small">
-				
-				<li class="link-secondary" data-toggle="modal" data-target="#exampleModalScrollable" style="color: blue">개발자</li>				
+				<li><a href="" class="text-primary" data-toggle="modal" data-target="#exampleModalScrollable">개발자</a></li>			
 					<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" 
 					aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
 					  <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -53,7 +52,7 @@
 					  </div>
 					</div>	
 					<br>
-					<li class="link-secondary" data-toggle="modal" data-target="#exampleModal" style="color: blue">게임</li>	
+					<li><a href="" class="text-primary" data-toggle="modal" data-target="#exampleModal">게임</li></li>
 					<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" 
 					aria-labelledby="exampleModal" aria-hidden="true">
 					  <div class="modal-dialog modal-dialog-scrollable" role="document">
