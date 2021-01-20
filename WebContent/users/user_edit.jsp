@@ -138,6 +138,12 @@
 		}
 		coin.submit();
 	}
+	function Charge(money) {
+		charge.charge_money.value = money;
+	}
+	function MoneyCheck(){
+		(charge.charge_money.value == 0) ? alert("금액을 입력해주세요") : charge.submit(); 
+	}
 </script>
 </head>
 <body>
@@ -191,14 +197,14 @@
 				</div>
 			</div>
 
-			<div class="col-12 mt-5">
-				<button class="btn btn-outline-primary" onclick="return modify()">완료</button>
-				<a href="index"><button class="btn btn-outline-secondary" type="button">뒤로</button></a>
-			</div>
 		</div>
 	</form>
-
-
+	<div class="col-12 mt-5">
+		<button class="btn btn-outline-primary" onclick="return modify()">완료</button>
+		<a href="index"><button class="btn btn-outline-secondary" type="button">뒤로</button></a>
+		<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#WithdrawalForm">회원탈퇴</button>
+	</div>
+	
 	<div class="modal" tabindex="-1" id="MoneyModal">
 		<div class="modal-dialog modal-xl">
 			<div class="modal-content">
@@ -215,27 +221,79 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="chargeModal" tabindex="-1" role="dialog" aria-labelledby="chargeModalLabel" aria-hidden="true">
+	
+	<!-- WithdrawalForm -->
+	<div class="modal fade" id="WithdrawalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="chargeModalLabel">충전 금액</h5>
+			<!--Content-->
+			<div class="modal-content form-elegant">
+				<!--Header-->
+				<div class="modal-header text-center">
+					<h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel">
+						<strong>Withdrawal</strong>
+					</h3>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body">
-					<button type="submit" class="btn btn-primary">1,000</button>
-					<button type="submit" class="btn btn-primary">5,000</button>
-					<button type="submit" class="btn btn-primary">10,000</button>
+				<!--Body-->
+				<form method="post" action="user?cmd=user_withdrawal">
+					<div class="modal-body mx-4">
+						<!--Body-->
+						<div class="md-form pb-3">
+							<label>회원탈퇴를 위해 비밀번호를 입력해주세요</label>
+						</div>
+						<div class="md-form pb-3">
+							<input type="password" id="withdrawal_pw" name="withdrawal_pw" class="form-control validate" placeholder="비밀번호 입력" required><br>
+							<h6 style="color: red;">※회원 탈퇴 시 복구는 불가합니다</h6>
+						</div>
+
+						<div class="text-center mb-3">
+							<button type="submit" class="btn btn-primary">탈퇴하기</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<!--/.Content-->
+		</div>
+	</div>
+	<!-- ChargeModal -->
+	<div class="modal fade" id="chargeModal" tabindex="-1" role="dialog" aria-labelledby="chargeModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel">
+						<strong>Charge</strong>
+					</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				</div>
+				<form name="charge" method="post" action="user?cmd=user_chargemoney">
+					<div class="md-form pb-3">
+						<label>충전할 금액을 선택해주세요</label>
+					</div>
+					<div class="modal-body">
+						<button type="button" class="btn btn-primary" onClick="Charge(1000)">1000</button>
+						<button type="button" class="btn btn-primary" onClick="Charge(2000)">2000</button>
+						<button type="button" class="btn btn-primary" onClick="Charge(5000)">5000</button>
+						<br>
+						<br>
+						<button type="button" class="btn btn-primary" onClick="Charge(10000)">10000</button>
+						<button type="button" class="btn btn-primary" onClick="Charge(50000)">50000</button>
+						<button type="button" class="btn btn-primary" onClick="reset()">reset</button>
+					</div>
+					<div class="modal-body mx-4">
+						<div class="md-form pb-3">
+							<input type="text" id="charge_money" name="charge_money" class="form-control" value="0" readOnly><br>
+							<button type="button" class="btn btn-primary" onClick="MoneyCheck()">충전하기</button>
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">뒤로가기</button>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
-
 </body>
 <%@ include file="/include/footer.jsp"%>
 </html>

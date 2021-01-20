@@ -11,8 +11,8 @@ import javax.mail.internet.MimeMessage;
 
 public class EmailModel {
 	private String host = "smtp.naver.com";
-	private String user = "skgusal119@naver.com";
-	private String password = "dnfldnwjd119";
+	private String user = "id@naver.com";
+	private String password = "password";
 
 	public void send(String title, String email, String authKey) throws Exception {
 		Properties props = new Properties();
