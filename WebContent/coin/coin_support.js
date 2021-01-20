@@ -74,9 +74,6 @@ $(function () {
     if (money < reprice) {
       return $(".form-text").text("자산을 초과하였습니다.");
     }
-    if ($("#flexCheckDefault").val() == 0) {
-      return $(".form-text").text("구매확정체크를 확인해주세요.");
-    }
     $("#rrr2").text("구입시 고객님의 남은 자산 :" + chk + "원");
     $("#rrr2").css("color", "red");
     $("#myModal").modal("hide");
