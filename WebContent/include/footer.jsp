@@ -105,7 +105,7 @@
 	</main>
 		<div class="col-6 col-md" align="center">
 		<small class="d-block mb-3 text-muted"> 상호(주)Method 대표 나형진 사업자 등록번호 047815923 통신판매업신고 제 2020 대전 중구 - 1777호
-		<br> 사업자 정보 확인 himitsu 고객 문의˚Tel. 042-000-0000 Fax. 042-0000-0000 주소 대한민국 충청도 대전 중구 계룡로 825 희영빌딩 5층 <br>
+		<br> 사업자 정보 확인 himitsu 고객 문의˚Tel. 042-000-0000 Fax. 042-0000-0000 주소 대전광역시 중구 계룡로 825 희영빌딩 5층 <br>
 		<a style="color: lightgray" href="https://map.naver.com/v5/directions/-/14182969.994201731,4345677.705236001,%ED%9D%AC%EC%98%81%EB%B9%8C%EB%94%A9,
 		16264785,PLACE_POI/-/car?c=14182955.0174115,4345665.2623418,19,0,0,0,dh">▶찾아오시는길◀ </a>	
 		</small>
