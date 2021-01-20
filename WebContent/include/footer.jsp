@@ -16,8 +16,7 @@
 			<div class="col-6 col-md">
 				<h5> Introduce </h5>
 				<ul class="list-unstyled text-small">
-				
-				<li class="link-secondary" data-toggle="modal" data-target="#exampleModalScrollable">개발자</li>				
+				<li><a href="" class="text-primary" data-toggle="modal" data-target="#exampleModalScrollable">개발자</a></li>			
 					<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" 
 					aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
 					  <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -30,19 +29,20 @@
 					 	    </button>
 					    
 					      </div>
-					      <div class="modal-body" align="left">
-					        	나형진:팀 Method의 팀장을 맡고 팀원들을  돕고@#$%<br><br>
-					        	조종형:메인 그래프를 초단위로 기능 구현 Method팀의 )!@#*^<br><br>
-					        	김용휘:Method의 물주를 담당하고 랭킹 및 Q$A를 구현 $%@*<br><br>
-					        	최현빈:환자 임에 불구하고 디자인,정보수정을 담당하고 %!$@<br><br>
-					        	권현지:유치원 선생님의 경력이 있으며 로그인 구현?!#%#$<br><br>
+					      <div class="modal-body" align="left" style="font-style: bold">
+					      
+					        	나형진<small style="color: gray">팀 Method의 팀장을 맡고 팀원들을  돕고@#$%</small><br><br>
+					        	조종혁<small style="color: gray">메인 그래프를 초단위로 기능 구현 Method팀의 )!@#*^</small><br><br>
+					        	최현빈<small style="color: gray">환자 임에 불구하고 디자인,정보수정을 담당하고 %!$@</small><br><br>
+					        	김용휘<small style="color: gray">Method의 물주를 담당하고 랭킹 및 Q$A를 구현 $%@*</small><br><br>
+					        	권현지<small style="color: gray">유치원 선생님의 경력이 있으며 로그인 구현?!#%#$</small><br><br>
 					      </div>
-					      <div class="modal-body" align="left">
-							          ナ·ヒョンジン:チームMethodのチーム長を務め、チームメンバーをサポートします。@#$%<br><br>
-								操縦型:メイングラフを秒単位で機能を実現するMethodチーム）です！@#*^<br><br>
-								キム·ヨンフィ:Methodの荷主を担当してランキング及びQ$Aを実現$%@*<br><br>
-								チェ·ヒョンビン:患者であるにもかかわらず、デザイン、情報修正を担当します！$@<br><br>
-								クォン·ヒョンジ:幼稚園の先生の経歴があります。また、ログインを実現？#%#$<br><br>
+					      <div class="modal-body" align="left" style="font-style: bold">
+							          ナ·ヒョンジン <small style="color: gray">チームMethodのチーム長を務め、チームメンバーをサポートします。@#$%</small><br><br>					
+								ゾゾンヒョック <small style="color: gray">メイングラフを秒単位で機能を実現するMethodチーム）です！@#*^</small><br><br>
+								チェ·ヒョンビン <small style="color: gray">患者であるにもかかわらず、デザイン、情報修正を担当します！$@</small><br><br>
+								キム·ヨンフィ<small style="color: gray">Methodの荷主を担当してランキング及びQ$Aを実現$%@*</small><br><br>
+								クォン·ヒョンジ <small style="color: gray">幼稚園の先生の経歴があります。また、ログインを実現？#%#$</small><br><br>
 					      </div>
 					     
 					      <div class="modal-footer">
@@ -52,7 +52,7 @@
 					  </div>
 					</div>	
 					<br>
-					<li class="link-secondary" data-toggle="modal" data-target="#exampleModal" style="green">게임</li>	
+					<li><a href="" class="text-primary" data-toggle="modal" data-target="#exampleModal">게임</li></li>
 					<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" 
 					aria-labelledby="exampleModal" aria-hidden="true">
 					  <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -87,7 +87,7 @@
 			<div class="col-6 col-md">
 				<h5> Partners </h5>
 				<ul class="list-unstyled text-small">
-					<li><a class="link-secondary" href="#" >AD</a></li>
+					<li><a class="link-secondary" href="https://github.com/NaHyeongJin/CoinTraderWebGame" >AD</a></li>
 				</ul>
 			</div>
 			
@@ -105,9 +105,9 @@
 	</main>
 		<div class="col-6 col-md" align="center">
 		<small class="d-block mb-3 text-muted"> 상호(주)Method 대표 나형진 사업자 등록번호 047815923 통신판매업신고 제 2020 대전 중구 - 1777호
-		<br> 사업자 정보 확인 himitsu 고객 문의˚Tel. 042-000-0000 Fax. 042-0000-0000 주소 대한민국 충청도 대전 중구 계룡로 825 희영빌딩 5층 <br>
+		<br> 사업자 정보 확인 himitsu 고객 문의˚Tel. 042-000-0000 Fax. 042-0000-0000 주소 대전광역시 중구 계룡로 825 희영빌딩 5층 <br>
 		<a style="color: lightgray" href="https://map.naver.com/v5/directions/-/14182969.994201731,4345677.705236001,%ED%9D%AC%EC%98%81%EB%B9%8C%EB%94%A9,
-		16264785,PLACE_POI/-/car?c=14182955.0174115,4345665.2623418,19,0,0,0,dh">찾아오시는길◀ </a>	
+		16264785,PLACE_POI/-/car?c=14182955.0174115,4345665.2623418,19,0,0,0,dh">▶찾아오시는길◀ </a>	
 		</small>
 		</div>
 
