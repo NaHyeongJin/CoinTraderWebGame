@@ -24,7 +24,7 @@ public class CoinDAO {
 
 	public String coinUpdateDate() {
 		String date = "";
-		String sql = "SELECT TIME FROM (SELECT TIME FROM ACOIN ORDER BY TIME) WHERE ROWNUM <= 1";
+		String sql = "SELECT TIME FROM (SELECT TIME FROM COIN_PRICE ORDER BY TIME) WHERE ROWNUM = 1";
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -45,20 +45,14 @@ public class CoinDAO {
 
 	public int[][] coinPrices() {
 		int[][] prices = new int[4][70];
-		String sql = "SELECT A.PRICE A_PRICE, B.PRICE B_PRICE, C.PRICE C_PRICE, D.PRICE D_PRICE\r\n"
-				+ "FROM ACOIN A, BCOIN B, CCOIN C, DCOIN D\r\n"
-				+ "WHERE A.TIME = B.TIME AND B.TIME = C.TIME AND C.TIME = D.TIME\r\n"
-				+ "ORDER BY A.TIME, B.TIME, C.TIME, D.TIME";
+		String sql = "SELECT * FROM COIN_PRICE ORDER BY TIME";
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			int cnt = 0;
 			while (rs.next()) {
-				prices[0][cnt] = rs.getInt("A_PRICE");
-				prices[1][cnt] = rs.getInt("B_PRICE");
-				prices[2][cnt] = rs.getInt("C_PRICE");
-				prices[3][cnt] = rs.getInt("D_PRICE");
+				prices[rs.getInt("NUM") - 1][cnt / 4] = rs.getInt("PRICE");
 				cnt++;
 			}
 		} catch (Exception e) {
@@ -78,10 +72,10 @@ public class CoinDAO {
 	public void addPrices(int[][] prices) {
 		deletePrices();
 		for (int i = 0; i < prices[0].length; i++) {
-			String sql = "INSERT ALL\r\n" + "INTO ACOIN (TIME, PRICE)\r\n" + "VALUES (SYSDATE + ?/86400, ?)\r\n"
-					+ "INTO BCOIN (TIME, PRICE)\r\n" + "VALUES (SYSDATE + ?/86400, ?)\r\n"
-					+ "INTO CCOIN (TIME, PRICE)\r\n" + "VALUES (SYSDATE + ?/86400, ?)\r\n"
-					+ "INTO DCOIN (TIME, PRICE)\r\n" + "VALUES (SYSDATE + ?/86400, ?)\r\n" + "SELECT * FROM DUAL";
+			String sql = "INSERT ALL\r\n" + "INTO COIN_PRICE(NUM, TIME, PRICE) VALUES(1, SYSDATE + ?/86400, ?)\r\n"
+					+ "INTO COIN_PRICE(NUM, TIME, PRICE) VALUES(2, SYSDATE + ?/86400, ?)\r\n"
+					+ "INTO COIN_PRICE(NUM, TIME, PRICE) VALUES(3, SYSDATE + ?/86400, ?)\r\n"
+					+ "INTO COIN_PRICE(NUM, TIME, PRICE) VALUES(4, SYSDATE + ?/86400, ?)\r\n" + "SELECT * FROM DUAL";
 			try {
 				conn = DBUtil.getConnection();
 				pstmt = conn.prepareStatement(sql);
@@ -103,17 +97,11 @@ public class CoinDAO {
 	}
 
 	private void deletePrices() {
-		String[] sql = new String[4];
-		sql[0] = "DELETE ACOIN";
-		sql[1] = "DELETE BCOIN";
-		sql[2] = "DELETE CCOIN";
-		sql[3] = "DELETE DCOIN";
+		String sql = "DELETE COIN_PRICE";
 		try {
 			conn = DBUtil.getConnection();
-			for (int i = 0; i < sql.length; i++) {
-				pstmt = conn.prepareStatement(sql[i]);
-				pstmt.executeUpdate();
-			}
+			pstmt = conn.prepareStatement(sql);
+			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -127,16 +115,17 @@ public class CoinDAO {
 
 	public void coinBuy(String id, int cnt, int amount, int price) {
 		moneyUpdate(id, amount * price * -1);
-		String receipt = (char) ('a' + cnt - 1) + "RECEIPT";
-		String sql = "INSERT ALL\r\n" + "INTO \"" + receipt + "\" (COUNT, PRICE, ID)\r\n" + "VALUES (?, ?, ?)\r\n"
-				+ "INTO COIN_MONEY (ID, MONEY)\r\n" + "VALUES (?, (SELECT MONEY FROM COIN_USER WHERE ID = ?))\r\n"
+		String sql = "INSERT ALL\r\n"
+				+ "INTO COIN_RECEIPT(NUM, COUNT, PRICE, ID) VALUES(?, ?, ?, ?)\r\n"
+				+ "INTO COIN_MONEY(ID, MONEY) VALUES(?, (SELECT MONEY FROM COIN_USER WHERE ID = ?))\r\n"
 				+ "SELECT * FROM DUAL";
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, amount);
-			pstmt.setInt(2, price);
-			for (int i = 3; i < 6; i++) {
+			pstmt.setInt(1, cnt);
+			pstmt.setInt(2, amount);
+			pstmt.setInt(3, price);
+			for (int i = 4; i < 7; i++) {
 				pstmt.setString(i, id);
 			}
 			pstmt.executeUpdate();
@@ -173,16 +162,17 @@ public class CoinDAO {
 
 	public void coinSell(String id, int cnt, int amount, int price) {
 		moneyUpdate(id, amount * price);
-		String receipt = (char) ('a' + cnt - 1) + "RECEIPT";
-		String sql = "INSERT ALL\r\n" + "INTO \"" + receipt + "\" (COUNT, PRICE, ID)\r\n" + "VALUES (?, ?, ?)\r\n"
-				+ "INTO COIN_MONEY (ID, MONEY)\r\n" + "VALUES (?, (SELECT MONEY FROM COIN_USER WHERE ID = ?))\r\n"
+		String sql = "INSERT ALL\r\n"
+				+ "INTO COIN_RECEIPT(NUM, COUNT, PRICE, ID) VALUES(?, ?, ?, ?)\r\n"
+				+ "INTO COIN_MONEY(ID, MONEY) VALUES(?, (SELECT MONEY FROM COIN_USER WHERE ID = ?))\r\n"
 				+ "SELECT * FROM DUAL";
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, amount * -1);
-			pstmt.setInt(2, price);
-			for (int i = 3; i < 6; i++) {
+			pstmt.setInt(1, cnt);
+			pstmt.setInt(2, amount * -1);
+			pstmt.setInt(3, price);
+			for (int i = 4; i < 7; i++) {
 				pstmt.setString(i, id);
 			}
 			pstmt.executeUpdate();

@@ -187,7 +187,7 @@ public class UserDAO {
 			pstmt.setString(3, vo.getEmail1());
 			pstmt.setString(4, vo.getEmail2());
 			row = pstmt.executeUpdate();
-			insertCoinMoney(vo.getId());
+			insertCoinMoney(vo.getId(), 50000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -200,12 +200,13 @@ public class UserDAO {
 		return row;
 	}
 
-	private void insertCoinMoney(String id) {
-		String query = "insert into COIN_MONEY(ID) values (?)";
+	private void insertCoinMoney(String id, int money) {
+		String query = "insert into COIN_MONEY(ID, MONEY) values (?, ?)";
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id);
+			pstmt.setInt(2, money);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -386,6 +387,7 @@ public class UserDAO {
 			pstmt.setInt(1, money);
 			pstmt.setString(2, id);
 			row = pstmt.executeUpdate();
+			insertCoinMoney(id, getUserMoney(id));
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
