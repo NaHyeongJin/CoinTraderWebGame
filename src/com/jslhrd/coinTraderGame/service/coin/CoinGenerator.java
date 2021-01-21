@@ -31,17 +31,17 @@ public class CoinGenerator {
 	private CoinGenerator() {
 		upPer[0] = 40;
 		upPer[1] = 40;
-		upPer[2] = 95;
+		upPer[2] = 90;
 		upPer[3] = 10;
 
 		keepPer[0] = 20;
 		keepPer[1] = 20;
-		keepPer[2] = 2;
+		keepPer[2] = 3;
 		keepPer[3] = 10;
 
 		downPer[0] = 40;
 		downPer[1] = 40;
-		downPer[2] = 3;
+		downPer[2] = 7;
 		downPer[3] = 80;
 
 		maxUp[0] = LOW_VALUE;
@@ -90,6 +90,7 @@ public class CoinGenerator {
 
 	static private int[] CoinPriceGenerator(Date lastUpdateDate, int[] prices, int maxUp, int minUp, int maxDown,
 			int minDown, int upPer, int keepPer, int downPer) {
+		int[] newPrices = new int[prices.length];
 		int cnt = 0;
 		long dif = (new Date().getTime() - lastUpdateDate.getTime()) / 1000; // 현재시간 - 마지막 업데이트 시간
 		dif = (dif > 69) ? 69 : dif;
@@ -97,22 +98,22 @@ public class CoinGenerator {
 			return prices;
 		}
 		for (int i = 0; i < prices.length - (int) dif; i++) {
-			prices[i] = prices[(int) dif + i];
+			newPrices[i] = prices[(int) dif + i];
 			cnt++;
 		}
 		for (int i = cnt; i < prices.length; i++) {
 			int rand = (int) Math.round(Math.random() * 100); // 0~100 사이 랜덤 수 설정
 			if (rand < downPer) {
-				prices[i] = prices[i - 1] - (int) Math.round(Math.random() * (maxDown - minDown)) - minDown;
+				newPrices[i] = newPrices[i - 1] - (int) Math.round(Math.random() * (maxDown - minDown)) - minDown;
 			} // 감소
 			else if (rand < downPer + keepPer) {
-				prices[i] = prices[i - 1];
+				newPrices[i] = newPrices[i - 1];
 			} // 유지
 			else {
-				prices[i] = prices[i - 1] + (int) Math.round(Math.random() * (maxUp - minUp)) + minUp;
+				newPrices[i] = newPrices[i - 1] + (int) Math.round(Math.random() * (maxUp - minUp)) + minUp;
 			} // 상승
-			prices[i] = (prices[i] < 2000) ? prices[i] + 500 : prices[i]; // 2000원 미만이면 +500원으로 설정
+			newPrices[i] = (newPrices[i] < 2000) ? newPrices[i] + 500 : newPrices[i]; // 2000원 미만이면 +500원으로 설정
 		} // 확률에 따라 prices 가격 바꿔서 배열에 저장
-		return prices;
+		return newPrices;
 	}
 }
