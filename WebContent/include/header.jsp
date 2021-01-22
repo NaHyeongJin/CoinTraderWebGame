@@ -101,6 +101,7 @@
 			<c:if test="${!(empty id)}">
 				<a class="btn btn-outline-primary" href="user?cmd=logout">Sign out</a>
 				<a class="btn btn-outline-primary" href="user?cmd=user_edit">Your profile</a>
+				<a class="btn btn-outline-primary" href="receipt?cmd=receipt_list">Receipt</a>
 				<a class="btn btn-outline-primary" href="qna?cmd=qna_list">Help</a>
 			</c:if>
 		</nav>

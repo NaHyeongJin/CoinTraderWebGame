@@ -147,8 +147,17 @@
 </script>
 </head>
 <body>
-
-	<h4 class="mb-3">개인정보 수정</h4>
+	<a href="index"><img src="resource/img/indexcoin.jpg" width="180px" height="45px"></a>
+	<br><br>
+	<img src="resource/img/정보수정.png" width="140px" height="50px">
+	<br><br>
+	
+	    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                  
+                   
 	<form method="post" class="needs-validation" novalidate name="coin" action="user?cmd=user_edit_pro">
 		<div class="row g-3">
 			<div class="col-12">
@@ -291,6 +300,10 @@
 						</div>
 					</div>
 				</form>
+				</div>
+				</div>
+				</div>
+				</div>
 			</div>
 		</div>
 	</div>
