@@ -59,9 +59,9 @@
 			}
 		})
 	}
-	$('#hrefgocoin').click(function() {
+	$(function () {$('#hrefgocoin').click(function() {
 		$('#gocoin').val(1);
-	});
+	});});
 </script>
 <link rel="stylesheet" href="resource/css/bootstrap.css">
 

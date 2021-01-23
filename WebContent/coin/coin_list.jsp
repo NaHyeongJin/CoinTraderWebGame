@@ -96,7 +96,8 @@
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel2">
 						<b>코인판매<a id="sellCoin" data-toggle="popover"> <img alt="" src="coin/img/chat-dots.svg">
-						</a></b>
+						</a><span id='timeset'></span></b>
+						
 					</h5>
 
 				</div>
@@ -106,7 +107,7 @@
 					<div id="rrr2"></div>
 					<label for="floatingInputValue" style="padding-top: 10px;"><b>판매할 코인</b></label>
 					<input type="text" style="text-align: center;" class="form-control" id="floatingInputValue" placeholder="name@example.com" value="" readonly="readonly">
-					<div class="input-group mb-3">
+					<div class="input-group mb-3" style="padding-top: 30px;">
 						<div class="row g-3 align-items-center">
 							<div class="col-auto">
 								<label for="inputPassword6" class="col-form-label">판매수량</label>

@@ -4,12 +4,16 @@ $(function () {
   var amount;
   var sellprice;
   var timer;
+  var clear;
   var Aarray = [];
   var Barray = [];
   var Carray = [];
   var Darray = [];
   var cnt = 0;
 
+  let timerset;
+  let y=0;
+  let price;
   let update = null;
   let timerId = null;
   const firstTime = new Date().getTime();
@@ -91,11 +95,12 @@ $(function () {
       success: function (data) {},
     });
   }
-
-  function coin() {
-    $("#sellbutton").click(function () {
-      let coinname = $("#coinname").val();
-      let y = $("#selltime").val();
+  
+  function BuySell(){
+	  let coinname = $("#coinname").val();
+      if(y==0){
+    	  y = $("#selltime").val();
+      }
       let buyalert;
       let sellalert;
       timer = y;
@@ -184,10 +189,77 @@ $(function () {
       $(".dropdown-toggle").text("코인");
       $("#floatingInputValue").val("");
       $("#coincnt2").val("");
-      setTimeout(function () {
+      var settime=setTimeout(function () {
         alert(sellalert);
       }, y * 1000);
-    });
+	  clearInterval(timerset);
+	  $("#timeset").text('');
+  };
+  
+  $("#sellbutton").click(function () {
+  	y=0;
+    BuySell();
+  });
+  function coin() {
+	  $("#closemodalbutton1,#closemodalbutton2").on("click", function () {
+		  	clearInterval(clear);
+		    //구입모달 x/닫기버튼
+		    $("#myModal").modal("hide");
+		    $("#coinname").css("background-position", "100px 6px");
+		    $("#coinname").val("코인을 선택해주세요");
+		    $(".dropdown-toggle").text("코인");
+		    $("#coincnt").val("");
+		    $(".form-text").text("");
+		  }); 	
+	  $("#aprice").click(function () {
+		  	clearInterval(clear);
+		    $(".form-text").text("");
+		    var money = $("#prmoney").val();
+		    $("#rrr").text("내 자산 :" + money);
+		    $("#coincnt").val("");
+		    $("#coinname").css("background-position", "125px 5px");
+		    clear =  setInterval(function () {
+		    	$("#coinname").val("A코인:" + Aarray[cnt] + "원");
+		    	price = Aarray[cnt];
+		      }, 1000);
+		  });
+		  $("#bprice").click(function () {
+			  clearInterval(clear);
+		    $(".form-text").text("");
+		    var money = $("#prmoney").val();
+		    $("#rrr").text("내 자산 :" + money);
+		    $("#coincnt").val("");
+		    $("#coinname").css("background-position", "125px 6px");
+		    clear =  setInterval(function () {
+		    	$("#coinname").val("B코인:" + Barray[cnt] + "원");
+		    	price = Barray[cnt];
+		      }, 1000);
+		  });
+		  $("#cprice").click(function () {
+			  clearInterval(clear);
+		    $(".form-text").text("");
+		    var money = $("#prmoney").val();
+		    $("#rrr").text("내 자산 :" + money);
+		    $("#coincnt").val("");
+		    $("#coinname").css("background-position", "120px 6px");
+		    clear =  setInterval(function () {
+		    	$("#coinname").val("C코인:" + Carray[cnt] + "원");
+		    	price = Carray[cnt];
+		      }, 1000);
+		  });
+		  $("#dprice").click(function () {
+			  clearInterval(clear);
+		    $(".form-text").text("");
+		    var money = $("#prmoney").val();
+		    $("#rrr").text("내 자산 :" + money);
+		    $("#coincnt").val("");
+		    $("#coinname").css("background-position", "120px 6px");
+		    clear =  setInterval(function () {
+		    	$("#coinname").val("D코인:" + Darray[cnt] + "원");
+		    	price = Darray[cnt];
+		      }, 1000);
+		  });
+		  
     var it = setInterval(function () {
       var aput = Aarray[cnt];
       var bput = Barray[cnt];
@@ -251,12 +323,70 @@ $(function () {
       $("#myModal").modal("show");
       var money = $("#prmoney").val();
       $("#rrr").text("내 자산 :" + money);
-      $("#Apriceinput").val(Aarray[cnt]);
-      $("#Bpriceinput").val(Barray[cnt]);
-      $("#Cpriceinput").val(Carray[cnt]);
-      $("#Dpriceinput").val(Darray[cnt]);
     });
+    
+	  $("#coincnt").on("keyup", function (e) {
+		    //코인개수 구입시 경고문삭제
+		    var money = $("#prmoney").val();
+		    var totcoincnt = $("#coincnt").val();
+		    var cn = $("#coinname").val();
+		    var totprice = price * totcoincnt;
+		    var my = money - totprice;
 
+		    if (money < totprice) {
+		      $("#rrr").text("내 자산 : 0");
+		      return $(".form-text").text("자산을 초과하였습니다.");
+		    }
+		    if (totcoincnt == "") {
+		      $("#rrr").text("내 자산 :" + money);
+		    }
+		    if (cn == "") {
+		      return $(".form-text").text("코인을 선택해주세요.");
+		    }
+		    $("#rrr").text("내 자산 :" + my);
+		    $(".form-text").text("");
+		  });
+	  
+	  	$("#modalbutton2").on("click", function () {
+	  		clearInterval(clear);
+	    //판매모달버튼이벤트
+	    $("#priceinput").val(price);
+	    var totprice = $("#coinname").val();
+	    var totcoincnt = $("#coincnt").val();
+	    var money = $("#prmoney").val();
+	    var reprice = price * totcoincnt;
+	    var chk = money - reprice;
+	    if (totprice == "" || totprice == "코인을 선택해주세요") {
+	      return $(".form-text").text("코인을 선택해주세요");
+	    }
+	    if (totcoincnt == "") {
+	      return $(".form-text").text("수량을 확인해주세요");
+	    }
+	    if (money < reprice) {
+	      return $(".form-text").text("자산을 초과하였습니다.");
+	    }
+	    $("#rrr2").text("구입시 고객님의 남은 자산 :" + chk + "원");
+	    $("#rrr2").css("color", "red");
+	    $("#myModal").modal("hide");
+	    $(".dropdown-toggle").text("시간");
+	    $("#myModal2").modal("show");
+	    let i=16;
+	    timerset = setInterval(function(){
+		    	i--;
+		    	$("#timeset").css("color", "red");
+		    	$("#timeset").text(i+'초 뒤 자동으로 5초뒤 가격으로 판매됩니다.');
+		    	if(i==0){
+		    		clearInterval(timerset);
+		    		$("#timeset").text('');
+		    		y=5;
+		    		BuySell();
+		    	}
+		    	}, 1000);
+	    $(".form-text").text("");
+	    $("#floatingInputValue").val(totprice + "  코인개수:" + totcoincnt);
+	    $("#coincnt2").val(totcoincnt);
+	  });
+	  	
     var chart1 = new Highcharts.stockChart("Acontainer", {
       chart: {
         events: {
