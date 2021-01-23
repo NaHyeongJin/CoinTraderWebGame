@@ -96,7 +96,7 @@
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel2">
 						<b>코인판매<a id="sellCoin" data-toggle="popover"> <img alt="" src="coin/img/chat-dots.svg">
-						</a><span id='timeset'></span></b>
+						</a><span id='timeset' style="font-size: 15px;"></span></b>
 						
 					</h5>
 
