@@ -29,8 +29,19 @@
 			method : "GET",
 			dataType : "JSON",
 			success : function(money) {
-				document.getElementById("money").innerHTML = money;
 				$('#prmoney').val(money);
+				var stringMoney = String(money);
+				let newMoney = "";
+				let cnt = 0;
+				for (let i = stringMoney.length; i >= 0; i--) {
+					newMoney = stringMoney.charAt(i) + newMoney;
+					if(cnt % 3 == 0 && cnt != 0 && cnt != stringMoney.length) {
+						newMoney = "," + newMoney;
+					}
+					cnt++;
+					
+				}
+				document.getElementById("money").innerHTML = newMoney;
 			}
 		})
 	}
