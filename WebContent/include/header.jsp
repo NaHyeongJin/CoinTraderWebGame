@@ -7,6 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="resource/js/bootstrap.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script type="text/javascript">
 	var timerId = null;
 	var timerRanking = null;
@@ -29,8 +31,19 @@
 			method : "GET",
 			dataType : "JSON",
 			success : function(money) {
-				document.getElementById("money").innerHTML = money;
 				$('#prmoney').val(money);
+				var stringMoney = String(money);
+				let newMoney = "";
+				let cnt = 0;
+				for (let i = stringMoney.length; i >= 0; i--) {
+					newMoney = stringMoney.charAt(i) + newMoney;
+					if(cnt % 3 == 0 && cnt != 0 && cnt != stringMoney.length) {
+						newMoney = "," + newMoney;
+					}
+					cnt++;
+					
+				}
+				document.getElementById("money").innerHTML = newMoney;
 			}
 		})
 	}
@@ -63,6 +76,12 @@
 		$('#gocoin').val(1);
 	});
 </script>
+<style>
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
+</style>
 <link rel="stylesheet" href="resource/css/bootstrap.css">
 
 </head>
@@ -81,7 +100,7 @@
 			<p class="h7 my-0 mr-3 fw-normal">${id}님환영합니다.</p>
 			<p class="h7 my-0 fw-normal">현재 남은 자금은&nbsp;</p>
 			<p class="h7 my-0 fw-normal" id="money"></p>
-			<p class="h7 my-0 mr-auto fw-normal">원입니다.</p>
+			<p class="h7 my-0 mr-auto fw-normal">원 입니다.</p>
 		</c:if>
 		<nav class="my-2 my-md-0 me-md-3">
 			<c:if test="${!empty id}">
@@ -100,7 +119,16 @@
 			</c:if>
 			<c:if test="${!(empty id)}">
 				<a class="btn btn-outline-primary" href="user?cmd=logout">Sign out</a>
-				<a class="btn btn-outline-primary" href="user?cmd=user_edit">Your profile</a>
+				<div class="btn-group">
+					<div class="dropdown">
+					  <button class="btn btn-outline-primary dropdown-toggle">My Page</button>
+					  <div class="dropdown-menu">
+					    <a class="dropdown-item" href="user?cmd=user_edit">Your profile</a>
+					    <div class="dropdown-divider"></div>
+					    <a class="dropdown-item" href="receipt?cmd=receipt_list">Receipt</a>
+					  </div>
+					</div>
+				</div>
 				<a class="btn btn-outline-primary" href="qna?cmd=qna_list">Help</a>
 			</c:if>
 		</nav>
