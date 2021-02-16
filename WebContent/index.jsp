@@ -20,7 +20,6 @@
 			Third <small style="color: black">자신의 순위를 높여 보세요!</small>
 		</div>
 	</div>
-	<a href="receipt?cmd=receipt_list"><button type="button" class="btn btn-outline-primary">q</button></a>
 </body>
 <%@ include file="/include/footer.jsp"%>
 </html>
