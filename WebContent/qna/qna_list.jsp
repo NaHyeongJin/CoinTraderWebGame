@@ -9,6 +9,8 @@
 <title>1:1문의</title>
 </head>
 <body>
+	<a href="index"><img src="resource/img/indexcoin.jpg" width="180px" height="45px"></a><br>
+	<img class="mt-3 mb-3" src="resource/img/문의사항.png" width="140px" height="50px">
     <div class="row">
         <div class="col-lg-12">
             <div class="card">

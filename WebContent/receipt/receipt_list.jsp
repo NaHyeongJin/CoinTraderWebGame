@@ -42,11 +42,8 @@ function getInputValue(){
 </head>
 <body>
    <a href="index"><img src="resource/img/indexcoin.jpg" width="180px"
-      height="45px"></a>
-   <br>
-   <br>
-   <br>
-   <br>
+      height="45px"></a><br>
+     <img class="mt-3 mb-3" src="resource/img/구매내역.png" width="140px" height="50px">
    <form name="search" action="" method="post">
    <nav class="d-flex p-2 bd-highlight">
       <div class='col-md-2 col-xs-4'>
