@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="resource/js/bootstrap.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script type="text/javascript">
 	var timerId = null;
@@ -41,7 +41,6 @@
 						newMoney = "," + newMoney;
 					}
 					cnt++;
-					
 				}
 				document.getElementById("money").innerHTML = newMoney;
 			}
@@ -88,10 +87,10 @@
 <c:if test="${empty id}">
 	<body onload="RankingStart();">
 </c:if>
+<c:if test="${!empty id}">
+	<body onload="Start();RankingStart();">
+</c:if>
 <form method="post" action="user?cmd=login">
-	<c:if test="${!empty id}">
-		<body onload="Start();RankingStart();">
-	</c:if>
 	<header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm sticky-top">
 		<p class="h5 my-0 mr-auto fw-normal">
 			<a href="index"><img src="resource/img/logo1.png"></a>
