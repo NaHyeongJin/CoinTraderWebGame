@@ -58,60 +58,56 @@
 					$('#MoneyModal').modal('show');
 					Highcharts.stockChart('container', {
 						rangeSelector : {
-							buttons : [
-								{
-									count : 5,
-									type : 'day',
-									text : '5일'
-								},
-								{
-									count : 10,
-									type : 'day',
-									text : '10일'
-								},
-								{
-									count : 1,
-									type : 'month',
-									text : '30일'
-								},
-								{
-									type : 'all',
-									text : 'All'
-								} ],
-								selected : 0,
-								inputEnabled : false
-							},
+							buttons : [ {
+								count : 5,
+								type : 'day',
+								text : '5일'
+							}, {
+								count : 10,
+								type : 'day',
+								text : '10일'
+							}, {
+								count : 1,
+								type : 'month',
+								text : '30일'
+							}, {
+								type : 'all',
+								text : 'All'
+							} ],
+							selected : 0,
+							inputEnabled : false
+						},
 
-							title : {
-								text : '내 자산 그래프'
-							},
+						title : {
+							text : '내 자산 그래프'
+						},
 
-							scrollbar : {
-								barBackgroundColor : 'gray',
-								barBorderRadius : 7,
-								barBorderWidth : 0,
-								buttonBackgroundColor : 'gray',
-								buttonBorderWidth : 0,
-								buttonBorderRadius : 7,
-								trackBackgroundColor : 'none',
-								trackBorderWidth : 1,
-								trackBorderRadius : 8,
-								trackBorderColor : '#CCC'
-							},
+						scrollbar : {
+							barBackgroundColor : 'gray',
+							barBorderRadius : 7,
+							barBorderWidth : 0,
+							buttonBackgroundColor : 'gray',
+							buttonBorderWidth : 0,
+							buttonBorderRadius : 7,
+							trackBackgroundColor : 'none',
+							trackBorderWidth : 1,
+							trackBorderRadius : 8,
+							trackBorderColor : '#CCC'
+						},
 
-							series : [ {
-								name : '내 자산',
-								data : (function() {
-									let list = [];
-									for (let i = 0; i < data.length; i++) {
-										list.push([Date.parse(data[i].regdate), data[i].money]);
-									}
-									return list;
-								})(),
-								tooltip : {
-									valueDecimals : 0
-								}
-							} ]
+						series : [ {
+							name : '내 자산',
+							data: (function () {
+					            let list = [];
+					            for (let i = 0; i < data.length; i++) {
+					            	list.push([Date.parse(data[i].regdate), data[i].money]);
+					            }
+					            return list;
+					          })(),
+							tooltip : {
+								valueDecimals : 0
+							}
+						} ]
 					});
 				}
 			})
@@ -144,8 +140,7 @@
 		charge.charge_money.value = money;
 	}
 	function MoneyCheck() {
-		(charge.charge_money.value == 0) ? alert("금액을 입력해주세요") : charge
-				.submit();
+		(charge.charge_money.value == 0) ? alert("금액을 입력해주세요") : charge.submit();
 	}
 </script>
 </head>
