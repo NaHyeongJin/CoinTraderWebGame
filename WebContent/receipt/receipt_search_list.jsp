@@ -5,29 +5,33 @@
 <html>
 <head>
 <title>구매 내역</title>
-<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
-<script> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" />
+<%
+java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyyMMdd");
+String today = formatter.format(new java.util.Date());
+%>
+<script type="text/javascript"> 
 $(function () { 
-   $('#datetimepicker1').datetimepicker({ 
-	  format: 'L',
-	  format: 'YYYY-MM-DD'
-	  });
-   $('#datetimepicker2').datetimepicker({ 
-	  format: 'L', 
-	  format: 'YYYY-MM-DD',
-      useCurrent: false 
-      }); 
-   $("#datetimepicker1").on("change.datetimepicker", function (e) {
-      $('#datetimepicker2').datetimepicker('minDate', e.date); 
-      });
-   $("#datetimepicker2").on("change.datetimepicker", function (e) {
-      $('#datetimepicker1').datetimepicker('maxDate', e.date); 
-      });
-   });
+	   $('#datetimepicker1').datetimepicker({ 
+		  format: 'L',
+		  format: 'YYYY-MM-DD'
+		  });
+	   $('#datetimepicker2').datetimepicker({ 
+		  format: 'L', 
+		  format: 'YYYY-MM-DD',
+	      useCurrent: false 
+	      }); 
+	   $("#datetimepicker1").on("change.datetimepicker", function (e) {
+	      $('#datetimepicker2').datetimepicker('minDate', e.date); 
+	      });
+	   $("#datetimepicker2").on("change.datetimepicker", function (e) {
+	      $('#datetimepicker1').datetimepicker('maxDate', e.date); 
+	      });
+	   });
 </script>
 <script type="text/javascript">
 function getInputValue(){
@@ -36,7 +40,6 @@ function getInputValue(){
 	var startday = day1.substring(0,4)+day1.substring(5,7)+day1.substring(8,10);
 	var endday = day2.substring(0,4)+day2.substring(5,7)+day2.substring(8,10);
 	location.href="receipt?cmd=receipt_search&startday="+startday+"&endday="+endday;
-	submit();
 }
 </script>
 </head>
@@ -45,10 +48,9 @@ function getInputValue(){
       height="45px"></a>
    <br>
    <br>
-     <img src="resource/img/구매내역.png" width="140px" height="50px">
    <br>
    <br>
-   <form name="search" action="" method="post">
+   <form name="datesearch" action="receipt?cmd=receipt_search" method="post">
    <nav class="d-flex p-2 bd-highlight">
       <div class='col-md-2 col-xs-4'>
          <div class="form-group" >
@@ -65,7 +67,6 @@ function getInputValue(){
             </div>
          </div>
       </div>
-      <h3>~</h3>
       <div class='col-md-2 col-xs-4'>
          <div class="form-group">
             <div class="input-group date" id="datetimepicker2"
@@ -81,9 +82,7 @@ function getInputValue(){
             </div>
          </div>
       </div>
-      <div class="form-group">
       <button type="button" class="col-xs-4 btn btn-outline-primary" style="display: inline-table;" onClick="getInputValue();">검색</button>
-      </div>
    </nav>
    </form>
    <div align="left">
@@ -132,24 +131,24 @@ function getInputValue(){
       <c:choose>
          <c:when test="${currentPage==1 }">
             <li class="page-item disabled"><a class="page-link"
-               href="receipt?cmd=receipt_list&page=${currentPage-1}" tabindex="-1"
+               href="receipt?cmd=receipt_search&page=${currentPage-1}&startday=${startday}&endday=${endday}" tabindex="-1"
                aria-disabled="true">Previous</a></li>
          </c:when>
          <c:when test="${currentPage!=1 }">
             <li class="page-item"><a class="page-link"
-               href="receipt?cmd=receipt_list&page=${currentPage-1}">Previous</a></li>
+               href="receipt?cmd=receipt_search&page=${currentPage-1}&startday=${startday}&endday=${endday}">Previous</a></li>
          </c:when>
       </c:choose>
       <c:forEach var="a" begin="1" end="${totpage }" step="1">
-         <li class="page-item"><a class="page-link" href="receipt?cmd=receipt_list&page=${a}">${a}</a></li>
+         <li class="page-item"><a class="page-link" href="receipt?cmd=receipt_search&page=${a}&startday=${startday}&endday=${endday}">${a}</a></li>
       </c:forEach>
       <c:if test="${currentPage == totpage }">
          <li class="page-item disabled"><a class="page-link"
-            href="receipt?cmd=receipt_list&page=${currentPage+1}">Next</a></li>
+            href="receipt?cmd=receipt_search&page=${currentPage+1}&startday=${startday}&endday=${endday}">Next</a></li>
       </c:if>
       <c:if test="${currentPage != totpage }">
          <li class="page-item"><a class="page-link"
-            href="receipt?cmd=receipt_list&page=${currentPage+1}">Next</a></li>
+            href="receipt?cmd=receipt_search&page=${currentPage+1}&startday=${startday}&endday=${endday}">Next</a></li>
       </c:if>
    </ul>
       <br>

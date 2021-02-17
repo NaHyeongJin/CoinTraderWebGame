@@ -5,6 +5,7 @@ public class ReceiptVO {
 	private int count;
 	private String regdate;
 	private int price;
+	private int money;
 
 	public String getName() {
 		return name;
@@ -36,5 +37,13 @@ public class ReceiptVO {
 
 	public void setPrice(int price) {
 		this.price = price;
+	}
+
+	public int getMoney() {
+		return money;
+	}
+
+	public void setMoney(int money) {
+		this.money = money;
 	}
 }
