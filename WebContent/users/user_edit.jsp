@@ -49,7 +49,7 @@
 			$('#MoneyModal').modal('hide');
 		});
 
-		$('#moneybutton').on('click',function() {
+		$('#moneybutton').on('click', function() {
 			$.ajax({
 				url : "http://localhost:8089/CoinTraderWebGame/UsersCoinMoney",
 				method : "GET",
