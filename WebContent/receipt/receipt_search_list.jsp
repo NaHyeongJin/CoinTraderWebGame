@@ -45,11 +45,8 @@ function getInputValue(){
 </head>
 <body>
    <a href="index"><img src="resource/img/indexcoin.jpg" width="180px"
-      height="45px"></a>
-   <br>
-   <br>
-   <br>
-   <br>
+      height="45px"></a><br>
+     <img class="mt-3 mb-3" src="resource/img/구매내역.png" width="140px" height="50px">
    <form name="datesearch" action="receipt?cmd=receipt_search" method="post">
    <nav class="d-flex p-2 bd-highlight">
       <div class='col-md-2 col-xs-4'>
@@ -67,6 +64,7 @@ function getInputValue(){
             </div>
          </div>
       </div>
+      <h3>~</h3>
       <div class='col-md-2 col-xs-4'>
          <div class="form-group">
             <div class="input-group date" id="datetimepicker2"
@@ -82,7 +80,9 @@ function getInputValue(){
             </div>
          </div>
       </div>
+      <div class="form-group">
       <button type="button" class="col-xs-4 btn btn-outline-primary" style="display: inline-table;" onClick="getInputValue();">검색</button>
+      </div>
    </nav>
    </form>
    <div align="left">
