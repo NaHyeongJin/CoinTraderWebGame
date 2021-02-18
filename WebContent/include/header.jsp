@@ -120,7 +120,7 @@
 				<a class="btn btn-outline-primary" href="user?cmd=logout">Sign out</a>
 				<div class="btn-group">
 					<div class="dropdown">
-					  <button class="btn btn-outline-primary dropdown-toggle">My Page</button>
+					  <button class="btn btn-outline-primary dropdown-user">My Page</button>
 					  <div class="dropdown-menu">
 					    <a class="dropdown-item" href="user?cmd=user_edit">Your profile</a>
 					    <div class="dropdown-divider"></div>
